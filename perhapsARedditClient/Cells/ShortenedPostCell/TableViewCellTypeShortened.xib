@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="62" id="KGk-i7-Jjw" customClass="TableViewCellTypeShortened" customModule="projRed" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-iq-vlE">
+                        <rect key="frame" x="5" y="8" width="310" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="xUT-ae-Psy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtS-rM-hSv">
+                        <rect key="frame" x="5" y="31" width="310" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="x5j-hK-h0z"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" systemColor="labelColor"/>
+                <constraints>
+                    <constraint firstItem="AtS-rM-hSv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="0Bq-RC-anK"/>
+                    <constraint firstItem="csV-iq-vlE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="2GD-Tq-cmL"/>
+                    <constraint firstAttribute="trailing" secondItem="csV-iq-vlE" secondAttribute="trailing" constant="5" id="4uf-Sc-tWw"/>
+                    <constraint firstItem="AtS-rM-hSv" firstAttribute="top" secondItem="csV-iq-vlE" secondAttribute="bottom" constant="5" id="Kdl-2L-0og"/>
+                    <constraint firstItem="csV-iq-vlE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VA0-tV-5N7"/>
+                    <constraint firstAttribute="trailing" secondItem="AtS-rM-hSv" secondAttribute="trailing" constant="5" id="nS4-Xe-iIR"/>
+                    <constraint firstAttribute="bottom" secondItem="AtS-rM-hSv" secondAttribute="bottom" constant="8" id="yFo-0Q-wnZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="title" destination="csV-iq-vlE" id="cff-0q-P4X"/>
+                <outlet property="userAndSubreddit" destination="AtS-rM-hSv" id="reT-wL-hVJ"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="85.714285714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
