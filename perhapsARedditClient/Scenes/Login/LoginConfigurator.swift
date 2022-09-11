@@ -14,7 +14,9 @@ enum LoginConfigurator {
 //        let presenter = LoginPresenter()
         let interactor = LoginInteractor(worker: worker)
         let router = LoginRouter()
-        let viewController = LoginViewController(interactor: interactor, router: router)
+        let viewController = LoginViewController(
+//    interactor: interactor, router: router
+        )
 //        presenter.viewController = viewController
         router.viewController = viewController
         

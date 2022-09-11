@@ -14,6 +14,7 @@ import UIKit
 
 protocol LoginBusinessLogic {
     func didTapLogin(username: String?, password: String?) -> Bool
+    func didTapSignup(username: String?, password: String?) -> Bool
 }
 
 protocol LoginDataStore { }
@@ -37,6 +38,14 @@ extension LoginInteractor: LoginBusinessLogic {
     func didTapLogin(username: String?, password: String?) -> Bool {
         if username != nil && password != nil && username != "" && password != "" {
             let bool = worker.login(username: username!, password: password!)
+            return bool
+        }
+        return false
+    }
+    
+    func didTapSignup(username: String?, password: String?) -> Bool {
+        if username != nil && password != nil && username != "" && password != "" {
+            let bool = worker.register(username: username!, password: password!)
             return bool
         }
         return false

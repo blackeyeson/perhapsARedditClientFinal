@@ -15,6 +15,7 @@ import UIKit
 protocol LoginRoutingLogic {
     func loginSuccessNavigateToMain(username: String?)
     func dismissSelf()
+    var viewController: LoginViewController? { get set }
 }
 
 protocol LoginDataPassing { }
@@ -27,8 +28,15 @@ final class LoginRouter: LoginRoutingLogic, LoginDataPassing {
     // MARK: - Routing
     
     func loginSuccessNavigateToMain(username: String?) {
-        let destinationVC = MainScreenConfigurator.configure(username: username ?? "Guest")
-        viewController?.navigationController?.pushViewController(destinationVC, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "MainScreenViewController") as! MainScreenViewController
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        
+        vc.config(username: username)
+        vc.username = username ?? "Guest"
+        
+        viewController?.present(vc, animated: true, completion: nil)
     }
     func dismissSelf() {
         viewController?.dismiss(animated: true, completion: nil)

@@ -1,20 +1,24 @@
 import UIKit
 
 class LeftSideMenuViewController: UIViewController {
-
+    
+    // MARK: - Clean Components
+    
+//    private var interactor: LeftSideMenuBusinessLogic = LeftSideMenuInteractor()
+//    private var router: LeftSideMenuRoutingLogic & LeftSideMenuDataPassing = LeftSideMenuRouter()
+    
     var delegate: MainScreenViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    //MARK: - actions
     @IBAction func tap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
     }
     @IBAction func swipe(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
-
     }
     @IBAction func pics(_ sender: Any) {
         changeSub(sub: "pics")
@@ -45,6 +49,8 @@ class LeftSideMenuViewController: UIViewController {
         changeTimePeriod(period: "all")
     }
 
+    //MARK: - functions
+    
     func changeSub(sub: String) {
 //        delegate?.redditData = nil
 //        delegate?.subreddit = sub
@@ -58,4 +64,17 @@ class LeftSideMenuViewController: UIViewController {
 //        delegate?.loadTableData()
 //        delegate?.contractionStats = []
     }
+    // MARK: - config
+    
+    func config() {
+        let presenter = RightSideMenuPresenter()
+        let interactor = RightSideMenuInteractor()
+        let router = RightSideMenuRouter(username: "debug")
+//        self.interactor = interactor
+//        self.router = router
+//        router.viewController = self
+//        presenter.viewController = self
+//        router.viewController = self
+    }
+    
 }

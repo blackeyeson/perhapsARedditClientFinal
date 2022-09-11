@@ -9,10 +9,7 @@ import Foundation
 
 enum GreetConfigurator {
     static func configure() -> GreetViewController {
-        let router = GreetRouter()
-        let viewController = GreetViewController(router: router)
-        router.viewController = viewController
-        
+        let viewController = GreetViewController()        
         return viewController
     }
 }

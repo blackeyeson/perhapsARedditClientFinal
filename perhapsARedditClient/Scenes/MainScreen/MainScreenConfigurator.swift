@@ -14,7 +14,9 @@ enum MainScreenConfigurator {
         let presenter = MainScreenPresenter()
         let interactor = MainScreenInteractor(presenter: presenter, worker: worker)
         let router = MainScreenRouter(username: username)
-        let viewController = MainScreenViewController(interactor: interactor, router: router)
+        let viewController = MainScreenViewController(
+//            interactor: interactor, router: router
+        )
         presenter.viewController = viewController
         router.viewController = viewController
         

@@ -10,28 +10,45 @@ class MainScreenViewController: UIViewController
 {
     // MARK: - Clean Components
     
-    var interactor: MainScreenBusinessLogic
-    var router: MainScreenRoutingLogic & MainScreenDataPassing
+    var interactor: MainScreenBusinessLogic = MainScreenInteractor(presenter: MainScreenPresenter(), worker: MainScreenWorker(apiManager: APIManager()))
+    var router: MainScreenRoutingLogic & MainScreenDataPassing = MainScreenRouter(username: "nil")
     
-    // MARK: - View
+    // MARK: - Views
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var blueView: UIView!
 
     
     // MARK: - Fields
     
     private var dataSource = [PostForTable]()
+    var username = "Guest"
     
-    // MARK: - Object lifecycle
+//    // MARK: - Object lifecycle
+//
+//    init(interactor: MainScreenBusinessLogic, router: MainScreenRoutingLogic & MainScreenDataPassing) {
+//        self.interactor = interactor
+//        self.router = router
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+    // MARK: - config
     
-    init(interactor: MainScreenBusinessLogic, router: MainScreenRoutingLogic & MainScreenDataPassing) {
+    func config(username: String?) {
+        let apiManager = APIManager()
+        let worker = MainScreenWorker(apiManager: apiManager)
+        let presenter = MainScreenPresenter()
+        let interactor = MainScreenInteractor(presenter: presenter, worker: worker)
+        let router = MainScreenRouter(username: username ?? "Guest")
         self.interactor = interactor
         self.router = router
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        router.viewController = self
+        presenter.viewController = self
+        router.viewController = self
     }
     
     // MARK: View lifecycle
@@ -45,13 +62,47 @@ class MainScreenViewController: UIViewController
     // MARK: Setup
     
     private func setupView() {
-        tableView.register(TableViewCellType1.self, forCellReuseIdentifier: TableViewCellType1.identifier)
+        tableView.register(TableViewCellTypeFull.self, forCellReuseIdentifier: TableViewCellTypeFull.identifier)
         tableView.register(TableViewCellTypeShortened.self, forCellReuseIdentifier: TableViewCellTypeShortened.identifier)
     }
     
     private func setTableData(data: [PostForTable]) {
         self.dataSource = data
         tableView.reloadData()
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func tap3Lines(_ sender: Any) {
+        router.navigateToLeftSide()
+    }
+    @IBAction func swipe3Lines(_ sender: Any) {
+        router.navigateToLeftSide()
+    }
+    
+    @IBAction func homeTap(_ sender: Any) {
+        scrollToTop(duration: 0.35)
+    }
+    
+    @IBAction func tapProfile(_ sender: Any) {
+        router.navigateToRightSide()
+    }
+    @IBAction func swipeProfile(_ sender: Any) {
+        router.navigateToRightSide()
+    }
+    
+    //MARK: - functions
+    
+    func scrollToTop(duration: Double) {
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        UIView.transition(with: tableView,
+                          duration: duration,
+                          options: .transitionCrossDissolve,
+                          animations:
+                            { () -> Void in
+            self.tableView.reloadData()
+        },
+                          completion: nil);
     }
 }
 
@@ -78,7 +129,7 @@ extension MainScreenViewController: UITableViewDataSource {
         let model = dataSource[indexPath.row]
         
         if let model = model as PostForTable? {
-            let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellType1.identifier) as! TableViewCellType1
+            let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellTypeFull.identifier, for: indexPath) as! TableViewCellTypeFull
             cell.configure(with: model)
             return cell
         }

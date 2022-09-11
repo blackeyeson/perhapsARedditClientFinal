@@ -36,11 +36,24 @@ final class MainScreenRouter: MainScreenRoutingLogic, MainScreenDataPassing {
     // MARK: - Routing
     
     func navigateToRightSide() {
-//        guard let selectedCountry = dataStore.selectedCountry else { return }
-//        let destinationVC = CountryDetailsConfigurator.configure(with: selectedCountry)
-//        viewController?.navigationController?.pushViewController(destinationVC, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "RightSideMenuViewController") as! RightSideMenuViewController
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .flipHorizontal
+        
+        vc.config(username: username)
+        vc.username = username
+        
+        viewController?.present(vc, animated: true, completion: nil)
     }
     func navigateToLeftSide() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "leftSideMenuViewController") as! LeftSideMenuViewController
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .flipHorizontal
         
+        vc.config()
+        
+        viewController?.present(vc, animated: true, completion: nil)
     }
 }

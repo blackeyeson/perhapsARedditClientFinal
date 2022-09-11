@@ -20,8 +20,8 @@ protocol RightSideMenuDisplayLogic: AnyObject {
 final class RightSideMenuViewController: UIViewController {
     // MARK: - Clean Components
     
-    private let interactor: RightSideMenuBusinessLogic
-    private let router: RightSideMenuRoutingLogic & RightSideMenuDataPassing
+    private var interactor: RightSideMenuBusinessLogic = RightSideMenuInteractor()
+    private var router: RightSideMenuRoutingLogic & RightSideMenuDataPassing = RightSideMenuRouter(username: "Guest")
     
     // MARK: - View
 
@@ -31,18 +31,31 @@ final class RightSideMenuViewController: UIViewController {
     
     // MARK: - Fields
     
-    private var username: String? = nil
+    var username = "Guest"
     
-    // MARK: Object lifecycle
+//    // MARK: Object lifecycle
+//
+//    init(interactor: RightSideMenuBusinessLogic, router: RightSideMenuRoutingLogic & RightSideMenuDataPassing) {
+//        self.interactor = interactor
+//        self.router = router
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    // MARK: - config
     
-    init(interactor: RightSideMenuBusinessLogic, router: RightSideMenuRoutingLogic & RightSideMenuDataPassing) {
+    func config(username: String) {
+        let presenter = RightSideMenuPresenter()
+        let interactor = RightSideMenuInteractor()
+        let router = RightSideMenuRouter(username: username)
         self.interactor = interactor
         self.router = router
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.username = username
+        router.viewController = self
+        presenter.viewController = self
+        router.viewController = self
     }
     
     // MARK: View lifecycle
@@ -56,12 +69,11 @@ final class RightSideMenuViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setup() {
-        var user = "Guest"
-        if username != nil {
-            user = username!
+        if username != "Guest" {
             signInLogOut.titleLabel?.text = "Change account"
         }
-        greetLabel.text = "Hello \(user)!"
+        signInLogOut.titleLabel?.text = "Sign in"
+        greetLabel.text = "Hello \(username)!"
 
     }
     

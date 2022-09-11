@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewCellType1: UITableViewCell {
+class TableViewCellTypeFull: UITableViewCell {
     
     // MARK: - Static Fields
     
@@ -33,15 +33,15 @@ class TableViewCellType1: UITableViewCell {
     weak var delegate: MainScreenViewController?
     var currnetTime = Date()
     
-    // MARK: - ObjectLifecycle
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    // MARK: - ObjectLifecycle
+//    
+//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+//        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     
     
@@ -140,10 +140,10 @@ class TableViewCellType1: UITableViewCell {
         
         
         
-        upDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
-        downDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
-        isRed = false
-        isBlue = false
+//        upDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+//        downDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+//        isRed = false
+//        isBlue = false
         
         //            if data!.score > 999 {
         //                voteCount.text = "\(round(Double(data!.score)/100)/10)K"

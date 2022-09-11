@@ -15,6 +15,7 @@ import UIKit
 protocol RightSideMenuRoutingLogic {
     func backToStart()
     func dismissSelf()
+    var username: String { get set }
 }
 
 protocol RightSideMenuDataPassing { }
@@ -23,13 +24,25 @@ final class RightSideMenuRouter: RightSideMenuRoutingLogic, RightSideMenuDataPas
     // MARK: - Clean Components
     
     weak var viewController: RightSideMenuViewController?
+    var username: String
+    
+    // MARK: - Object Lifecycle
+    
+    init(username: String) {
+        self.username = username
+    }
     
     // MARK: - Routing
     
     func backToStart() {
-        let destinationVC = GreetConfigurator.configure()
-        viewController?.navigationController?.pushViewController(destinationVC, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "GreetViewController") as! GreetViewController
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+                
+        viewController?.present(vc, animated: true, completion: nil)
     }
+    
     func dismissSelf() {
         viewController?.dismiss(animated: true, completion: nil)
     }

@@ -21,33 +21,54 @@ final class LoginViewController: UIViewController {
     // MARK: - Views
     
     @IBOutlet var myView: UIView!
+    @IBOutlet var actionButton: UIButton!
+    @IBOutlet var changeModeButton: UIButton!
     
     // MARK: - Clean Components
     
-    private let interactor: LoginBusinessLogic
-    private let router: LoginRoutingLogic & LoginDataPassing
+    private var interactor: LoginBusinessLogic = LoginInteractor(worker: LoginWorker(apiManager: APIManager()))
+    private var router: LoginRoutingLogic & LoginDataPassing = LoginRouter()
     
     // MARK: - Fields
     
     @IBOutlet var usernameField: UITextField!
     @IBOutlet var passwordField: UITextField!
+    var loginMode = true
     
     // MARK: Object lifecycle
     
-    init(interactor: LoginBusinessLogic, router: LoginRoutingLogic & LoginDataPassing) {
+//    init(interactor: LoginBusinessLogic, router: LoginRoutingLogic & LoginDataPassing) {
+//        self.interactor = interactor
+//        self.router = router
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        let apiManager = APIManager()
+//        let worker = LoginWorker(apiManager: apiManager)
+//        let interactor = LoginInteractor(worker: worker)
+//        let router = LoginRouter()
+//        self.interactor = interactor
+//        self.router = router
+//        super.init(nibName: nil, bundle: nil)
+//        }
+    // MARK: - config
+    
+    func config() {
+        let apiManager = APIManager()
+        let worker = LoginWorker(apiManager: apiManager)
+        let interactor = LoginInteractor(worker: worker)
+        let router = LoginRouter()
         self.interactor = interactor
         self.router = router
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        router.viewController = self
     }
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        router.viewController = self
         myView.layer.cornerRadius = 5
         myView.layer.masksToBounds = true
     }
@@ -58,10 +79,18 @@ final class LoginViewController: UIViewController {
         dismiss()
     }
     @IBAction func login(_ sender: Any) {
-        login(username: usernameField.text, password: passwordField.text)
+        if loginMode {
+            login(username: usernameField.text, password: passwordField.text)
+        } else {
+            addAcount(username: usernameField.text, password: passwordField.text)
+        }
+        
     }
     @IBAction func tapOut(_ sender: Any) {
         dismiss()
+    }
+    @IBAction func SignUp(_ sender: Any) {
+        changeMode()
     }
 }
 
@@ -73,7 +102,41 @@ extension LoginViewController: LoginDisplayLogic {
         let bool = interactor.didTapLogin(username: username, password: password)
         if bool {
             self.router.loginSuccessNavigateToMain(username: username)
-        } else { print("err/login") }
+        } else {
+            print("err/login")
+            alertUserWithError(error: "Login failed", message: "User not Found")
+        }
+    }
+    
+    func addAcount(username: String?, password: String?) {
+        let bool = interactor.didTapSignup(username: username, password: password)
+        if bool {
+            self.router.loginSuccessNavigateToMain(username: username)
+        } else {
+            print("err/signup")
+            alertUserWithError(error: "Sign up failed", message: nil)
+        }
+    }
+    
+    func changeMode() {
+        loginMode = !loginMode
+        if loginMode {
+            actionButton.setTitle("Log in", for: .normal)
+            changeModeButton.setTitle("New to Reddit? Sign up", for: .normal)
+        } else {
+            actionButton.setTitle("Sign Up", for: .normal)
+            changeModeButton.setTitle("log in?", for: .normal)
+        }
+    }
+    
+    func alertUserWithError(error: String, message: String?) {
+        let alert = UIAlertController(title: error, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                UIAlertAction in
+                NSLog("OK Pressed")
+            }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func dismiss() {

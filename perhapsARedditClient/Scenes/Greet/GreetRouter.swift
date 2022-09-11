@@ -30,6 +30,9 @@ import UIKit
 
 protocol GreetRoutingLogic {
     func openURL(stringURL: String)
+    func presentMain()
+    func presentLogin()
+    var viewController: GreetViewController? { get set }
 }
 
 final class GreetRouter: GreetRoutingLogic {
@@ -44,5 +47,27 @@ final class GreetRouter: GreetRoutingLogic {
         if let url = URL(string: stringURL) {
           UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    func presentMain() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "MainScreenViewController") as! MainScreenViewController
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        
+        vc.config(username: nil)
+        
+        viewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func presentLogin() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        
+        vc.config()
+        
+        viewController?.present(vc, animated: true, completion: nil)
     }
 }

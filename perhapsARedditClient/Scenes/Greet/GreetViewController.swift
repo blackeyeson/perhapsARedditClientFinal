@@ -22,7 +22,8 @@ class GreetViewController: UIViewController
     
     // MARK: - Clean Components
     
-    var router: GreetRoutingLogic
+    @IBOutlet var logo: UIImageView!
+    var router: GreetRoutingLogic = GreetRouter()
     
     // MARK: - Fields
     
@@ -30,19 +31,21 @@ class GreetViewController: UIViewController
     
     // MARK: - Object lifecycle
     
-    init(router: GreetRoutingLogic) {
-        self.router = router
-        super.init(nibName: nil, bundle: nil)
-    }
+//    init(router: GreetRoutingLogic) {
+//        self.router = router
+//        super.init(nibName: nil, bundle: nil)
+//    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    required init?(coder: NSCoder) {
+//        let gRouter = GreetRouter()
+//        self.router = gRouter
+//    }
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.router.viewController = self
         setupAlert()
     }
     
@@ -69,6 +72,12 @@ class GreetViewController: UIViewController
     }
     @IBAction func privacyPolicy(_ sender: Any) {
         router.openURL(stringURL: "https://www.reddit.com/policies/privacy-policy")
+    }
+    @IBAction func Skip(_ sender: Any) {
+        router.presentMain()
+    }
+    @IBAction func login(_ sender: Any) {
+        router.presentLogin()
     }
 }
 

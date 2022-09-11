@@ -11,7 +11,7 @@
         <!--Greet View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="registrationPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="GreetViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GreetViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="GreetViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,6 +50,7 @@
                                     <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="Skip:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hdW-hy-RqC"/>
                                     <segue destination="BaP-4V-nDZ" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ICE-XU-INx"/>
                                 </connections>
                             </button>
@@ -157,6 +158,7 @@
                                             <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
+                                            <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kvw-ti-iTA"/>
                                             <segue destination="sYa-DF-c3f" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="1rW-QF-Ebe"/>
                                         </connections>
                                     </button>
@@ -198,6 +200,9 @@
                             <constraint firstItem="lXS-KI-mW0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="900" constant="10" id="yiJ-Se-sFz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logo" destination="mYb-By-q7h" id="ked-BS-jKp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -206,7 +211,7 @@
         <!--Login View Controller-->
         <scene sceneID="xsy-m1-c50">
             <objects>
-                <viewController id="sYa-DF-c3f" customClass="LoginViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sYa-DF-c3f" customClass="LoginViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FZE-Bt-TGh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -220,7 +225,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHr-cj-Ape">
-                                <rect key="frame" x="72" y="373.5" width="270" height="149"/>
+                                <rect key="frame" x="72" y="354" width="270" height="188"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7pf-p1-qZ8">
                                         <rect key="frame" x="10" y="10" width="250" height="34"/>
@@ -245,7 +250,6 @@
                                         <buttonConfiguration key="configuration" style="gray" title="Back"/>
                                         <connections>
                                             <action selector="back:" destination="sYa-DF-c3f" eventType="touchUpInside" id="WjO-Ep-9jo"/>
-                                            <action selector="goBack:" destination="sYa-DF-c3f" eventType="touchUpInside" id="e3t-nK-2Si"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiS-Rj-7sh">
@@ -253,20 +257,27 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Log in"/>
                                         <connections>
-                                            <action selector="Login:" destination="sYa-DF-c3f" eventType="touchUpInside" id="Y6A-WS-Wtd"/>
                                             <action selector="login:" destination="sYa-DF-c3f" eventType="touchUpInside" id="aVV-3X-g1H"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tus-Cz-aLm">
+                                        <rect key="frame" x="47.5" y="147" width="175" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="New to Reddit? Sign up"/>
+                                        <connections>
+                                            <action selector="SignUp:" destination="sYa-DF-c3f" eventType="touchUpInside" id="rd3-bi-Yzh"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.089999999999999997" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Esm-R1-lDO" firstAttribute="leading" secondItem="dHr-cj-Ape" secondAttribute="leading" constant="10" id="0OC-mf-qaW"/>
+                                    <constraint firstItem="tus-Cz-aLm" firstAttribute="top" secondItem="ea2-0m-dEY" secondAttribute="bottom" constant="8" symbolic="YES" id="DPe-Lr-BVi"/>
                                     <constraint firstItem="DiS-Rj-7sh" firstAttribute="leading" secondItem="ea2-0m-dEY" secondAttribute="trailing" constant="10" id="DVJ-OM-hMm"/>
                                     <constraint firstItem="ea2-0m-dEY" firstAttribute="top" secondItem="Esm-R1-lDO" secondAttribute="bottom" constant="20" id="EgA-UY-zHG"/>
                                     <constraint firstItem="DiS-Rj-7sh" firstAttribute="top" secondItem="Esm-R1-lDO" secondAttribute="bottom" constant="20" id="H63-5x-WzH"/>
-                                    <constraint firstAttribute="bottom" secondItem="ea2-0m-dEY" secondAttribute="bottom" constant="10" id="NJt-hc-u5a"/>
+                                    <constraint firstAttribute="bottom" secondItem="tus-Cz-aLm" secondAttribute="bottom" constant="10" id="Jq6-g1-7f5"/>
                                     <constraint firstAttribute="trailing" secondItem="7pf-p1-qZ8" secondAttribute="trailing" constant="10" id="Vgp-Qy-5dO"/>
-                                    <constraint firstAttribute="bottom" secondItem="DiS-Rj-7sh" secondAttribute="bottom" constant="10" id="Vjg-Yv-aTb"/>
                                     <constraint firstItem="Esm-R1-lDO" firstAttribute="top" secondItem="7pf-p1-qZ8" secondAttribute="bottom" constant="10" id="a8S-Az-fUX"/>
                                     <constraint firstItem="7pf-p1-qZ8" firstAttribute="top" secondItem="dHr-cj-Ape" secondAttribute="top" constant="10" id="aRw-Cl-aju"/>
                                     <constraint firstAttribute="trailing" secondItem="DiS-Rj-7sh" secondAttribute="trailing" constant="10" id="aff-2Z-lbo"/>
@@ -274,6 +285,8 @@
                                     <constraint firstItem="ea2-0m-dEY" firstAttribute="leading" secondItem="dHr-cj-Ape" secondAttribute="leading" constant="10" id="eME-dy-pGZ"/>
                                     <constraint firstItem="DiS-Rj-7sh" firstAttribute="width" secondItem="ea2-0m-dEY" secondAttribute="width" id="iUA-1Y-qaN"/>
                                     <constraint firstAttribute="trailing" secondItem="Esm-R1-lDO" secondAttribute="trailing" constant="10" id="mRn-Eh-Zak"/>
+                                    <constraint firstItem="tus-Cz-aLm" firstAttribute="centerX" secondItem="dHr-cj-Ape" secondAttribute="centerX" id="nYs-EN-ROo"/>
+                                    <constraint firstItem="DiS-Rj-7sh" firstAttribute="height" secondItem="ea2-0m-dEY" secondAttribute="height" id="pUR-OM-Loj"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -289,9 +302,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionButton" destination="DiS-Rj-7sh" id="hPh-kc-mkV"/>
+                        <outlet property="changeModeButton" destination="tus-Cz-aLm" id="YKo-y5-7a9"/>
                         <outlet property="myView" destination="dHr-cj-Ape" id="1QL-75-x7h"/>
                         <outlet property="passwordField" destination="Esm-R1-lDO" id="9nG-3i-Pa8"/>
-                        <outlet property="username" destination="7pf-p1-qZ8" id="pX8-Gh-XlZ"/>
                         <outlet property="usernameField" destination="7pf-p1-qZ8" id="FmA-zc-0ID"/>
                     </connections>
                 </viewController>
@@ -307,7 +321,7 @@
         <!--Main Screen View Controller-->
         <scene sceneID="y2W-Vb-3Un">
             <objects>
-                <viewController storyboardIdentifier="MainScreenViewController" id="BaP-4V-nDZ" customClass="MainScreenViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainScreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BaP-4V-nDZ" customClass="MainScreenViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MC9-5N-pKr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -448,43 +462,43 @@
                     </view>
                     <navigationItem key="navigationItem" id="noe-kq-v4Y"/>
                     <connections>
-                        <outlet property="coloredBar" destination="ugw-vu-7pd" id="aHA-1s-AUb"/>
+                        <outlet property="blueView" destination="ugw-vu-7pd" id="fMC-R0-Cq8"/>
                         <outlet property="tableView" destination="RtF-lT-q4x" id="3xA-YE-hHg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIm-TJ-G1w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="SmK-jS-eIA">
                     <connections>
-                        <action selector="tap3Lines:" destination="BaP-4V-nDZ" id="92y-b7-lgU"/>
+                        <action selector="tap3Lines:" destination="BaP-4V-nDZ" id="XKY-tC-p0r"/>
                     </connections>
                 </tapGestureRecognizer>
                 <swipeGestureRecognizer direction="right" id="uhJ-td-nW0">
                     <connections>
-                        <action selector="swipe3Lines:" destination="BaP-4V-nDZ" id="oEF-CX-ZTa"/>
+                        <action selector="swipe3Lines:" destination="BaP-4V-nDZ" id="8Bm-8f-b4s"/>
                     </connections>
                 </swipeGestureRecognizer>
                 <tapGestureRecognizer id="Sw2-PA-F4L">
                     <connections>
-                        <action selector="homeTap:" destination="BaP-4V-nDZ" id="YST-XH-z2O"/>
+                        <action selector="homeTap:" destination="BaP-4V-nDZ" id="fZ6-TD-cSf"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="CQ6-z4-FSd">
                     <connections>
-                        <action selector="tapProfile:" destination="BaP-4V-nDZ" id="qvU-vW-SB7"/>
+                        <action selector="tapProfile:" destination="BaP-4V-nDZ" id="cdf-X6-iPA"/>
                     </connections>
                 </tapGestureRecognizer>
                 <swipeGestureRecognizer direction="left" id="cgC-W8-CDQ">
                     <connections>
-                        <action selector="swipeProfile:" destination="BaP-4V-nDZ" id="U3l-7c-DGs"/>
+                        <action selector="swipeProfile:" destination="BaP-4V-nDZ" id="FvI-pc-gYw"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1002.8985507246377" y="69.642857142857139"/>
         </scene>
-        <!--Left Side Menu View Controller-->
+        <!--Right Side Menu View Controller-->
         <scene sceneID="Q3i-do-wmi">
             <objects>
-                <viewController storyboardIdentifier="LeftSideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5S9-vN-GBr" customClass="LeftSideMenuViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RightSideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5S9-vN-GBr" customClass="RightSideMenuViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="elo-hs-2Ym">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -505,12 +519,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3R-2O-I6p">
-                                        <rect key="frame" x="79.5" y="791" width="68" height="31"/>
+                                        <rect key="frame" x="-240" y="791" width="706.5" height="31"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="Sign in"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="The end is never. The end is never. The end is never. The end is never. The end is never. The end is never. "/>
                                         <connections>
-                                            <action selector="backToStart:" destination="5S9-vN-GBr" eventType="touchUpInside" id="qHd-Dg-qNJ"/>
-                                            <action selector="signInButton:" destination="m1V-eE-gCn" eventType="touchUpInside" id="q88-Wl-16v"/>
+                                            <action selector="signInButton:" destination="5S9-vN-GBr" eventType="touchUpInside" id="e3d-xH-qVa"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -569,36 +582,33 @@
                             <constraint firstItem="rN0-MJ-dbp" firstAttribute="leading" secondItem="Tux-O9-PDH" secondAttribute="leading" id="mC2-ip-Q5W"/>
                         </constraints>
                         <connections>
-                            <outlet property="greetLabel" destination="apO-4h-YPA" id="SJy-7n-KTB"/>
-                            <outlet property="signInLogOut" destination="J3R-2O-I6p" id="pc1-zZ-26j"/>
-                            <outlet property="userImage" destination="1j0-pQ-mi1" id="MNH-FY-Dad"/>
                             <outletCollection property="gestureRecognizers" destination="42X-2t-QXo" appends="YES" id="0oD-b6-F4E"/>
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="Button" destination="J3R-2O-I6p" id="kEq-zG-TUg"/>
-                        <outlet property="helloThere" destination="apO-4h-YPA" id="p3D-k5-Yfp"/>
+                        <outlet property="greetLabel" destination="apO-4h-YPA" id="LGk-lj-sSH"/>
+                        <outlet property="signInLogOut" destination="J3R-2O-I6p" id="7Kh-RP-ezE"/>
+                        <outlet property="userImage" destination="1j0-pQ-mi1" id="GhV-ps-rdY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d58-DZ-SeC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="m1V-eE-gCn" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="cN9-XY-6jm">
                     <connections>
-                        <action selector="tapOut:" destination="m1V-eE-gCn" id="yEd-ti-Ef6"/>
+                        <action selector="tapOut:" destination="5S9-vN-GBr" id="M7A-4A-EPy"/>
                     </connections>
                 </tapGestureRecognizer>
                 <swipeGestureRecognizer direction="right" id="42X-2t-QXo">
                     <connections>
-                        <action selector="swipeOut:" destination="m1V-eE-gCn" id="LfB-3C-7Ii"/>
+                        <action selector="swipeOut:" destination="5S9-vN-GBr" id="8TV-6j-03D"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1750.7246376811595" y="434.59821428571428"/>
         </scene>
-        <!--Right Side Menu View Controller-->
+        <!--Left Side Menu View Controller-->
         <scene sceneID="gqP-Ox-EpQ">
             <objects>
-                <viewController storyboardIdentifier="RightSideMenuViewController" id="APD-MM-DVP" customClass="RightSideMenuViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftSideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APD-MM-DVP" customClass="LeftSideMenuViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FPM-Ei-eI7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
