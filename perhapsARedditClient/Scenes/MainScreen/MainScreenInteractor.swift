@@ -49,9 +49,9 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
         Task {
             do {
                 let redditPosts = try await worker.fetchPosts(subreddit: request.subreddit, timePeriod: request.timePeriod, numberOfPosts: request.numberOfPosts)
+                let subreddit = await worker.getSubreddit()
                 DispatchQueue.main.async { [weak self] in
-                    self?.redditPosts = redditPosts
-                    self?.presenter.presentPosts(response: MainScreen.GetPosts.Response(data: redditPosts))
+                    self?.presenter.presentPosts(response: MainScreen.GetPosts.Response(data: redditPosts, subreddit: subreddit))
                 }
             } catch { print(error) }
         }

@@ -17,7 +17,7 @@ protocol GreetDisplayLogic: AnyObject
     
 }
 
-class GreetViewController: UIViewController
+class GreetViewController: UIViewController, configable
 {
     
     // MARK: - Clean Components

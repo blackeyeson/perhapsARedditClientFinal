@@ -20,7 +20,6 @@ class MainScreenViewController: UIViewController, configable
     // MARK: - Fields
     
     private var dataSource = [PostForTable]()
-    var username = "Guest"
     
     // MARK: - config
     
@@ -43,13 +42,15 @@ class MainScreenViewController: UIViewController, configable
         super.viewDidLoad()
         interactor.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
         setupView()
+        addGlobalListener()
     }
     
-    // MARK: Setup
+    //MARK: - Setup
     
-    private func setupView() {
-        tableView.register(TableViewCellTypeFull.self, forCellReuseIdentifier: TableViewCellTypeFull.identifier)
-        tableView.register(TableViewCellTypeShortened.self, forCellReuseIdentifier: TableViewCellTypeShortened.identifier)
+    private func setupView() { tableConfiguration() }
+    
+    private func addGlobalListener() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
     }
     
     private func setTableData(data: [PostForTable]) {
@@ -77,18 +78,8 @@ class MainScreenViewController: UIViewController, configable
         router.navigateToRightSide()
     }
     
-    //MARK: - functions
-    
-    func scrollToTop(duration: Double) {
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        UIView.transition(with: tableView,
-                          duration: duration,
-                          options: .transitionCrossDissolve,
-                          animations:
-                            { () -> Void in
-            self.tableView.reloadData()
-        },
-                          completion: nil);
+    @objc func reloadData(notification: Notification) {
+        scrollToTop(duration: 0.35)
     }
 }
 
@@ -102,7 +93,7 @@ extension MainScreenViewController: MainScreenDisplayLogic {
 
 // MARK: - UITableViewDataSource
 
-extension MainScreenViewController: UITableViewDataSource {
+extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataSource.count
     }
@@ -111,12 +102,39 @@ extension MainScreenViewController: UITableViewDataSource {
         let model = dataSource[indexPath.row]
         
         if let model = model as PostForTable? {
-            let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellTypeFull.identifier, for: indexPath) as! TableViewCellTypeFull
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeFull", for: indexPath) as! TableViewCellTypeFull
             cell.configure(with: model)
             return cell
         }
         
         return .init()
+    }
+    
+    //MARK: - functions
+
+    func tableConfiguration() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "TableViewCellTypeFull", bundle: nil), forCellReuseIdentifier: "TableViewCellTypeFull")
+        tableView.register(UINib(nibName: "TableViewCellTypeShortened", bundle: nil), forCellReuseIdentifier: "TableViewCellTypeShortened")
+        tableView.reloadData()
+    }
+    
+    func scrollToTop(duration: Double) {
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        tableView.layer.opacity = 0
+        interactor.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
+        UIView.transition(
+            with: tableView,
+            duration: duration,
+            options: .transitionCrossDissolve,
+            animations:
+                { () -> Void in
+                    self.tableView.reloadData()
+                    self.tableView.layer.opacity = 1
+                },
+            completion: nil
+        )
     }
 }
 

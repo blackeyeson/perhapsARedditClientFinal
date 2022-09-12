@@ -33,8 +33,7 @@ final class LoginRouter: LoginRoutingLogic, LoginDataPassing {
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
         
-        vc.config(username: username)
-        vc.username = username ?? "Guest"
+        vc.config()
         
         viewController?.present(vc, animated: true, completion: nil)
     }

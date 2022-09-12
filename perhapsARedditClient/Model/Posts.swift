@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-// Mark: - subreddit page
+//MARK: - subreddit page
 
 struct RedditPosts: Decodable {
     
@@ -50,7 +50,7 @@ struct PostForTable {
     let timePassed: String
 }
 
-//about page
+//MARK: - about page
 
 struct About: Decodable {
     let data: Stuff
@@ -59,6 +59,9 @@ struct About: Decodable {
         let community_icon: String
     }
 }
+
+
+//MARK: - general protocol
 
 protocol configable: UIViewController {
     func config()

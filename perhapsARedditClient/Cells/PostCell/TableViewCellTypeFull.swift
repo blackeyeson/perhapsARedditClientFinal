@@ -9,10 +9,10 @@ import UIKit
 
 class TableViewCellTypeFull: UITableViewCell {
     
-    // MARK: - Static Fields
-    
-    static var identifier: String { .init(describing: self) }
-    
+//    // MARK: - Static Fields
+//    
+//    static var identifier: String { .init(describing: self) }
+//    
     // MARK: - Fields
     @IBOutlet weak var picture: UIImageView!
     @IBOutlet var upDoot: UIImageView!
@@ -100,10 +100,18 @@ class TableViewCellTypeFull: UITableViewCell {
     // MARK: - Methods
     
     func configure(with model: PostForTable) {
-        config()
-    }
-    
-    func config() {
+        upDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+        downDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
+        isRed = false
+        isBlue = false
+        
+        picture.load(url: model.picture)
+        postTitle.text = model.postTitle
+        subreddit.text = model.subreddit
+        oPUsername.text = model.oPUsername
+        timePassed.text = model.timePassed
+        voteCount.text = model.voteCount
+        
         //        if data != nil {
         //            picture.load(url: data!.thumbnail)
         //            postTitle.text = data!.title
@@ -135,15 +143,7 @@ class TableViewCellTypeFull: UITableViewCell {
         //                    }
         //                }
         //            }
-        
-        
-        
-        
-        
-//        upDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
-//        downDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
-//        isRed = false
-//        isBlue = false
+
         
         //            if data!.score > 999 {
         //                voteCount.text = "\(round(Double(data!.score)/100)/10)K"

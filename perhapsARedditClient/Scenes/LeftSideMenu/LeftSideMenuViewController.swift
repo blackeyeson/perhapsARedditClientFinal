@@ -108,6 +108,6 @@ extension LeftSideMenuViewController: LeftSideMenuDisplayLogic {
         router.dismissSelf()
     }
     func updateMain() {
-        
+        NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
     }
 }

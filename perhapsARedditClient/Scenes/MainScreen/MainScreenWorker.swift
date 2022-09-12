@@ -14,6 +14,7 @@ import UIKit
 
 protocol MainScreenWorkerLogic {
     func fetchPosts(subreddit: String, timePeriod: String, numberOfPosts: Int) async throws -> RedditPosts
+    func getSubreddit() async -> String
 }
 
 final class MainScreenWorker: MainScreenWorkerLogic {
@@ -31,8 +32,14 @@ final class MainScreenWorker: MainScreenWorkerLogic {
         let sub = try await api.getUserDefaults(Key: "subreddit", type: String.self)
         let time = try await api.getUserDefaults(Key: "timePeriod", type: String.self)
         return try await api.fetchData(
-            urlString: "https://www.reddit.com/r/\(sub ?? subreddit)/top/.json?t=\(time ?? timePeriod)&limit=\(100)",
+            urlString: "https://www.reddit.com/r/\(sub ?? "pics")/top/.json?t=\(time ?? "month")&limit=\(100)",
             decodingType: RedditPosts.self
         )
+    }
+    
+    func getSubreddit() async -> String {
+        do {
+            return try await api.getUserDefaults(Key: "subreddit", type: String.self) ?? "pics"
+        } catch  { print("err/getSubreddit"); return "pics" }
     }
 }

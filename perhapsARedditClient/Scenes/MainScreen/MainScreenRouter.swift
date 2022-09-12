@@ -38,7 +38,7 @@ final class MainScreenRouter: MainScreenRoutingLogic, MainScreenDataPassing {
     }
     func navigateToLeftSide() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "leftSideMenuViewController") as! LeftSideMenuViewController
+        let vc = storyboard.instantiateViewController(identifier: "LeftSideMenuViewController") as! LeftSideMenuViewController
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .flipHorizontal
         

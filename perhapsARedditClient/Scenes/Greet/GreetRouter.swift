@@ -55,7 +55,7 @@ final class GreetRouter: GreetRoutingLogic {
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
         
-        vc.config(username: nil)
+        vc.config()
         
         viewController?.present(vc, animated: true, completion: nil)
     }

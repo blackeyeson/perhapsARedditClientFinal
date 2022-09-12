@@ -12,20 +12,24 @@
 
 import UIKit
 
-protocol RightSideMenuPresentationLogic
-{
-//  func presentSomething(response: RightSideMenu.Something.Response)
+protocol RightSideMenuPresentationLogic {
+    func presentUsername(response: RightSideMenu.getUsername.Response)
 }
 
-class RightSideMenuPresenter: RightSideMenuPresentationLogic
-{
-  weak var viewController: RightSideMenuDisplayLogic?
-  
-  // MARK: Do something
-  
-//  func presentSomething(response: RightSideMenu.Something.Response)
-//  {
-//    let viewModel = RightSideMenu.Something.ViewModel()
-//    viewController?.displaySomething(viewModel: viewModel)
-//  }
+class RightSideMenuPresenter: RightSideMenuPresentationLogic {
+    // MARK: - Clean Components
+    
+    weak var viewController: RightSideMenuDisplayLogic?
 }
+
+// MARK: - PresentationLogic
+
+extension RightSideMenuPresenter {
+
+    
+    func presentUsername(response: RightSideMenu.getUsername.Response) {
+        let viewmodel = response.username
+        viewController?.displayUsername(ViewModel: RightSideMenu.getUsername.ViewModel(username: viewmodel))
+    }
+}
+
