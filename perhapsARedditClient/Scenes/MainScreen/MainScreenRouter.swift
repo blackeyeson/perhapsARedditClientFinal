@@ -17,22 +17,13 @@ protocol MainScreenRoutingLogic {
     func navigateToLeftSide()
 }
 
-protocol MainScreenDataPassing {
-    var username: String { get }
-}
+protocol MainScreenDataPassing {  }
 
 final class MainScreenRouter: MainScreenRoutingLogic, MainScreenDataPassing {
     // MARK: - Clean Components
     
     weak var viewController: MainScreenViewController?
-    var username: String
-    
-    // MARK: - Object Lifecycle
-    
-    init(username: String) {
-        self.username = username
-    }
-    
+
     // MARK: - Routing
     
     func navigateToRightSide() {
@@ -41,8 +32,7 @@ final class MainScreenRouter: MainScreenRoutingLogic, MainScreenDataPassing {
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .flipHorizontal
         
-        vc.config(username: username)
-        vc.username = username
+        vc.config()
         
         viewController?.present(vc, animated: true, completion: nil)
     }

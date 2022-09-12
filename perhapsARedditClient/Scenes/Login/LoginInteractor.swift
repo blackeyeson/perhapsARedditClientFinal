@@ -38,6 +38,7 @@ extension LoginInteractor: LoginBusinessLogic {
     func didTapLogin(username: String?, password: String?) -> Bool {
         if username != nil && password != nil && username != "" && password != "" {
             let bool = worker.login(username: username!, password: password!)
+            if bool { worker.saveUser(username: username) }
             return bool
         }
         return false
@@ -46,6 +47,7 @@ extension LoginInteractor: LoginBusinessLogic {
     func didTapSignup(username: String?, password: String?) -> Bool {
         if username != nil && password != nil && username != "" && password != "" {
             let bool = worker.register(username: username!, password: password!)
+            if bool { worker.saveUser(username: username) }
             return bool
         }
         return false

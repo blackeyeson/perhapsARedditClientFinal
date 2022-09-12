@@ -9,6 +9,9 @@ import Foundation
 import Security
 
 final class APIManager {
+    
+    //MARK: - internet
+    
     func fetchData<T: Decodable>(urlString: String, decodingType: T.Type) async throws -> T {
         let session = URLSession.shared
         guard let url = URL(string: urlString) else { throw ApiError.invalidUrl }
@@ -25,6 +28,8 @@ final class APIManager {
         }
     }
     
+    //MARK: - userDefaults
+    
     func setUserDefaults<T>(value: T, Key: String) {
         let defaults = UserDefaults.standard
         defaults.set(value, forKey: Key)
@@ -35,6 +40,18 @@ final class APIManager {
         let returnObject = defaults.object(forKey: Key) as? T
         return returnObject
     }
+    
+    func getUser() async -> String {
+        do {
+            let username = try await getUserDefaults(Key: "username", type: String?.self) ?? "Guest"
+            return username ?? "Guest"
+        } catch {
+            print("err/getUser")
+            return "Guest"
+        }
+    }
+    
+    //MARK: - keychain
     
     func keyChainSave(username: String, passcode: String) -> Bool{
         let password = passcode.data(using: .utf8)!

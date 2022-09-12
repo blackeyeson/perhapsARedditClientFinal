@@ -12,15 +12,11 @@
 
 import UIKit
 
-protocol MainScreenPresentationLogic
-{
+protocol MainScreenPresentationLogic {
     func presentPosts(response: MainScreen.GetPosts.Response)
-    func presentRightSideMenu()
-    func presentLeftSideMenu()
 }
 
-class MainScreenPresenter: MainScreenPresentationLogic
-{
+class MainScreenPresenter: MainScreenPresentationLogic {
     // MARK: - Clean Components
     
     weak var viewController: MainScreenDisplayLogic?
@@ -92,12 +88,9 @@ class MainScreenPresenter: MainScreenPresentationLogic
     
 }
 
-// MARK: - CountriesPresentationLogic
+// MARK: - PresentationLogic
 
 extension MainScreenPresenter {
-//    func presentSelectedCountry(response: Table.ShowCountryDetails.Response) {
-//        viewController?.displaySelectedCountry(viewModel: Table.ShowCountryDetails.ViewModel())
-//    }
     
     func presentPosts(response: MainScreen.GetPosts.Response) {
         
@@ -106,14 +99,5 @@ extension MainScreenPresenter {
         
         viewController?.displayPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel))
     }
-    
-    func presentRightSideMenu() {
-        
-    }
-    
-    func presentLeftSideMenu() {
-        
-    }
-    
 }
 

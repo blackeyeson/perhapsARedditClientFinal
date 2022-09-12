@@ -12,20 +12,22 @@
 
 import UIKit
 
-enum RightSideMenu
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
+enum RightSideMenu {
+    // MARK: Use cases
+    
+    enum getUsername {
+        struct Request {  }
+        
+        struct Response { let username: String }
+        
+        struct ViewModel { let username: String }
     }
-    struct Response
-    {
+    
+    enum removeAcc {
+        struct Request {  }
+        
+        struct Response {  }
+        
+        struct ViewModel {  }
     }
-    struct ViewModel
-    {
-    }
-  }
 }

@@ -15,7 +15,6 @@ import UIKit
 protocol RightSideMenuRoutingLogic {
     func backToStart()
     func dismissSelf()
-    var username: String { get set }
 }
 
 protocol RightSideMenuDataPassing { }
@@ -24,14 +23,7 @@ final class RightSideMenuRouter: RightSideMenuRoutingLogic, RightSideMenuDataPas
     // MARK: - Clean Components
     
     weak var viewController: RightSideMenuViewController?
-    var username: String
-    
-    // MARK: - Object Lifecycle
-    
-    init(username: String) {
-        self.username = username
-    }
-    
+
     // MARK: - Routing
     
     func backToStart() {

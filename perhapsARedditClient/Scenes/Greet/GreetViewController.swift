@@ -29,23 +29,19 @@ class GreetViewController: UIViewController
     
     let alert = UIAlertController(title: "Warning", message: "Feature unsupported!", preferredStyle: .alert)
     
-    // MARK: - Object lifecycle
+    // MARK: - config
     
-//    init(router: GreetRoutingLogic) {
-//        self.router = router
-//        super.init(nibName: nil, bundle: nil)
-//    }
-    
-//    required init?(coder: NSCoder) {
-//        let gRouter = GreetRouter()
-//        self.router = gRouter
-//    }
+    func config() {
+        let router = GreetRouter()
+        self.router = router
+        router.viewController = self
+    }
     
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.router.viewController = self
+//        self.router.viewController = self
         setupAlert()
     }
     
@@ -81,7 +77,7 @@ class GreetViewController: UIViewController
     }
 }
 
-// MARK: - CountriesDisplayLogic
+// MARK: - DisplayLogic
 
 extension GreetViewController: GreetDisplayLogic {
     private func unsupported() {

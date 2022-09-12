@@ -15,6 +15,7 @@ import UIKit
 protocol LoginWorkerLogic {
     func login(username: String, password: String) -> Bool
     func register(username: String, password: String) -> Bool
+    func saveUser(username: String?)
 }
 
 final class LoginWorker: LoginWorkerLogic {
@@ -33,5 +34,8 @@ final class LoginWorker: LoginWorkerLogic {
     }
     func register(username: String, password: String) -> Bool {
         api.keyChainSave(username: username, passcode: password)
+    }
+    func saveUser(username: String?) {
+        api.setUserDefaults(value: username, Key: "username")
     }
 }

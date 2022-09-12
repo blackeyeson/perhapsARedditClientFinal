@@ -34,24 +34,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet var usernameField: UITextField!
     @IBOutlet var passwordField: UITextField!
     var loginMode = true
-    
-    // MARK: Object lifecycle
-    
-//    init(interactor: LoginBusinessLogic, router: LoginRoutingLogic & LoginDataPassing) {
-//        self.interactor = interactor
-//        self.router = router
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        let apiManager = APIManager()
-//        let worker = LoginWorker(apiManager: apiManager)
-//        let interactor = LoginInteractor(worker: worker)
-//        let router = LoginRouter()
-//        self.interactor = interactor
-//        self.router = router
-//        super.init(nibName: nil, bundle: nil)
-//        }
+   
     // MARK: - config
     
     func config() {
@@ -102,6 +85,7 @@ extension LoginViewController: LoginDisplayLogic {
         let bool = interactor.didTapLogin(username: username, password: password)
         if bool {
             self.router.loginSuccessNavigateToMain(username: username)
+            
         } else {
             print("err/login")
             alertUserWithError(error: "Login failed", message: "User not Found")

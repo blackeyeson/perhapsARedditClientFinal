@@ -14,7 +14,7 @@ import UIKit
 
 protocol MainScreenBusinessLogic {
     func getPosts(request: MainScreen.GetPosts.Request)
-//    func didTapCountry(request: Table.ShowCountryDetails.Request)
+//    func didTapPost(request: MainScreen.hidePost.Request)
 }
 
 protocol MainScreenDataStore {
@@ -36,11 +36,11 @@ final class MainScreenInteractor: MainScreenDataStore {
     }
 }
 
-// MARK: - CountriesBusinessLogic
+// MARK: - BusinessLogic
 
 extension MainScreenInteractor: MainScreenBusinessLogic {
 
-//    func didTapCountry(request: MainScreen.ShowCountryDetails.Request) {
+//    func didTapPost(request: MainScreen.hidePost.Request) {
 //        self.selectedCountry = countries.first { $0.latlng == request.coord}
 //        presenter.presentSelectedCountry(response: Table.ShowCountryDetails.Response())
 //    }

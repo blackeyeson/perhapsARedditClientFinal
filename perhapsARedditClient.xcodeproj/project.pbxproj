@@ -34,7 +34,6 @@
 		0057D6D728C38AA300D361F5 /* RightSideMenuModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6D128C38AA300D361F5 /* RightSideMenuModels.swift */; };
 		0057D6D828C38AA300D361F5 /* RightSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6D228C38AA300D361F5 /* RightSideMenuViewController.swift */; };
 		0057D6D928C38AA300D361F5 /* RightSideMenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6D328C38AA300D361F5 /* RightSideMenuInteractor.swift */; };
-		0057D6E228C38AD000D361F5 /* LeftSideMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6DC28C38AD000D361F5 /* LeftSideMenuPresenter.swift */; };
 		0057D6E328C38AD000D361F5 /* LeftSideMenuWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6DD28C38AD000D361F5 /* LeftSideMenuWorker.swift */; };
 		0057D6E428C38AD000D361F5 /* LeftSideMenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6DE28C38AD000D361F5 /* LeftSideMenuRouter.swift */; };
 		0057D6E528C38AD000D361F5 /* LeftSideMenuModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6DF28C38AD000D361F5 /* LeftSideMenuModels.swift */; };
@@ -48,12 +47,6 @@
 		0057D6FF28C38B1100D361F5 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6F928C38B1100D361F5 /* LoginModels.swift */; };
 		0057D70028C38B1100D361F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6FA28C38B1100D361F5 /* LoginViewController.swift */; };
 		0057D70128C38B1100D361F5 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6FB28C38B1100D361F5 /* LoginInteractor.swift */; };
-		0057D70528C38C0E00D361F5 /* GreetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D70428C38C0E00D361F5 /* GreetConfigurator.swift */; };
-		0057D70728C38C2500D361F5 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D70628C38C2500D361F5 /* LoginConfigurator.swift */; };
-		0057D70928C38C4500D361F5 /* MainScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D70828C38C4500D361F5 /* MainScreenConfigurator.swift */; };
-		0057D70B28C38C5600D361F5 /* RightSideMenuConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D70A28C38C5600D361F5 /* RightSideMenuConfigurator.swift */; };
-		0057D70D28C38C6800D361F5 /* LeftSideMenuConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D70C28C38C6800D361F5 /* LeftSideMenuConfigurator.swift */; };
-		0084BFE228C8BE41007A924B /* asdasd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084BFE128C8BE41007A924B /* asdasd.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,7 +79,6 @@
 		0057D6D128C38AA300D361F5 /* RightSideMenuModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSideMenuModels.swift; sourceTree = "<group>"; };
 		0057D6D228C38AA300D361F5 /* RightSideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSideMenuViewController.swift; sourceTree = "<group>"; };
 		0057D6D328C38AA300D361F5 /* RightSideMenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSideMenuInteractor.swift; sourceTree = "<group>"; };
-		0057D6DC28C38AD000D361F5 /* LeftSideMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuPresenter.swift; sourceTree = "<group>"; };
 		0057D6DD28C38AD000D361F5 /* LeftSideMenuWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuWorker.swift; sourceTree = "<group>"; };
 		0057D6DE28C38AD000D361F5 /* LeftSideMenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuRouter.swift; sourceTree = "<group>"; };
 		0057D6DF28C38AD000D361F5 /* LeftSideMenuModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuModels.swift; sourceTree = "<group>"; };
@@ -100,12 +92,6 @@
 		0057D6F928C38B1100D361F5 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		0057D6FA28C38B1100D361F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0057D6FB28C38B1100D361F5 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
-		0057D70428C38C0E00D361F5 /* GreetConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetConfigurator.swift; sourceTree = "<group>"; };
-		0057D70628C38C2500D361F5 /* LoginConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfigurator.swift; sourceTree = "<group>"; };
-		0057D70828C38C4500D361F5 /* MainScreenConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenConfigurator.swift; sourceTree = "<group>"; };
-		0057D70A28C38C5600D361F5 /* RightSideMenuConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSideMenuConfigurator.swift; sourceTree = "<group>"; };
-		0057D70C28C38C6800D361F5 /* LeftSideMenuConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuConfigurator.swift; sourceTree = "<group>"; };
-		0084BFE128C8BE41007A924B /* asdasd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = asdasd.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,7 +230,6 @@
 				0057D6C428C38A6B00D361F5 /* MainScreenModels.swift */,
 				0057D6C528C38A6B00D361F5 /* MainScreenViewController.swift */,
 				0057D6C628C38A6B00D361F5 /* MainScreenInteractor.swift */,
-				0057D70828C38C4500D361F5 /* MainScreenConfigurator.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -258,7 +243,6 @@
 				0057D6D128C38AA300D361F5 /* RightSideMenuModels.swift */,
 				0057D6D228C38AA300D361F5 /* RightSideMenuViewController.swift */,
 				0057D6D328C38AA300D361F5 /* RightSideMenuInteractor.swift */,
-				0057D70A28C38C5600D361F5 /* RightSideMenuConfigurator.swift */,
 			);
 			path = RightSideMenu;
 			sourceTree = "<group>";
@@ -266,14 +250,11 @@
 		0057D6DA28C38AB500D361F5 /* LeftSideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				0084BFE128C8BE41007A924B /* asdasd.swift */,
-				0057D6DC28C38AD000D361F5 /* LeftSideMenuPresenter.swift */,
 				0057D6DD28C38AD000D361F5 /* LeftSideMenuWorker.swift */,
 				0057D6DE28C38AD000D361F5 /* LeftSideMenuRouter.swift */,
 				0057D6DF28C38AD000D361F5 /* LeftSideMenuModels.swift */,
 				0057D6E028C38AD000D361F5 /* LeftSideMenuViewController.swift */,
 				0057D6E128C38AD000D361F5 /* LeftSideMenuInteractor.swift */,
-				0057D70C28C38C6800D361F5 /* LeftSideMenuConfigurator.swift */,
 			);
 			path = LeftSideMenu;
 			sourceTree = "<group>";
@@ -283,7 +264,6 @@
 			children = (
 				0057D6EB28C38AF000D361F5 /* GreetRouter.swift */,
 				0057D6ED28C38AF000D361F5 /* GreetViewController.swift */,
-				0057D70428C38C0E00D361F5 /* GreetConfigurator.swift */,
 			);
 			path = Greet;
 			sourceTree = "<group>";
@@ -297,7 +277,6 @@
 				0057D6F928C38B1100D361F5 /* LoginModels.swift */,
 				0057D6FA28C38B1100D361F5 /* LoginViewController.swift */,
 				0057D6FB28C38B1100D361F5 /* LoginInteractor.swift */,
-				0057D70628C38C2500D361F5 /* LoginConfigurator.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -375,24 +354,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0057D70928C38C4500D361F5 /* MainScreenConfigurator.swift in Sources */,
-				0057D70728C38C2500D361F5 /* LoginConfigurator.swift in Sources */,
 				0057D6F128C38AF000D361F5 /* GreetRouter.swift in Sources */,
 				0057D6C828C38A6B00D361F5 /* MainScreenWorker.swift in Sources */,
 				0057D6AB28C387EE00D361F5 /* Posts.swift in Sources */,
 				0057D6D528C38AA300D361F5 /* RightSideMenuWorker.swift in Sources */,
-				0057D70528C38C0E00D361F5 /* GreetConfigurator.swift in Sources */,
 				0057D6E728C38AD000D361F5 /* LeftSideMenuInteractor.swift in Sources */,
 				0057D6F328C38AF000D361F5 /* GreetViewController.swift in Sources */,
 				0057D6CA28C38A6B00D361F5 /* MainScreenModels.swift in Sources */,
 				0057D6FE28C38B1100D361F5 /* LoginRouter.swift in Sources */,
-				0057D70D28C38C6800D361F5 /* LeftSideMenuConfigurator.swift in Sources */,
-				0057D70B28C38C5600D361F5 /* RightSideMenuConfigurator.swift in Sources */,
 				0057D6FC28C38B1100D361F5 /* LoginPresenter.swift in Sources */,
 				0057D6A828C387E300D361F5 /* UIView+Extension.swift in Sources */,
 				0057D6FF28C38B1100D361F5 /* LoginModels.swift in Sources */,
-				0057D6E228C38AD000D361F5 /* LeftSideMenuPresenter.swift in Sources */,
-				0084BFE228C8BE41007A924B /* asdasd.swift in Sources */,
 				0057D6C728C38A6B00D361F5 /* MainScreenPresenter.swift in Sources */,
 				0057D6CC28C38A6B00D361F5 /* MainScreenInteractor.swift in Sources */,
 				0057D6D928C38AA300D361F5 /* RightSideMenuInteractor.swift in Sources */,

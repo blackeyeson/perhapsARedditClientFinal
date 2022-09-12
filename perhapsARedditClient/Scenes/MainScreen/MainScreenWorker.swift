@@ -28,8 +28,10 @@ final class MainScreenWorker: MainScreenWorkerLogic {
     // MARK: - Methods
     
     func fetchPosts(subreddit: String, timePeriod: String, numberOfPosts: Int) async throws -> RedditPosts {
-        try await api.fetchData(
-            urlString: "https://www.reddit.com/r/\(subreddit)/top/.json?t=\(timePeriod)&limit=\(numberOfPosts)",
+        let sub = try await api.getUserDefaults(Key: "subreddit", type: String.self)
+        let time = try await api.getUserDefaults(Key: "timePeriod", type: String.self)
+        return try await api.fetchData(
+            urlString: "https://www.reddit.com/r/\(sub ?? subreddit)/top/.json?t=\(time ?? timePeriod)&limit=\(100)",
             decodingType: RedditPosts.self
         )
     }

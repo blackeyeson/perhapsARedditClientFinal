@@ -1,17 +1,15 @@
 import UIKit
 
-protocol MainScreenDisplayLogic: AnyObject
-{
+protocol MainScreenDisplayLogic: AnyObject {
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel)
-//    func displaySelectedCountry(viewModel: MainScreen.ShowCountryDetails.ViewModel)
 }
 
-class MainScreenViewController: UIViewController
+class MainScreenViewController: UIViewController, configable
 {
     // MARK: - Clean Components
     
     var interactor: MainScreenBusinessLogic = MainScreenInteractor(presenter: MainScreenPresenter(), worker: MainScreenWorker(apiManager: APIManager()))
-    var router: MainScreenRoutingLogic & MainScreenDataPassing = MainScreenRouter(username: "nil")
+    var router: MainScreenRoutingLogic & MainScreenDataPassing = MainScreenRouter()
     
     // MARK: - Views
     
@@ -24,26 +22,14 @@ class MainScreenViewController: UIViewController
     private var dataSource = [PostForTable]()
     var username = "Guest"
     
-//    // MARK: - Object lifecycle
-//
-//    init(interactor: MainScreenBusinessLogic, router: MainScreenRoutingLogic & MainScreenDataPassing) {
-//        self.interactor = interactor
-//        self.router = router
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
     // MARK: - config
     
-    func config(username: String?) {
+    func config() {
         let apiManager = APIManager()
         let worker = MainScreenWorker(apiManager: apiManager)
         let presenter = MainScreenPresenter()
         let interactor = MainScreenInteractor(presenter: presenter, worker: worker)
-        let router = MainScreenRouter(username: username ?? "Guest")
+        let router = MainScreenRouter()
         self.interactor = interactor
         self.router = router
         router.viewController = self
@@ -106,13 +92,9 @@ class MainScreenViewController: UIViewController
     }
 }
 
-// MARK: - CountriesDisplayLogic
+// MARK: - DisplayLogic
 
 extension MainScreenViewController: MainScreenDisplayLogic {
-//    func displaySelectedCountry(viewModel: MainScreen.ShowCountryDetails.ViewModel) {
-//        router.navigateToCountryDetails()
-//    }
-    
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel) {
         setTableData(data: viewModel.tableData)
     }

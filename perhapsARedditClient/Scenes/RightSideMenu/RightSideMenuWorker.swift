@@ -12,9 +12,26 @@
 
 import UIKit
 
-class RightSideMenuWorker
-{
-  func doSomeWork()
-  {
-  }
+protocol RightSideMenuWorkerLogic {
+    func getUser() async -> String
+    func logOut()
+}
+
+final class RightSideMenuWorker: RightSideMenuWorkerLogic {
+    // MARK: - Fields
+    
+    private var api: APIManager
+    
+    init(apiManager: APIManager) {
+        self.api = apiManager
+    }
+    
+    // MARK: - Methods
+    
+    func getUser() async -> String {
+        await api.getUser()
+    }
+    func logOut() {
+        api.setUserDefaults(value: "Guest", Key: "username")
+    }
 }

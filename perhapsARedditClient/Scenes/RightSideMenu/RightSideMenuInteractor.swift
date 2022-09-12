@@ -12,30 +12,37 @@
 
 import UIKit
 
-protocol RightSideMenuBusinessLogic
-{
-//  func doSomething(request: RightSideMenu.Something.Request)
+protocol RightSideMenuBusinessLogic {
+    func getUsername(request: RightSideMenu.getUsername.Request) async
+    func didTapLogOut(request: RightSideMenu.removeAcc.Request)
 }
 
-protocol RightSideMenuDataStore
-{
-  //var name: String { get set }
+protocol RightSideMenuDataStore {
 }
 
-class RightSideMenuInteractor: RightSideMenuBusinessLogic, RightSideMenuDataStore
-{
-  var presenter: RightSideMenuPresentationLogic?
-  var worker: RightSideMenuWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: RightSideMenu.Something.Request)
-  {
-//    worker = RightSideMenuWorker()
-//    worker?.doSomeWork()
-//
-//    let response = RightSideMenu.Something.Response()
-//    presenter?.presentSomething(response: response)
-  }
+final class RightSideMenuInteractor: RightSideMenuDataStore {
+    
+    private let presenter: RightSideMenuPresentationLogic
+    private let worker: RightSideMenuWorkerLogic
+    
+    // MARK: - Object Lifecycle
+    
+    init(presenter: RightSideMenuPresentationLogic, worker: RightSideMenuWorkerLogic) {
+        self.presenter = presenter
+        self.worker = worker
+    }
+}
+
+// MARK: - BusinessLogic
+
+extension RightSideMenuInteractor: RightSideMenuBusinessLogic {
+    
+    func getUsername(request: RightSideMenu.getUsername.Request) async {
+        let username = await worker.getUser()
+        presenter.presentUsername(response: RightSideMenu.getUsername.Response(username: username))
+    }
+    
+    func didTapLogOut(request: RightSideMenu.removeAcc.Request) {
+        worker.logOut()
+    }
 }

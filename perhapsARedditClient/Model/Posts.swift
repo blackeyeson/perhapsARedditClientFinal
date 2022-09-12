@@ -60,4 +60,8 @@ struct About: Decodable {
     }
 }
 
+protocol configable: UIViewController {
+    func config()
+}
+
 

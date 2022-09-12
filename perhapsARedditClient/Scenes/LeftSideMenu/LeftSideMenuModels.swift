@@ -12,20 +12,22 @@
 
 import UIKit
 
-enum LeftSideMenu
-{
+enum LeftSideMenu {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+    enum setSub {
+        struct Request { let subreddit: String }
+        
+        struct Response {  }
+        
+        struct ViewModel {  }
     }
-    struct Response
-    {
+    
+    enum setperiod {
+        struct Request { let timePeriod: String }
+        
+        struct Response {  }
+        
+        struct ViewModel {  }
     }
-    struct ViewModel
-    {
-    }
-  }
 }

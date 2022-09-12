@@ -15,13 +15,14 @@ import UIKit
 protocol RightSideMenuDisplayLogic: AnyObject {
     func backToStart()
     func dismiss()
+    func displayUsername(ViewModel: RightSideMenu.getUsername.ViewModel)
 }
 
 final class RightSideMenuViewController: UIViewController {
     // MARK: - Clean Components
     
-    private var interactor: RightSideMenuBusinessLogic = RightSideMenuInteractor()
-    private var router: RightSideMenuRoutingLogic & RightSideMenuDataPassing = RightSideMenuRouter(username: "Guest")
+    private var interactor: RightSideMenuBusinessLogic = RightSideMenuInteractor(presenter: RightSideMenuPresenter(), worker: RightSideMenuWorker(apiManager: APIManager()))
+    private var router: RightSideMenuRoutingLogic & RightSideMenuDataPassing = RightSideMenuRouter()
     
     // MARK: - View
 
@@ -29,52 +30,27 @@ final class RightSideMenuViewController: UIViewController {
     @IBOutlet var greetLabel: UILabel!
     @IBOutlet var signInLogOut: UIButton!
     
-    // MARK: - Fields
-    
-    var username = "Guest"
-    
-//    // MARK: Object lifecycle
-//
-//    init(interactor: RightSideMenuBusinessLogic, router: RightSideMenuRoutingLogic & RightSideMenuDataPassing) {
-//        self.interactor = interactor
-//        self.router = router
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     // MARK: - config
     
-    func config(username: String) {
+    func config() {
         let presenter = RightSideMenuPresenter()
-        let interactor = RightSideMenuInteractor()
-        let router = RightSideMenuRouter(username: username)
+        let api = APIManager()
+        let worker = RightSideMenuWorker(apiManager: api)
+        let interactor = RightSideMenuInteractor(presenter: presenter, worker: worker)
+        let router = RightSideMenuRouter()
         self.interactor = interactor
         self.router = router
-        self.username = username
         router.viewController = self
         presenter.viewController = self
         router.viewController = self
     }
     
-    // MARK: View lifecycle
+    // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        interactor.getprofpic(request: profile.getpic.Request())
-        setup()
-    }
-    
-    // MARK: - Private Methods
-    
-    private func setup() {
-        if username != "Guest" {
-            signInLogOut.titleLabel?.text = "Change account"
-        }
-        signInLogOut.titleLabel?.text = "Sign in"
-        greetLabel.text = "Hello \(username)!"
-
+        Task { await interactor.getUsername(request: RightSideMenu.getUsername.Request()) }
     }
     
     //MARK: - Actions
@@ -91,15 +67,24 @@ final class RightSideMenuViewController: UIViewController {
     
 }
 
-// MARK: - CountriesDisplayLogic
+// MARK: - DisplayLogic
 
 extension RightSideMenuViewController: RightSideMenuDisplayLogic {
+    
+    func displayUsername(ViewModel: RightSideMenu.getUsername.ViewModel)  {
+        let username = ViewModel.username
+        var buttonText = "Sign in"
+        if username != "Guest" { buttonText = "Change account" }
+        signInLogOut.titleLabel?.text = buttonText
+        greetLabel.text = "Hello \(username)!"
+    }
 
     func dismiss() {
         router.dismissSelf()
     }
     
     func backToStart() {
+        interactor.didTapLogOut(request: RightSideMenu.removeAcc.Request())
         router.backToStart()
     }
 }
