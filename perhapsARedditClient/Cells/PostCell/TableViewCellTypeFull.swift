@@ -21,30 +21,19 @@ class TableViewCellTypeFull: UITableViewCell {
     @IBOutlet var postTitle: UILabel!
     @IBOutlet var subredditIcon: UIImageView!
     @IBOutlet var subreddit: UILabel!
+    @IBOutlet var domain: UILabel!
     @IBOutlet var oPUsername: UILabel!
     @IBOutlet var timePassed: UILabel!
     @IBOutlet var topBarView: UIView!
+    @IBOutlet var indicator: UIActivityIndicatorView!
     
     var isRed = false
     var isBlue = false
     var index = -1
     var data: Post? = nil
     //    var aboutPage: Stuff? = nil
-    weak var delegate: MainScreenViewController?
+    var id = ""
     var currnetTime = Date()
-    
-//    // MARK: - ObjectLifecycle
-//    
-//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
-    
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -92,71 +81,35 @@ class TableViewCellTypeFull: UITableViewCell {
     
     @objc func handleThreeDotsTap(_ sender: UITapGestureRecognizer? = nil) {
         print("a")
-        //        if delegate?.redditData != nil && index != -1{
-        //            delegate!.contractionStats += [index]
-        //            delegate!.tableView.reloadData()
-        //        }
+        let defaults = UserDefaults.standard
+        var hiddenPosts: [String] = defaults.object(forKey: "hiddenPosts") as? [String] ?? []
+        if id != "" {
+            hiddenPosts += [id]
+            defaults.set(hiddenPosts, forKey: "hiddenPosts")
+            NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
+        }
     }
     // MARK: - Methods
     
     func configure(with model: PostForTable) {
+        
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        
         upDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
         downDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
         isRed = false
         isBlue = false
         
-        picture.load(url: model.picture)
+        picture.image = UIImage.init(named: "black")
+        picture.load(url: model.picture, indicator: indicator)
         postTitle.text = model.postTitle
         subreddit.text = model.subreddit
         oPUsername.text = model.oPUsername
+        domain.text = model.domain
         timePassed.text = model.timePassed
         voteCount.text = model.voteCount
-        
-        //        if data != nil {
-        //            picture.load(url: data!.thumbnail)
-        //            postTitle.text = data!.title
-        //            oPUsername.text = "u/\(data!.author)"
-        //
-        //            //set time component
-        //            let epocTime = Int(TimeInterval(data!.created_utc))
-        //            let currentTime = Int(Date().timeIntervalSince1970)
-        //            var differance = currentTime - epocTime
-        //
-        //            if differance / 60 < 60 && differance > 0  {
-        //                timePassed.text = "\(differance / 60)min"
-        //            } else {
-        //                differance = differance / 3600
-        //                if differance < 24 && differance > 0 {
-        //                    timePassed.text = "\(differance)h"
-        //                } else {
-        //                    differance = differance / 24
-        //                    if differance < 30 && differance > 0  {
-        //                        timePassed.text = "\(differance)d"
-        //                    } else {
-        //                        differance = differance / 30
-        //                        if differance < 12 && differance > 0  {
-        //                            timePassed.text = "\(differance)m"
-        //                        } else {
-        //                            differance = differance / 12
-        //                            timePassed.text = "\(differance)y"
-        //                        }
-        //                    }
-        //                }
-        //            }
-
-        
-        //            if data!.score > 999 {
-        //                voteCount.text = "\(round(Double(data!.score)/100)/10)K"
-        //            } else { voteCount.text = "\(data!.score)" }
-        //            if delegate != nil {
-        //                subreddit.text = "r/\(delegate!.subreddit)"
-        //            }
-        //            if aboutPage != nil {
-        ////                subredditIcon.load(url: URL(string: aboutPage!.community_icon)!)
-        ////                delegate!.coloredBar.backgroundColor = UIColor(hex: aboutPage!.primary_color)
-        //            }
-        //        }
-        
+        id = model.id
     }
     // MARK: - Private Methods
 }

@@ -322,7 +322,7 @@
         <scene sceneID="y2W-Vb-3Un">
             <objects>
                 <viewController storyboardIdentifier="MainScreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BaP-4V-nDZ" customClass="MainScreenViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MC9-5N-pKr">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="MC9-5N-pKr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -456,8 +456,8 @@
                             <constraint firstItem="DcO-HR-4tJ" firstAttribute="trailing" secondItem="RtF-lT-q4x" secondAttribute="trailing" id="xUL-zR-iJH"/>
                         </constraints>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="uhJ-td-nW0" appends="YES" id="Xmp-3B-ggN"/>
-                            <outletCollection property="gestureRecognizers" destination="cgC-W8-CDQ" appends="YES" id="JsA-fe-DRR"/>
+                            <outletCollection property="gestureRecognizers" destination="czC-Nz-YHZ" appends="YES" id="EIB-0z-S8O"/>
+                            <outletCollection property="gestureRecognizers" destination="7H3-QT-ths" appends="YES" id="gfW-OV-KUN"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="noe-kq-v4Y"/>
@@ -472,11 +472,6 @@
                         <action selector="tap3Lines:" destination="BaP-4V-nDZ" id="XKY-tC-p0r"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="uhJ-td-nW0">
-                    <connections>
-                        <action selector="swipe3Lines:" destination="BaP-4V-nDZ" id="8Bm-8f-b4s"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <tapGestureRecognizer id="Sw2-PA-F4L">
                     <connections>
                         <action selector="homeTap:" destination="BaP-4V-nDZ" id="fZ6-TD-cSf"/>
@@ -487,9 +482,14 @@
                         <action selector="tapProfile:" destination="BaP-4V-nDZ" id="cdf-X6-iPA"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="cgC-W8-CDQ">
+                <swipeGestureRecognizer direction="left" id="7H3-QT-ths">
                     <connections>
-                        <action selector="swipeProfile:" destination="BaP-4V-nDZ" id="FvI-pc-gYw"/>
+                        <action selector="swipeProfile:" destination="BaP-4V-nDZ" id="NqY-Fg-m4B"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="czC-Nz-YHZ">
+                    <connections>
+                        <action selector="swipe3Lines:" destination="BaP-4V-nDZ" id="Yzo-IM-He0"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

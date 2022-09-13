@@ -38,14 +38,18 @@ struct Post: Decodable {
     let permalink: String
     let author: String
     let created_utc: Double
+    let id: String
 }
 
 struct PostForTable {
     let postTitle: String
+    let id: String
     let voteCount: String
     let picture: URL
     let subredditIcon: URL
+    let thumbnail: URL
     let subreddit: String
+    let domain: String
     let oPUsername: String
     let timePassed: String
 }

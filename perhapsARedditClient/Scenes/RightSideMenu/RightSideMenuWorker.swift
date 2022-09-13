@@ -33,5 +33,6 @@ final class RightSideMenuWorker: RightSideMenuWorkerLogic {
     }
     func logOut() {
         api.setUserDefaults(value: "Guest", Key: "username")
+        api.setUserDefaults(value: [String](), Key: "hiddenPosts")
     }
 }

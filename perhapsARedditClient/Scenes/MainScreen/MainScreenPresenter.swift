@@ -21,10 +21,6 @@ class MainScreenPresenter: MainScreenPresentationLogic {
     
     weak var viewController: MainScreenDisplayLogic?
     
-    // MARK: - variables
-    
-    var subreddit = "pics"
-    
     // MARK: - Methods
     
     private func configureTableModel(from data: [Post]) -> [PostForTable] {
@@ -33,10 +29,13 @@ class MainScreenPresenter: MainScreenPresentationLogic {
         tableModel.append(contentsOf: data.map {
             PostForTable(
                 postTitle: $0.title,
+                id: $0.id,
                 voteCount: voteCount(score: $0.score),
-                picture: $0.thumbnail,
+                picture: $0.url_overridden_by_dest,
                 subredditIcon: $0.thumbnail,
-                subreddit: "r/\(subreddit)",
+                thumbnail: $0.thumbnail,
+                subreddit: "r/\($0.subreddit)",
+                domain: $0.domain,
                 oPUsername: "u/\($0.author)",
                 timePassed: timePassed(created_utc: $0.created_utc)
             )
@@ -97,11 +96,12 @@ extension MainScreenPresenter {
     
     func presentPosts(response: MainScreen.GetPosts.Response) {
         
-        subreddit = response.subreddit
+//        subreddit = response.subreddit
         let data = redditPostsToPosts(rawData: response.data)
         let viewModel = configureTableModel(from: data)
         
-        viewController?.displayPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel))
+        viewController?.displayPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel, hiddenPosts: response.hiddenPosts))
+        viewController?.revealTable()
     }
 }
 

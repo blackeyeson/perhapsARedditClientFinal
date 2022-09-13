@@ -2,6 +2,7 @@ import UIKit
 
 protocol MainScreenDisplayLogic: AnyObject {
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel)
+    func revealTable()
 }
 
 class MainScreenViewController: UIViewController, configable
@@ -15,11 +16,12 @@ class MainScreenViewController: UIViewController, configable
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var blueView: UIView!
-
+    
     
     // MARK: - Fields
     
     private var dataSource = [PostForTable]()
+    private var hiddenPosts = [String]()
     
     // MARK: - config
     
@@ -53,8 +55,9 @@ class MainScreenViewController: UIViewController, configable
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
     }
     
-    private func setTableData(data: [PostForTable]) {
+    private func setTableData(data: [PostForTable], hiddenPosts: [String]) {
         self.dataSource = data
+        self.hiddenPosts = hiddenPosts
         tableView.reloadData()
     }
     
@@ -68,7 +71,7 @@ class MainScreenViewController: UIViewController, configable
     }
     
     @IBAction func homeTap(_ sender: Any) {
-        scrollToTop(duration: 0.35)
+        scrollToTop()
     }
     
     @IBAction func tapProfile(_ sender: Any) {
@@ -79,15 +82,31 @@ class MainScreenViewController: UIViewController, configable
     }
     
     @objc func reloadData(notification: Notification) {
-        scrollToTop(duration: 0.35)
+        scrollToTop()
     }
 }
 
 // MARK: - DisplayLogic
 
 extension MainScreenViewController: MainScreenDisplayLogic {
+    
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel) {
-        setTableData(data: viewModel.tableData)
+        setTableData(data: viewModel.tableData, hiddenPosts: viewModel.hiddenPosts)
+    }
+    
+    func revealTable() {
+        let duration = 0.35
+        UIView.transition(
+            with: tableView,
+            duration: duration,
+            options: .transitionCrossDissolve,
+            animations:
+                { () -> Void in
+                    self.tableView.layer.opacity = 1
+                },
+            completion: nil
+        )
+        tableView.reloadData()
     }
 }
 
@@ -102,16 +121,23 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         let model = dataSource[indexPath.row]
         
         if let model = model as PostForTable? {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeFull", for: indexPath) as! TableViewCellTypeFull
-            cell.configure(with: model)
-            return cell
+            if !hiddenPosts.contains(model.id) {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeFull", for: indexPath) as! TableViewCellTypeFull
+                cell.configure(with: model)
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeShortened", for: indexPath) as! TableViewCellTypeShortened
+                cell.configure(with: model)
+                return cell
+            }
+            
         }
         
         return .init()
     }
     
     //MARK: - functions
-
+    
     func tableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -120,21 +146,20 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
     
-    func scrollToTop(duration: Double) {
+    func scrollToTop() {
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        tableView.layer.opacity = 0
-        interactor.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
+        //        tableView.layer.opacity = 0
         UIView.transition(
             with: tableView,
-            duration: duration,
+            duration: 0.35,
             options: .transitionCrossDissolve,
             animations:
                 { () -> Void in
-                    self.tableView.reloadData()
-                    self.tableView.layer.opacity = 1
+                    self.tableView.layer.opacity = 0
                 },
             completion: nil
         )
+        interactor.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
     }
 }
 

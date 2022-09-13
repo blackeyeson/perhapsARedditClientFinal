@@ -51,6 +51,8 @@ final class APIManager {
         }
     }
     
+    func addToHiddenPosts(reset: Bool, postId: String) {}
+    
     //MARK: - keychain
     
     func keyChainSave(username: String, passcode: String) -> Bool{

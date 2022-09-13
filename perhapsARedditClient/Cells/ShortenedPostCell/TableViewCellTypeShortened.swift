@@ -9,24 +9,18 @@ import UIKit
 
 class TableViewCellTypeShortened: UITableViewCell {
 
-
-    // MARK: - Static Fields
-
-    static var identifier: String { .init(describing: self) }
-
     // MARK: - Fields
     @IBOutlet var title: UILabel!
     @IBOutlet var userAndSubreddit: UILabel!
-
-    var data: Post? = nil
-    var index = -1
-    weak var delegate: MainScreenViewController? = nil
+    @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var thumbnail: UIImageView!
+    
+    var id = ""
 
     // MARK: - ObjectLifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        config()
         let threeDotsTap = UITapGestureRecognizer(target: self, action: #selector(self.handleThreeDotsTap(_:)))
         self.addGestureRecognizer(threeDotsTap)
     }
@@ -41,16 +35,25 @@ class TableViewCellTypeShortened: UITableViewCell {
 
     @objc func handleThreeDotsTap(_ sender: UITapGestureRecognizer? = nil) {
         print("a")
-//        if delegate?.redditData != nil && index != -1{
-//            delegate!.contractionStats = delegate!.contractionStats.filter { $0 != index }
-//            delegate!.tableView.reloadData()
-//        }
-    }
-    func config() {
-//        if delegate != nil {
-//            title.text = delegate!.redditData?.data.children[index].data.title
-//            userAndSubreddit.text = "u/\(delegate!.redditData!.data.children[index].data.author) | r/\(delegate!.subreddit)"
-//        } else { print("incorrect usage") }
-    }
+        let defaults = UserDefaults.standard
+        var hiddenPosts: [String] = defaults.object(forKey: "hiddenPosts") as? [String] ?? []
+        if id != "" {
+            hiddenPosts = hiddenPosts.filter { $0 != id }
+            defaults.set(hiddenPosts, forKey: "hiddenPosts")
+            NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
+        }
 
+    }
+    func configure(with model: PostForTable) {
+        
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        thumbnail.load(url: model.picture, indicator: indicator)
+        
+        title.text = model.postTitle
+        userAndSubreddit.text = "\(model.oPUsername) | \(model.subreddit)"
+        thumbnail.load(url: model.thumbnail, indicator: indicator)
+        id = model.id
+
+    }
 }

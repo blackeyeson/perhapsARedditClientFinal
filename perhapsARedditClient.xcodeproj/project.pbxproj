@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		001E291C28CE690D00777BAA /* TableViewCellTypeFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E291A28CE690D00777BAA /* TableViewCellTypeFull.swift */; };
 		001E291F28CE730500777BAA /* TableViewCellTypeFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001E291E28CE730500777BAA /* TableViewCellTypeFull.xib */; };
-		00509C2A28CFDF2C00DF0E70 /* TableViewCellTypeFulI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00509C2828CFDF2C00DF0E70 /* TableViewCellTypeFulI.swift */; };
-		00509C2B28CFDF2C00DF0E70 /* TableViewCellTypeFulI.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00509C2928CFDF2C00DF0E70 /* TableViewCellTypeFulI.xib */; };
 		0057D68C28C3875D00D361F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D68B28C3875D00D361F5 /* AppDelegate.swift */; };
 		0057D68E28C3875D00D361F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D68D28C3875D00D361F5 /* SceneDelegate.swift */; };
 		0057D69828C3876100D361F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0057D69628C3876100D361F5 /* LaunchScreen.storyboard */; };
@@ -54,8 +52,6 @@
 /* Begin PBXFileReference section */
 		001E291A28CE690D00777BAA /* TableViewCellTypeFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTypeFull.swift; sourceTree = "<group>"; };
 		001E291E28CE730500777BAA /* TableViewCellTypeFull.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellTypeFull.xib; sourceTree = "<group>"; };
-		00509C2828CFDF2C00DF0E70 /* TableViewCellTypeFulI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTypeFulI.swift; sourceTree = "<group>"; };
-		00509C2928CFDF2C00DF0E70 /* TableViewCellTypeFulI.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellTypeFulI.xib; sourceTree = "<group>"; };
 		0057D68828C3875D00D361F5 /* perhapsARedditClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = perhapsARedditClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0057D68B28C3875D00D361F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0057D68D28C3875D00D361F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,15 +105,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00509C2728CFDEF100DF0E70 /* FullPostCell */ = {
-			isa = PBXGroup;
-			children = (
-				00509C2828CFDF2C00DF0E70 /* TableViewCellTypeFulI.swift */,
-				00509C2928CFDF2C00DF0E70 /* TableViewCellTypeFulI.xib */,
-			);
-			path = FullPostCell;
-			sourceTree = "<group>";
-		};
 		0057D67F28C3875D00D361F5 = {
 			isa = PBXGroup;
 			children = (
@@ -170,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				0057D6B728C3893800D361F5 /* ShortenedPostCell */,
-				00509C2728CFDEF100DF0E70 /* FullPostCell */,
 				0057D6B228C3890800D361F5 /* PostCell */,
 			);
 			path = Cells;
@@ -356,7 +342,6 @@
 				0057D69828C3876100D361F5 /* LaunchScreen.storyboard in Resources */,
 				0057D6BD28C389D400D361F5 /* Main.storyboard in Resources */,
 				0057D6BB28C3894F00D361F5 /* TableViewCellTypeShortened.xib in Resources */,
-				00509C2B28CFDF2C00DF0E70 /* TableViewCellTypeFulI.xib in Resources */,
 				0057D6BF28C389F400D361F5 /* Assets.xcassets in Resources */,
 				001E291F28CE730500777BAA /* TableViewCellTypeFull.xib in Resources */,
 			);
@@ -384,7 +369,6 @@
 				0057D6CC28C38A6B00D361F5 /* MainScreenInteractor.swift in Sources */,
 				0057D6D928C38AA300D361F5 /* RightSideMenuInteractor.swift in Sources */,
 				0057D6CB28C38A6B00D361F5 /* MainScreenViewController.swift in Sources */,
-				00509C2A28CFDF2C00DF0E70 /* TableViewCellTypeFulI.swift in Sources */,
 				0057D6E428C38AD000D361F5 /* LeftSideMenuRouter.swift in Sources */,
 				0057D6D728C38AA300D361F5 /* RightSideMenuModels.swift in Sources */,
 				0057D6AF28C3886E00D361F5 /* UIImageView+Extension.swift in Sources */,

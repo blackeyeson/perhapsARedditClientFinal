@@ -144,7 +144,7 @@
                             <constraint firstItem="z9O-lK-8o4" firstAttribute="top" secondItem="LAg-ZA-QDb" secondAttribute="top" constant="8" id="nCO-wy-r3Y"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logonLogo" translatesAutoresizingMaskIntoConstraints="NO" id="AXX-zE-cLm">
+                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="black" translatesAutoresizingMaskIntoConstraints="NO" id="AXX-zE-cLm">
                         <rect key="frame" x="0.0" y="82" width="397" height="270"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -158,6 +158,9 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Dfa-HH-uLg">
+                        <rect key="frame" x="188.5" y="189" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -170,16 +173,20 @@
                     <constraint firstItem="AXX-zE-cLm" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="TRe-Sf-L5h"/>
                     <constraint firstItem="AXX-zE-cLm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XPK-T6-bxl"/>
                     <constraint firstItem="RxG-Dy-73h" firstAttribute="top" secondItem="Mge-sn-494" secondAttribute="bottom" id="cwS-d8-5VG"/>
+                    <constraint firstItem="Dfa-HH-uLg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="jCB-4r-vb5"/>
                     <constraint firstItem="LAg-ZA-QDb" firstAttribute="top" secondItem="AXX-zE-cLm" secondAttribute="bottom" id="klx-Fc-7ol"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RxG-Dy-73h" secondAttribute="trailing" id="t7v-Wy-gix"/>
                     <constraint firstItem="Mge-sn-494" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vl7-NP-jlq"/>
                     <constraint firstAttribute="trailing" secondItem="Mge-sn-494" secondAttribute="trailing" id="vxz-YR-VPA"/>
+                    <constraint firstItem="Dfa-HH-uLg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zBg-lR-xOp"/>
                     <constraint firstAttribute="trailing" secondItem="LAg-ZA-QDb" secondAttribute="trailing" id="zMM-eb-5F8"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="domain" destination="nYl-zt-sBH" id="agt-1P-OLD"/>
                 <outlet property="downDoot" destination="xWc-vW-YKh" id="cLC-if-xUf"/>
+                <outlet property="indicator" destination="Dfa-HH-uLg" id="w8D-f5-i9P"/>
                 <outlet property="oPUsername" destination="dIV-6J-iTB" id="M0g-dF-Dvp"/>
                 <outlet property="picture" destination="AXX-zE-cLm" id="iRc-hD-uo7"/>
                 <outlet property="postTitle" destination="RxG-Dy-73h" id="5xk-W4-oMP"/>
@@ -194,10 +201,10 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="black" width="500" height="476"/>
         <image name="icons8-drop-down-50" width="50" height="50"/>
         <image name="icons8-ui-24" width="24" height="24"/>
         <image name="icons8-up-squared-50" width="50" height="50"/>
-        <image name="logonLogo" width="1080" height="1080"/>
         <image name="reddit_loader_failstate" width="160" height="160"/>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

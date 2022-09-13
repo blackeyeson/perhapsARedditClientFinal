@@ -15,6 +15,7 @@ import UIKit
 protocol MainScreenWorkerLogic {
     func fetchPosts(subreddit: String, timePeriod: String, numberOfPosts: Int) async throws -> RedditPosts
     func getSubreddit() async -> String
+    func getHiddenPosts() async -> [String]
 }
 
 final class MainScreenWorker: MainScreenWorkerLogic {
@@ -41,5 +42,11 @@ final class MainScreenWorker: MainScreenWorkerLogic {
         do {
             return try await api.getUserDefaults(Key: "subreddit", type: String.self) ?? "pics"
         } catch  { print("err/getSubreddit"); return "pics" }
+    }
+    
+    func getHiddenPosts() async -> [String] {
+        do {
+            return try await api.getUserDefaults(Key: "hiddenPosts", type: [String].self) ?? []
+        } catch  { print("err/getHiddenPosts"); return [] }
     }
 }
