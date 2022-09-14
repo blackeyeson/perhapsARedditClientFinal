@@ -16,12 +16,15 @@ class MainScreenViewController: UIViewController, configable
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var blueView: UIView!
+    @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var filterStringFieldOutlet: UITextField!
     
     
     // MARK: - Fields
     
     private var dataSource = [PostForTable]()
     private var hiddenPosts = [String]()
+    private var filterString = ""
     
     // MARK: - config
     
@@ -49,7 +52,11 @@ class MainScreenViewController: UIViewController, configable
     
     //MARK: - Setup
     
-    private func setupView() { tableConfiguration() }
+    private func setupView() {
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        tableConfiguration()
+    }
     
     private func addGlobalListener() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
@@ -81,6 +88,11 @@ class MainScreenViewController: UIViewController, configable
         router.navigateToRightSide()
     }
     
+    @IBAction func filterStringFiled(_ sender: Any) {
+        filterString = filterStringFieldOutlet.text ?? ""
+        scrollToTop()
+    }
+    
     @objc func reloadData(notification: Notification) {
         scrollToTop()
     }
@@ -96,6 +108,7 @@ extension MainScreenViewController: MainScreenDisplayLogic {
     
     func revealTable() {
         let duration = 0.35
+        indicator.stopAnimating()
         UIView.transition(
             with: tableView,
             duration: duration,
@@ -114,11 +127,19 @@ extension MainScreenViewController: MainScreenDisplayLogic {
 
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource.count
+        if filterString != "" {
+            return dataSource.filter { $0.postTitle.contains(filterString) }.count
+        } else {
+            return dataSource.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = dataSource[indexPath.row]
+        var model = dataSource[indexPath.row]
+        
+        if filterString != "" {
+            model = dataSource.filter { $0.postTitle.contains(filterString) }[indexPath.row]
+        }
         
         if let model = model as PostForTable? {
             if !hiddenPosts.contains(model.id) {
@@ -148,7 +169,6 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     
     func scrollToTop() {
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        //        tableView.layer.opacity = 0
         UIView.transition(
             with: tableView,
             duration: 0.35,
@@ -159,6 +179,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
                 },
             completion: nil
         )
+        indicator.startAnimating()
         interactor.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
     }
 }

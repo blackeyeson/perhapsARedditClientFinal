@@ -15,6 +15,8 @@ import UIKit
 protocol LeftSideMenuWorkerLogic {
     func setSub(subreddit: String)
     func setPeriod(timePeriod: String)
+    func getPeriod() async -> Int
+    func getSubreddits(request: LeftSideMenu.getSubs.Request) async -> LeftSideMenu.getSubs.Response
 }
 
 final class LeftSideMenuWorker: LeftSideMenuWorkerLogic {
@@ -33,5 +35,36 @@ final class LeftSideMenuWorker: LeftSideMenuWorkerLogic {
     }
     func setPeriod(timePeriod: String) {
         api.setUserDefaults(value: timePeriod, Key: "timePeriod")
+    }
+    func getPeriod() async -> Int {
+        do {
+            let period = try await api.getUserDefaults(Key: "timePeriod", type: String.self) ?? ""
+            switch period {
+            case "day":
+                return 0
+            case "week":
+                return 1
+            case "month":
+                return 2
+            case "year":
+                return 3
+            case "all":
+                return 4
+            default:
+                return 0
+            }
+        } catch { print("err/getPeriod"); return 0 }
+    }
+    
+    func getSubreddits(request: LeftSideMenu.getSubs.Request) async -> LeftSideMenu.getSubs.Response {
+        let urlString = "https://www.reddit.com/subreddits.json"
+        
+        var response = LeftSideMenu.getSubs.Response(subreddits: [subredditsPage.Stuff.Subs]())
+        
+        do {
+            response.subreddits = try await api.fetchData(urlString: urlString, decodingType: subredditsPage.self).data.children
+        } catch { print("error/getsubs/fetchData") }
+        
+        return response
     }
 }

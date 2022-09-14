@@ -47,6 +47,9 @@
 		0057D6FF28C38B1100D361F5 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6F928C38B1100D361F5 /* LoginModels.swift */; };
 		0057D70028C38B1100D361F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6FA28C38B1100D361F5 /* LoginViewController.swift */; };
 		0057D70128C38B1100D361F5 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6FB28C38B1100D361F5 /* LoginInteractor.swift */; };
+		00A8FE2B28D2079900F8F657 /* LeftSideMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A8FE2A28D2079900F8F657 /* LeftSideMenuPresenter.swift */; };
+		00A8FE2F28D2116F00F8F657 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A8FE2D28D2116F00F8F657 /* TableViewCell.swift */; };
+		00A8FE3028D2116F00F8F657 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A8FE2E28D2116F00F8F657 /* TableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,9 @@
 		0057D6F928C38B1100D361F5 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		0057D6FA28C38B1100D361F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0057D6FB28C38B1100D361F5 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		00A8FE2A28D2079900F8F657 /* LeftSideMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuPresenter.swift; sourceTree = "<group>"; };
+		00A8FE2D28D2116F00F8F657 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		00A8FE2E28D2116F00F8F657 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,7 @@
 			children = (
 				0057D6B728C3893800D361F5 /* ShortenedPostCell */,
 				0057D6B228C3890800D361F5 /* PostCell */,
+				00A8FE2C28D2114E00F8F657 /* subredditCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -250,6 +257,7 @@
 		0057D6DA28C38AB500D361F5 /* LeftSideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				00A8FE2A28D2079900F8F657 /* LeftSideMenuPresenter.swift */,
 				0057D6DD28C38AD000D361F5 /* LeftSideMenuWorker.swift */,
 				0057D6DE28C38AD000D361F5 /* LeftSideMenuRouter.swift */,
 				0057D6DF28C38AD000D361F5 /* LeftSideMenuModels.swift */,
@@ -279,6 +287,15 @@
 				0057D6FB28C38B1100D361F5 /* LoginInteractor.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		00A8FE2C28D2114E00F8F657 /* subredditCell */ = {
+			isa = PBXGroup;
+			children = (
+				00A8FE2D28D2116F00F8F657 /* TableViewCell.swift */,
+				00A8FE2E28D2116F00F8F657 /* TableViewCell.xib */,
+			);
+			path = subredditCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0057D69828C3876100D361F5 /* LaunchScreen.storyboard in Resources */,
+				00A8FE3028D2116F00F8F657 /* TableViewCell.xib in Resources */,
 				0057D6BD28C389D400D361F5 /* Main.storyboard in Resources */,
 				0057D6BB28C3894F00D361F5 /* TableViewCellTypeShortened.xib in Resources */,
 				0057D6BF28C389F400D361F5 /* Assets.xcassets in Resources */,
@@ -383,12 +401,14 @@
 				0057D6E528C38AD000D361F5 /* LeftSideMenuModels.swift in Sources */,
 				0057D68C28C3875D00D361F5 /* AppDelegate.swift in Sources */,
 				0057D6D628C38AA300D361F5 /* RightSideMenuRouter.swift in Sources */,
+				00A8FE2F28D2116F00F8F657 /* TableViewCell.swift in Sources */,
 				0057D68E28C3875D00D361F5 /* SceneDelegate.swift in Sources */,
 				0057D6E328C38AD000D361F5 /* LeftSideMenuWorker.swift in Sources */,
 				0057D6D828C38AA300D361F5 /* RightSideMenuViewController.swift in Sources */,
 				0057D6B128C3888900D361F5 /* UIColor+Extension.swift in Sources */,
 				0057D6C928C38A6B00D361F5 /* MainScreenRouter.swift in Sources */,
 				0057D6D428C38AA300D361F5 /* RightSideMenuPresenter.swift in Sources */,
+				00A8FE2B28D2079900F8F657 /* LeftSideMenuPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

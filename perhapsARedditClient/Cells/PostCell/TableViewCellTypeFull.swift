@@ -62,7 +62,7 @@ class TableViewCellTypeFull: UITableViewCell {
             upDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
             isRed = false
         } else {
-            upDoot.backgroundColor = .red
+            upDoot.backgroundColor = UIColor(red: 1.00, green: 0.55, blue: 0.38, alpha: 1.00)
             downDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
             isRed = true
         }
@@ -73,7 +73,7 @@ class TableViewCellTypeFull: UITableViewCell {
             downDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
             isBlue = false
         } else {
-            downDoot.backgroundColor = .blue
+            downDoot.backgroundColor = UIColor(red: 0.58, green: 0.58, blue: 1.00, alpha: 1.00)
             upDoot.backgroundColor = UIColor.black.withAlphaComponent(0.0)
             isBlue = true
         }
@@ -102,7 +102,16 @@ class TableViewCellTypeFull: UITableViewCell {
         isBlue = false
         
         picture.image = UIImage.init(named: "black")
-        picture.load(url: model.picture, indicator: indicator)
+        if let url = model.picture {
+            picture.load(url: url, indicator: indicator)
+        }
+        
+        subredditIcon.layer.cornerRadius = 8
+        if let iconURL = URL(string: model.iconUrlString) {
+            subredditIcon.image = UIImage(named: "logonLogo")
+            subredditIcon.load(url: iconURL, indicator: UIActivityIndicatorView())
+        }
+        
         postTitle.text = model.postTitle
         subreddit.text = model.subreddit
         oPUsername.text = model.oPUsername

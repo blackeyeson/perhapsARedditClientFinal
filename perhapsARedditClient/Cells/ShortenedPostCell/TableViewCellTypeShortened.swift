@@ -48,11 +48,15 @@ class TableViewCellTypeShortened: UITableViewCell {
         
         indicator.startAnimating()
         indicator.hidesWhenStopped = true
-        thumbnail.load(url: model.picture, indicator: indicator)
+        if let url = model.picture {
+            thumbnail.load(url: url, indicator: indicator)
+        }
         
         title.text = model.postTitle
         userAndSubreddit.text = "\(model.oPUsername) | \(model.subreddit)"
-        thumbnail.load(url: model.thumbnail, indicator: indicator)
+        if let url = model.thumbnail {
+            thumbnail.load(url: url, indicator: indicator)
+        }
         id = model.id
 
     }

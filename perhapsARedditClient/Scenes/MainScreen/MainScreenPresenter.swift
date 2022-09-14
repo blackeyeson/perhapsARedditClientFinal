@@ -20,6 +20,7 @@ class MainScreenPresenter: MainScreenPresentationLogic {
     // MARK: - Clean Components
     
     weak var viewController: MainScreenDisplayLogic?
+    private var iconUrlString = ""
     
     // MARK: - Methods
     
@@ -37,7 +38,8 @@ class MainScreenPresenter: MainScreenPresentationLogic {
                 subreddit: "r/\($0.subreddit)",
                 domain: $0.domain,
                 oPUsername: "u/\($0.author)",
-                timePassed: timePassed(created_utc: $0.created_utc)
+                timePassed: timePassed(created_utc: $0.created_utc),
+                iconUrlString: iconUrlString
             )
             
         })
@@ -96,7 +98,9 @@ extension MainScreenPresenter {
     
     func presentPosts(response: MainScreen.GetPosts.Response) {
         
-//        subreddit = response.subreddit
+        iconUrlString = ""
+        iconUrlString = response.iconUrlString
+        
         let data = redditPostsToPosts(rawData: response.data)
         let viewModel = configureTableModel(from: data)
         

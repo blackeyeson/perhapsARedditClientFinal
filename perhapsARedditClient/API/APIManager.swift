@@ -24,6 +24,7 @@ final class APIManager {
         do {
            return try JSONDecoder().decode(decodingType.self, from: data)
         } catch {
+            print("err/decoding")
             throw ApiError.decodingError
         }
     }

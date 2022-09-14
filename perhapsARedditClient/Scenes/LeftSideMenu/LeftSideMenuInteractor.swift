@@ -15,6 +15,8 @@ import UIKit
 protocol LeftSideMenuBusinessLogic {
     func didTapSubreddit(request: LeftSideMenu.setSub.Request)
     func didTapTimePeriod(request: LeftSideMenu.setperiod.Request)
+    func selectRow() async
+    func getSubs(request: LeftSideMenu.getSubs.Request) async
 }
 
 protocol LeftSideMenuDataStore {
@@ -23,17 +25,34 @@ protocol LeftSideMenuDataStore {
 final class LeftSideMenuInteractor: LeftSideMenuDataStore {
     
     private let worker: LeftSideMenuWorkerLogic
+    private let presenter: LeftSideMenuPresentationLogic
     
     // MARK: - Object Lifecycle
     
-    init(worker: LeftSideMenuWorkerLogic) {
+    init(worker: LeftSideMenuWorkerLogic, presenter: LeftSideMenuPresentationLogic) {
         self.worker = worker
+        self.presenter = presenter
     }
 }
 
 // MARK: - BusinessLogic
 
 extension LeftSideMenuInteractor: LeftSideMenuBusinessLogic {
+    
+    func getSubs(request: LeftSideMenu.getSubs.Request) async {
+        let sebredditsPage = await worker.getSubreddits(request: LeftSideMenu.getSubs.Request())
+        var subs: [String] = []
+        sebredditsPage.subreddits.forEach { subs += [$0.data.display_name] }
+        
+        DispatchQueue.main.async { [weak self, subs] in
+            self?.presenter.presentSubs(viewModel: LeftSideMenu.getSubs.ViewModel(subNames: subs))
+        }
+    }
+    
+    func selectRow() async {
+        let row = await worker.getPeriod()
+        presenter.selectRow(response: row)
+    }
     
     func didTapSubreddit(request: LeftSideMenu.setSub.Request) {
         worker.setSub(subreddit: request.subreddit)

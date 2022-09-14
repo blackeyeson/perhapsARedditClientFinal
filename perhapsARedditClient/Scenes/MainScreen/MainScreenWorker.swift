@@ -13,9 +13,10 @@
 import UIKit
 
 protocol MainScreenWorkerLogic {
-    func fetchPosts(subreddit: String, timePeriod: String, numberOfPosts: Int) async throws -> RedditPosts
+    func fetchPosts(after: String?) async throws -> RedditPosts
     func getSubreddit() async -> String
     func getHiddenPosts() async -> [String]
+    func getIconUrl() async -> String
 }
 
 final class MainScreenWorker: MainScreenWorkerLogic {
@@ -29,13 +30,14 @@ final class MainScreenWorker: MainScreenWorkerLogic {
     
     // MARK: - Methods
     
-    func fetchPosts(subreddit: String, timePeriod: String, numberOfPosts: Int) async throws -> RedditPosts {
+    func fetchPosts(after: String?) async throws -> RedditPosts {
         let sub = try await api.getUserDefaults(Key: "subreddit", type: String.self)
         let time = try await api.getUserDefaults(Key: "timePeriod", type: String.self)
-        return try await api.fetchData(
-            urlString: "https://www.reddit.com/r/\(sub ?? "pics")/top/.json?t=\(time ?? "month")&limit=\(100)",
-            decodingType: RedditPosts.self
-        )
+        var urlString = "https://www.reddit.com/r/\(sub ?? "pics")/top/.json?t=\(time ?? "month")&limit=\(100)"
+        if let postId = after {
+            urlString = "https://www.reddit.com/r/\(sub ?? "pics")/top/.json?t=\(time ?? "month")&limit=\(100)&after=\(postId)"
+        }
+        return try await api.fetchData(urlString: urlString, decodingType: RedditPosts.self)
     }
     
     func getSubreddit() async -> String {
@@ -48,5 +50,32 @@ final class MainScreenWorker: MainScreenWorkerLogic {
         do {
             return try await api.getUserDefaults(Key: "hiddenPosts", type: [String].self) ?? []
         } catch  { print("err/getHiddenPosts"); return [] }
+    }
+    
+    func getIconUrl() async -> String {
+        var urlString = "https://www.reddit.com/favicon.ico"
+        
+        do {
+            let data = try await api.fetchData(urlString: "https://www.reddit.com/r/\(getSubreddit())/about.json" , decodingType: About.self).data
+            
+            if data.icon_img != "" {
+                urlString = data.icon_img
+            } else { urlString = data.community_icon }
+        } catch { print("err/getIconUrl") }
+
+        urlString = removeExtraUrlString(url: urlString, extensionString: ".jpg")
+        urlString = removeExtraUrlString(url: urlString, extensionString: ".png")
+        urlString = removeExtraUrlString(url: urlString, extensionString: ".ico")
+
+        return urlString
+    }
+    
+    private func removeExtraUrlString(url: String, extensionString: String) -> String {
+        var string = url
+        if let dotRange = string.range(of: extensionString) {
+            string.removeSubrange(dotRange.lowerBound..<string.endIndex)
+            string += extensionString
+        }
+        return string
     }
 }

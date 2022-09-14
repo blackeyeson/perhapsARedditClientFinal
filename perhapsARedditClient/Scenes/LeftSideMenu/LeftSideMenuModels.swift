@@ -30,4 +30,12 @@ enum LeftSideMenu {
         
         struct ViewModel {  }
     }
+    
+    enum getSubs {
+        struct Request {  }
+        
+        struct Response { var subreddits: [subredditsPage.Stuff.Subs] }
+        
+        struct ViewModel { let subNames: [String] }
+    }
 }

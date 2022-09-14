@@ -48,12 +48,17 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
     func getPosts(request: MainScreen.GetPosts.Request) {
         Task {
             do {
-                let redditPosts = try await worker.fetchPosts(subreddit: request.subreddit, timePeriod: request.timePeriod, numberOfPosts: request.numberOfPosts)
+                let redditPosts = try await worker.fetchPosts(after: nil)
                 let hiddenPosts = await worker.getHiddenPosts()
+                let iconURLString = await worker.getIconUrl()
                 DispatchQueue.main.async { [weak self] in
-                    self?.presenter.presentPosts(response: MainScreen.GetPosts.Response(data: redditPosts, hiddenPosts: hiddenPosts))
+                    self?.presenter.presentPosts(response: MainScreen.GetPosts.Response(data: redditPosts, hiddenPosts: hiddenPosts, iconUrlString: iconURLString))
                 }
             } catch { print(error) }
         }
     }
+    
+//    func getMorePosts() {
+//
+//    }
 }
