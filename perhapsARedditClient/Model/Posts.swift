@@ -13,11 +13,9 @@ import UIKit
 struct RedditPosts: Decodable {
     
     var data: ListingData
-    
     struct ListingData: Decodable {
         
         var children: [PostData]
-        
         struct PostData: Decodable {
             let data: Post
         }
@@ -25,6 +23,7 @@ struct RedditPosts: Decodable {
 }
 
 struct Post: Decodable {
+    let selftext: String
     let title: String
     let subreddit: String
     let subreddit_name_prefixed: String
@@ -32,27 +31,41 @@ struct Post: Decodable {
     let domain: String
     let score: Int
     let is_created_from_ads_ui: Bool
-    let thumbnail: URL?
-    let url_overridden_by_dest: URL?
-    let url: URL?
+    let thumbnail: String?
+    let url_overridden_by_dest: String?
+    let url: String?
     let permalink: String
     let author: String
     let created_utc: Double
     let id: String
+    let is_video: Bool
+    let media: Media?
+    struct Media: Decodable {
+        
+        let reddit_video: RVideo?
+        struct RVideo: Decodable {
+            
+            let fallback_url: String
+        }
+    }
 }
 
 struct PostForTable {
     let postTitle: String
     let id: String
     let voteCount: String
-    let picture: URL?
-    let subredditIcon: URL?
-    let thumbnail: URL?
+    let picture: String?
+    let subredditIcon: String?
+    let thumbnail: String?
     let subreddit: String
     let domain: String
     let oPUsername: String
     let timePassed: String
     let iconUrlString: String
+    let isVideo: Bool
+    let isGif: Bool
+    let VideoUrlString: String?
+    let bodyText: String
 }
 
 //MARK: - about page
@@ -60,6 +73,7 @@ struct PostForTable {
 struct About: Decodable {
     let data: Stuff
     struct Stuff: Decodable {
+        
         let icon_img: String
         let community_icon: String
     }
@@ -70,10 +84,13 @@ struct About: Decodable {
 struct subredditsPage: Decodable {
     let data: Stuff
     struct Stuff: Decodable {
+        
         let children: [Subs]
         struct Subs: Decodable {
+            
             let data: SubPage
             struct SubPage: Decodable {
+                
                 let display_name: String
             }
         }

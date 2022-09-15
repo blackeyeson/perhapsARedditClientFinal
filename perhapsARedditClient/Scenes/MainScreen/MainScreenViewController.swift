@@ -2,6 +2,7 @@ import UIKit
 
 protocol MainScreenDisplayLogic: AnyObject {
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel)
+    func refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel)
     func revealTable()
 }
 
@@ -60,8 +61,9 @@ class MainScreenViewController: UIViewController, configable
     
     private func addGlobalListener() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadDataWithoutRefresh), name: Notification.Name("com.testCompany.Notification.reloadDataWithoutRefresh"), object: nil)
     }
-    
+
     private func setTableData(data: [PostForTable], hiddenPosts: [String]) {
         self.dataSource = data
         self.hiddenPosts = hiddenPosts
@@ -96,6 +98,11 @@ class MainScreenViewController: UIViewController, configable
     @objc func reloadData(notification: Notification) {
         scrollToTop()
     }
+    
+    @objc func reloadDataWithoutRefresh(notification: Notification) {
+        interactor.refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request())
+        tableView.reloadData()
+    }
 }
 
 // MARK: - DisplayLogic
@@ -104,6 +111,10 @@ extension MainScreenViewController: MainScreenDisplayLogic {
     
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel) {
         setTableData(data: viewModel.tableData, hiddenPosts: viewModel.hiddenPosts)
+    }
+    
+    func refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel) {
+        hiddenPosts = viewModel.posts
     }
     
     func revealTable() {

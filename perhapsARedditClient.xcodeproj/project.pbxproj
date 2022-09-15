@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		001E291C28CE690D00777BAA /* TableViewCellTypeFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E291A28CE690D00777BAA /* TableViewCellTypeFull.swift */; };
 		001E291F28CE730500777BAA /* TableViewCellTypeFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001E291E28CE730500777BAA /* TableViewCellTypeFull.xib */; };
+		004B69B128D3661D004872D5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B69B028D3661D004872D5 /* UIImage+Extension.swift */; };
 		0057D68C28C3875D00D361F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D68B28C3875D00D361F5 /* AppDelegate.swift */; };
 		0057D68E28C3875D00D361F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D68D28C3875D00D361F5 /* SceneDelegate.swift */; };
 		0057D69828C3876100D361F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0057D69628C3876100D361F5 /* LaunchScreen.storyboard */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		001E291A28CE690D00777BAA /* TableViewCellTypeFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTypeFull.swift; sourceTree = "<group>"; };
 		001E291E28CE730500777BAA /* TableViewCellTypeFull.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellTypeFull.xib; sourceTree = "<group>"; };
+		004B69B028D3661D004872D5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		0057D68828C3875D00D361F5 /* perhapsARedditClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = perhapsARedditClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0057D68B28C3875D00D361F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0057D68D28C3875D00D361F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				0057D6A728C387E300D361F5 /* UIView+Extension.swift */,
 				0057D6AE28C3886E00D361F5 /* UIImageView+Extension.swift */,
 				0057D6B028C3888900D361F5 /* UIColor+Extension.swift */,
+				004B69B028D3661D004872D5 /* UIImage+Extension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				0057D6D828C38AA300D361F5 /* RightSideMenuViewController.swift in Sources */,
 				0057D6B128C3888900D361F5 /* UIColor+Extension.swift in Sources */,
 				0057D6C928C38A6B00D361F5 /* MainScreenRouter.swift in Sources */,
+				004B69B128D3661D004872D5 /* UIImage+Extension.swift in Sources */,
 				0057D6D428C38AA300D361F5 /* RightSideMenuPresenter.swift in Sources */,
 				00A8FE2B28D2079900F8F657 /* LeftSideMenuPresenter.swift in Sources */,
 			);

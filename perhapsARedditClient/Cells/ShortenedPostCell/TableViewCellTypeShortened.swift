@@ -40,7 +40,7 @@ class TableViewCellTypeShortened: UITableViewCell {
         if id != "" {
             hiddenPosts = hiddenPosts.filter { $0 != id }
             defaults.set(hiddenPosts, forKey: "hiddenPosts")
-            NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadDataWithoutRefresh"), object: nil)
         }
 
     }
@@ -48,16 +48,20 @@ class TableViewCellTypeShortened: UITableViewCell {
         
         indicator.startAnimating()
         indicator.hidesWhenStopped = true
-        if let url = model.picture {
-            thumbnail.load(url: url, indicator: indicator)
-        }
+        thumbnail.layer.cornerRadius = 8
+//        if let url = model.picture {
+//            thumbnail.load(url: url, indicator: indicator)
+//        }
         
         title.text = model.postTitle
         userAndSubreddit.text = "\(model.oPUsername) | \(model.subreddit)"
         if let url = model.thumbnail {
-            thumbnail.load(url: url, indicator: indicator)
+            thumbnail.load(urlString: url, indicator: indicator)
         }
         id = model.id
 
+    }
+    deinit {
+        print("deined")
     }
 }

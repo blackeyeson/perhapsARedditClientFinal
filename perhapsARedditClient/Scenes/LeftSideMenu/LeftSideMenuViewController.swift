@@ -35,8 +35,9 @@ final class LeftSideMenuViewController: UIViewController {
     
     private var dataSource = [String]()
     private var filterString = ""
-    var subs = ["cats", "PixelArt", "memes", "gaming", "pics", "MadeMeSmile", "HolUp", "interestingasfuck", "shittymoviedetails", "pcmasterrace", "therewasanattempt", "aww", "meirl", "PrequelMemes", "ThatsInsane", "funny", "mildlyinfuriating"]
+    var subs = ["all", "cats", "PixelArt", "memes", "gaming", "pics", "MadeMeSmile", "HolUp", "interestingasfuck", "shittymoviedetails", "pcmasterrace", "therewasanattempt", "aww", "meirl", "PrequelMemes", "ThatsInsane", "funny", "mildlyinfuriating"]
     var urls = [
+        nil,
         "https://styles.redditmedia.com/t5_2qhta/styles/communityIcon_2fsd7ji8awg91.png",
         "https://styles.redditmedia.com/t5_2ql09/styles/communityIcon_k7ch3e2u2m711.png",
         "https://styles.redditmedia.com/t5_2qjpg/styles/communityIcon_bzdtpod2vtv81.png",

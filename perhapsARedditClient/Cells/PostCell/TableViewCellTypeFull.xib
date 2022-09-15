@@ -149,16 +149,22 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="270" id="sXx-ay-AO4"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" priority="900" constant="270" id="sXx-ay-AO4"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxG-Dy-73h">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxG-Dy-73h">
                         <rect key="frame" x="20" y="60" width="357" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Dfa-HH-uLg">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tta-qI-fIv">
+                        <rect key="frame" x="20" y="82" width="357" height="270"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cZO-Ps-ikh">
                         <rect key="frame" x="188.5" y="189" width="20" height="20"/>
                     </activityIndicatorView>
                 </subviews>
@@ -166,19 +172,24 @@
                 <constraints>
                     <constraint firstItem="AXX-zE-cLm" firstAttribute="top" secondItem="RxG-Dy-73h" secondAttribute="bottom" id="0DT-jL-4fn"/>
                     <constraint firstAttribute="bottom" secondItem="LAg-ZA-QDb" secondAttribute="bottom" id="9I7-xy-TIV"/>
+                    <constraint firstItem="AXX-zE-cLm" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="GeT-6v-m5b"/>
+                    <constraint firstItem="Tta-qI-fIv" firstAttribute="top" secondItem="RxG-Dy-73h" secondAttribute="bottom" id="HdK-ca-Ol0"/>
                     <constraint firstItem="RxG-Dy-73h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Igt-jw-81A"/>
                     <constraint firstItem="Mge-sn-494" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="PUc-u4-wTS"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AXX-zE-cLm" secondAttribute="trailing" id="S35-6M-DXs"/>
+                    <constraint firstItem="Tta-qI-fIv" firstAttribute="height" secondItem="AXX-zE-cLm" secondAttribute="height" id="RqU-aw-BRp"/>
+                    <constraint firstAttribute="trailing" secondItem="AXX-zE-cLm" secondAttribute="trailing" id="S35-6M-DXs"/>
+                    <constraint firstItem="cZO-Ps-ikh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="S4q-Ih-bmm"/>
                     <constraint firstItem="LAg-ZA-QDb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="T4R-A0-9JU"/>
-                    <constraint firstItem="AXX-zE-cLm" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="TRe-Sf-L5h"/>
-                    <constraint firstItem="AXX-zE-cLm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XPK-T6-bxl"/>
+                    <constraint firstAttribute="trailing" secondItem="Tta-qI-fIv" secondAttribute="trailing" constant="20" id="Wg6-ap-hod"/>
+                    <constraint firstItem="AXX-zE-cLm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XPK-T6-bxl"/>
                     <constraint firstItem="RxG-Dy-73h" firstAttribute="top" secondItem="Mge-sn-494" secondAttribute="bottom" id="cwS-d8-5VG"/>
-                    <constraint firstItem="Dfa-HH-uLg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="jCB-4r-vb5"/>
+                    <constraint firstItem="Tta-qI-fIv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="cyN-yq-IdD"/>
                     <constraint firstItem="LAg-ZA-QDb" firstAttribute="top" secondItem="AXX-zE-cLm" secondAttribute="bottom" id="klx-Fc-7ol"/>
+                    <constraint firstItem="cZO-Ps-ikh" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="rZA-19-gON"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RxG-Dy-73h" secondAttribute="trailing" id="t7v-Wy-gix"/>
                     <constraint firstItem="Mge-sn-494" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vl7-NP-jlq"/>
                     <constraint firstAttribute="trailing" secondItem="Mge-sn-494" secondAttribute="trailing" id="vxz-YR-VPA"/>
-                    <constraint firstItem="Dfa-HH-uLg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zBg-lR-xOp"/>
+                    <constraint firstItem="LAg-ZA-QDb" firstAttribute="top" secondItem="Tta-qI-fIv" secondAttribute="bottom" id="wT5-59-HrR"/>
                     <constraint firstAttribute="trailing" secondItem="LAg-ZA-QDb" secondAttribute="trailing" id="zMM-eb-5F8"/>
                 </constraints>
             </tableViewCellContentView>
@@ -186,18 +197,19 @@
             <connections>
                 <outlet property="domain" destination="nYl-zt-sBH" id="agt-1P-OLD"/>
                 <outlet property="downDoot" destination="xWc-vW-YKh" id="cLC-if-xUf"/>
-                <outlet property="indicator" destination="Dfa-HH-uLg" id="w8D-f5-i9P"/>
+                <outlet property="indicator" destination="cZO-Ps-ikh" id="Oja-ll-lzL"/>
                 <outlet property="oPUsername" destination="dIV-6J-iTB" id="M0g-dF-Dvp"/>
                 <outlet property="picture" destination="AXX-zE-cLm" id="iRc-hD-uo7"/>
                 <outlet property="postTitle" destination="RxG-Dy-73h" id="5xk-W4-oMP"/>
                 <outlet property="subreddit" destination="vkT-ie-rbT" id="443-YG-ALB"/>
                 <outlet property="subredditIcon" destination="R0d-Of-f1P" id="Gl0-fU-3tZ"/>
+                <outlet property="subtext" destination="Tta-qI-fIv" id="eqN-jc-Au0"/>
                 <outlet property="timePassed" destination="19d-ef-ajd" id="dZ3-sV-db9"/>
                 <outlet property="topBarView" destination="Mge-sn-494" id="VGj-WD-53h"/>
                 <outlet property="upDoot" destination="z9O-lK-8o4" id="WCk-Nx-WlX"/>
                 <outlet property="voteCount" destination="otL-RD-u2l" id="PEB-el-mmQ"/>
             </connections>
-            <point key="canvasLocation" x="73" y="93"/>
+            <point key="canvasLocation" x="71.739130434782609" y="92.410714285714278"/>
         </tableViewCell>
     </objects>
     <resources>

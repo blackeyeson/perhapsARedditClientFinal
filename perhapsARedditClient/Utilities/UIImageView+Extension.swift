@@ -9,20 +9,23 @@
 
 import Foundation
 import UIKit
+import ImageIO
 
 extension UIImageView {
-    func load(url: URL, indicator: UIActivityIndicatorView) {
+    func load(urlString: String, indicator: UIActivityIndicatorView?) {
+        guard let url = URL(string: urlString) else { print("err/imageLoad"); return }
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         self?.image = image
-                        indicator.stopAnimating()
+                        self?.layer.opacity = 1
+                        indicator?.stopAnimating()
                     }
                 } else {
                     DispatchQueue.main.async {
                         self?.image = UIImage(named: "loadingError")
-                        indicator.stopAnimating()
+                        indicator?.stopAnimating()
                     }
                 }
             }

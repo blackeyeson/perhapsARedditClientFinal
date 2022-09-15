@@ -14,6 +14,7 @@ import UIKit
 
 protocol MainScreenPresentationLogic {
     func presentPosts(response: MainScreen.GetPosts.Response)
+    func refreshHiddenPosts(response: MainScreen.refreshHiddenPost.Response)
 }
 
 class MainScreenPresenter: MainScreenPresentationLogic {
@@ -28,7 +29,18 @@ class MainScreenPresenter: MainScreenPresentationLogic {
         var tableModel = [PostForTable]()
         
         tableModel.append(contentsOf: data.map {
-            PostForTable(
+            var isGif = false
+            var videoUrlString: String? = nil
+            
+            if let url = $0.url_overridden_by_dest {
+                if "\(url)".contains(".gif") { isGif = true }
+            }
+            
+            if let videoType = $0.media?.reddit_video {
+                videoUrlString = videoType.fallback_url
+            }
+            print($0.selftext)
+            return PostForTable(
                 postTitle: $0.title,
                 id: $0.id,
                 voteCount: voteCount(score: $0.score),
@@ -39,9 +51,12 @@ class MainScreenPresenter: MainScreenPresentationLogic {
                 domain: $0.domain,
                 oPUsername: "u/\($0.author)",
                 timePassed: timePassed(created_utc: $0.created_utc),
-                iconUrlString: iconUrlString
-            )
-            
+                iconUrlString: iconUrlString,
+                isVideo: $0.is_video,
+                isGif: isGif,
+                VideoUrlString: removeExtraUrlString(url: videoUrlString, extensionString: ".mp4"),
+                bodyText: $0.selftext
+            )  
         })
         return tableModel
     }
@@ -90,6 +105,15 @@ class MainScreenPresenter: MainScreenPresentationLogic {
         return returnString
     }
     
+    func removeExtraUrlString(url: String?, extensionString: String) -> String? {
+        guard var string = url else { return url }
+        if let dotRange = string.range(of: extensionString) {
+            string.removeSubrange(dotRange.lowerBound..<string.endIndex)
+            string += extensionString
+        }
+        return string
+    }
+    
 }
 
 // MARK: - PresentationLogic
@@ -106,6 +130,10 @@ extension MainScreenPresenter {
         
         viewController?.displayPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel, hiddenPosts: response.hiddenPosts))
         viewController?.revealTable()
+    }
+    
+    func refreshHiddenPosts(response: MainScreen.refreshHiddenPost.Response) {
+        viewController?.refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel(posts: response.posts))
     }
 }
 

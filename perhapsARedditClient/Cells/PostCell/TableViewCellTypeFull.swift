@@ -6,19 +6,21 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TableViewCellTypeFull: UITableViewCell {
     
-//    // MARK: - Static Fields
-//    
-//    static var identifier: String { .init(describing: self) }
-//    
+    //    // MARK: - Static Fields
+    //
+    //    static var identifier: String { .init(describing: self) }
+    //
     // MARK: - Fields
     @IBOutlet weak var picture: UIImageView!
     @IBOutlet var upDoot: UIImageView!
     @IBOutlet var downDoot: UIImageView!
     @IBOutlet var voteCount: UILabel!
     @IBOutlet var postTitle: UILabel!
+    @IBOutlet var subtext: UILabel!
     @IBOutlet var subredditIcon: UIImageView!
     @IBOutlet var subreddit: UILabel!
     @IBOutlet var domain: UILabel!
@@ -34,6 +36,10 @@ class TableViewCellTypeFull: UITableViewCell {
     //    var aboutPage: Stuff? = nil
     var id = ""
     var currnetTime = Date()
+//    var playerAV: AVPlayer!
+    var videoPlayer:AVPlayer?
+    var videoPlayerLayer:AVPlayerLayer?
+    var playerLooper:NSObject?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,8 +53,13 @@ class TableViewCellTypeFull: UITableViewCell {
         let threeDotsTap = UITapGestureRecognizer(target: self, action: #selector(self.handleThreeDotsTap(_:)))
         topBarView.addGestureRecognizer(threeDotsTap)
         
+        let subtextTap = UITapGestureRecognizer(target: self, action: #selector(self.subtextTap(_:)))
+        topBarView.addGestureRecognizer(threeDotsTap)
+        picture.addGestureRecognizer(subtextTap)
+
         upDoot.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         upDoot.backgroundColor = UIColor.white.withAlphaComponent(0.0)
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -79,6 +90,13 @@ class TableViewCellTypeFull: UITableViewCell {
         }
     }
     
+    @objc func subtextTap(_ sender: UITapGestureRecognizer? = nil) {
+        if subtext.text == "" { return }
+        if let url = URL(string: subtext.text ?? "") {
+          UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     @objc func handleThreeDotsTap(_ sender: UITapGestureRecognizer? = nil) {
         print("a")
         let defaults = UserDefaults.standard
@@ -86,7 +104,7 @@ class TableViewCellTypeFull: UITableViewCell {
         if id != "" {
             hiddenPosts += [id]
             defaults.set(hiddenPosts, forKey: "hiddenPosts")
-            NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadDataWithoutRefresh"), object: nil)
         }
     }
     // MARK: - Methods
@@ -102,23 +120,97 @@ class TableViewCellTypeFull: UITableViewCell {
         isBlue = false
         
         picture.image = UIImage.init(named: "black")
-        if let url = model.picture {
-            picture.load(url: url, indicator: indicator)
-        }
-        
         subredditIcon.layer.cornerRadius = 8
-        if let iconURL = URL(string: model.iconUrlString) {
-            subredditIcon.image = UIImage(named: "logonLogo")
-            subredditIcon.load(url: iconURL, indicator: UIActivityIndicatorView())
-        }
-        
         postTitle.text = model.postTitle
         subreddit.text = model.subreddit
         oPUsername.text = model.oPUsername
         domain.text = model.domain
         timePassed.text = model.timePassed
         voteCount.text = model.voteCount
+        subtext.text = ""
+        videoPlayerLayer?.opacity = 0
+        videoPlayer?.pause()
         id = model.id
+        
+        subredditIcon.image = UIImage(named: "logonLogo")
+        subredditIcon.load(urlString: model.iconUrlString, indicator: nil)
+        
+        let StringUrl = model.picture ?? ""
+        let vidStringUrl = model.VideoUrlString ?? ""
+        let bodyText = model.bodyText
+        
+        let isPicture = StringUrl.contains(".jpg") || StringUrl.contains("png")
+        let isGif = model.isGif && !StringUrl.contains(".gifv")
+        let isVideo = vidStringUrl.contains(".mp4")
+        let isText = !isPicture && !model.isVideo && !model.isGif
+        let isBodyText = model.bodyText != ""
+
+        if isVideo { playvideo(videourl: vidStringUrl); return }
+
+        if isGif { setGif(urlString: StringUrl); return }
+        
+        if isPicture { picture.load(urlString: StringUrl, indicator: indicator); return }
+                            
+        if isText { setText(text: StringUrl); return }
+        
+        if isBodyText { setText(text: bodyText); return }
+        
+        setText(text: StringUrl)
     }
-    // MARK: - Private Methods
+    
+    func setGif(urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("err/setGif")
+            setText(text: urlString)
+            return
+        }
+        DispatchQueue.global().async { [weak self] in
+            let image = UIImage.gifImageWithURL("\(url)")
+            DispatchQueue.main.async {
+                self?.picture.image = image
+                self?.indicator.stopAnimating()
+            }
+        }
+    }
+    
+    func setText(text: String) {
+        subtext.text = text
+        picture.image = UIImage(named: "blackSmoll")
+        picture.layer.opacity = 0
+        indicator.stopAnimating()
+    }
+    
+    func playvideo(videourl: String) {
+        
+        picture.layer.opacity = 1
+        picture.image = UIImage(named: "black")
+        // Create a URL
+        guard let url = URL(string: videourl) else {
+            picture.layer.opacity = 0
+            setText(text: videourl)
+            return
+        }
+        
+        // Create the video player item
+        let item = AVPlayerItem(url: url)
+        
+        // Assign an array of 1 item to AVQueuePlayer
+        videoPlayer = AVQueuePlayer(items: [item])
+        
+        // Loop the video
+        playerLooper = AVPlayerLooper(player: videoPlayer! as! AVQueuePlayer, templateItem: item)
+        
+        // Create the layer
+        videoPlayerLayer = AVPlayerLayer(player: videoPlayer)
+        
+        // Adjust the size and frame
+        videoPlayerLayer?.frame = picture.bounds
+        videoPlayerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        picture.layer.addSublayer(videoPlayerLayer!)
+
+        // Add it to the view and play it
+        indicator.stopAnimating()
+        videoPlayerLayer?.opacity = 1
+        videoPlayer?.play()
+    }
 }

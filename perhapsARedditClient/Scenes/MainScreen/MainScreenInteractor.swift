@@ -14,6 +14,7 @@ import UIKit
 
 protocol MainScreenBusinessLogic {
     func getPosts(request: MainScreen.GetPosts.Request)
+    func refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request)
 //    func didTapPost(request: MainScreen.hidePost.Request)
 }
 
@@ -57,6 +58,16 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
             } catch { print(error) }
         }
     }
+    
+    func refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request) {
+        Task {
+            let hiddenPosts = await worker.getHiddenPosts()
+            presenter.refreshHiddenPosts(response: MainScreen.refreshHiddenPost.Response(posts: hiddenPosts))
+        }
+        
+    }
+    
+    
     
 //    func getMorePosts() {
 //

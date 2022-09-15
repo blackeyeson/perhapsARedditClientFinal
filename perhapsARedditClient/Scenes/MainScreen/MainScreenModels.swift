@@ -33,4 +33,13 @@ enum MainScreen
         
         struct ViewModel {  }
     }
+    
+    enum refreshHiddenPost {
+        
+        struct Request {  }
+        
+        struct Response { let posts: [String] }
+        
+        struct ViewModel { let posts: [String] }
+    }
 }
