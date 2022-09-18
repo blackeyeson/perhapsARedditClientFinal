@@ -7,6 +7,8 @@
 
 import Foundation
 import Security
+import UIKit
+import AVFoundation
 
 final class APIManager {
     
@@ -103,5 +105,44 @@ final class APIManager {
             print("Something went wrong trying to find the user in the keychain"); return false
         }
         return false
+    }
+    
+    //MARK: - media Loading
+    
+    func loadImageFrom(urlString: String) async throws -> UIImage? {
+        guard let url = URL(string: urlString)
+        else { return UIImage(named: "loadingError") }
+        
+        guard let data = try? Data(contentsOf: url)
+        else { return UIImage(named: "loadingError") }
+        
+        guard let image = UIImage(data: data)
+        else { return UIImage(named: "loadingError") }
+        
+        return image
+    }
+    
+    func loadGifFrom(urlString: String) async throws -> UIImage? {
+        guard let url = URL(string: urlString)
+        else { return UIImage(named: "loadingError") }
+//        return UIImage(named: "loadingError")
+        return UIImage.gifImageWithURL("\(url)") ?? UIImage(named: "loadingError")
+    }
+    
+    func imageDimenssions(url: String) -> [CGFloat] {
+        if let imageSource = CGImageSourceCreateWithURL(URL(string: url)! as CFURL, nil) {
+            if let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {
+                let pixelWidth = imageProperties[kCGImagePropertyPixelWidth] as! CGFloat
+                let pixelHeight = imageProperties[kCGImagePropertyPixelHeight] as! CGFloat
+                return [pixelWidth, pixelHeight]
+            }
+        }
+        return [200, 200]
+    }
+    
+    func getVideoResolution(url: String) -> [CGFloat] {
+        guard let track = AVURLAsset(url: URL(string: url)!).tracks(withMediaType: AVMediaType.video).first else { return [200, 200] }
+        let size = track.naturalSize.applying(track.preferredTransform)
+        return [abs(size.width), abs(size.height)]
     }
 }

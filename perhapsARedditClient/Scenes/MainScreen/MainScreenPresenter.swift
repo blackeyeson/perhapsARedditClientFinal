@@ -21,16 +21,18 @@ class MainScreenPresenter: MainScreenPresentationLogic {
     // MARK: - Clean Components
     
     weak var viewController: MainScreenDisplayLogic?
-    private var iconUrlString = ""
+    private var iconUrlStrings: [String] = []
     
     // MARK: - Methods
     
     private func configureTableModel(from data: [Post]) -> [PostForTable] {
         var tableModel = [PostForTable]()
+        var i = 0
         
         tableModel.append(contentsOf: data.map {
             var isGif = false
             var videoUrlString: String? = nil
+            i += 1
             
             if let url = $0.url_overridden_by_dest {
                 if "\(url)".contains(".gif") { isGif = true }
@@ -51,7 +53,7 @@ class MainScreenPresenter: MainScreenPresentationLogic {
                 domain: $0.domain,
                 oPUsername: "u/\($0.author)",
                 timePassed: timePassed(created_utc: $0.created_utc),
-                iconUrlString: iconUrlString,
+                iconUrlString: iconUrlStrings[i-1],
                 isVideo: $0.is_video,
                 isGif: isGif,
                 VideoUrlString: removeExtraUrlString(url: videoUrlString, extensionString: ".mp4"),
@@ -122,8 +124,7 @@ extension MainScreenPresenter {
     
     func presentPosts(response: MainScreen.GetPosts.Response) {
         
-        iconUrlString = ""
-        iconUrlString = response.iconUrlString
+        iconUrlStrings = response.iconUrlStrings
         
         let data = redditPostsToPosts(rawData: response.data)
         let viewModel = configureTableModel(from: data)

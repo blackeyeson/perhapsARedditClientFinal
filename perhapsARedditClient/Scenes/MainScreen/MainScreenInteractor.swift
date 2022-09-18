@@ -15,6 +15,9 @@ import UIKit
 protocol MainScreenBusinessLogic {
     func getPosts(request: MainScreen.GetPosts.Request)
     func refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request)
+    func tableLoadImageOrGif(urlString: String) async -> UIImage?
+    func getUIimageDimentions(urlString: String) -> [CGFloat]
+    func getVideoResolution(url: String) -> [CGFloat]
 //    func didTapPost(request: MainScreen.hidePost.Request)
 }
 
@@ -27,6 +30,7 @@ final class MainScreenInteractor: MainScreenDataStore {
     private let worker: MainScreenWorkerLogic
     
     var redditPosts: RedditPosts? = nil
+    private var iconURLStrings: [String] = []
 //    private(set) var selectedCountry: Country?
     
     // MARK: - Object Lifecycle
@@ -51,9 +55,12 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
             do {
                 let redditPosts = try await worker.fetchPosts(after: nil)
                 let hiddenPosts = await worker.getHiddenPosts()
-                let iconURLString = await worker.getIconUrl()
+                for i in 0..<redditPosts.data.children.count {
+                    let subreddit = redditPosts.data.children[i].data.subreddit
+                    iconURLStrings += [await worker.getIconUrl(from: subreddit)]
+                }
                 DispatchQueue.main.async { [weak self] in
-                    self?.presenter.presentPosts(response: MainScreen.GetPosts.Response(data: redditPosts, hiddenPosts: hiddenPosts, iconUrlString: iconURLString))
+                    self?.presenter.presentPosts(response: MainScreen.GetPosts.Response(data: redditPosts, hiddenPosts: hiddenPosts, iconUrlStrings: self?.iconURLStrings ?? []))
                 }
             } catch { print(error) }
         }
@@ -67,8 +74,30 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
         
     }
     
+    func tableLoadImageOrGif(urlString: String) async -> UIImage? {
+        let isPicture = urlString.contains(".jpg") || urlString.contains("png")
+        let isGif = urlString.contains(".gif") && !urlString.contains(".gifv")
+        
+        if isGif {
+            do {
+                return try await worker.loadGifFrom(urlString: urlString)
+            } catch { print("gifError") }
+        }
+        if isPicture {
+            do {
+                return try await worker.loadImageFrom(urlString: urlString)
+            } catch { print("gifError") }
+        }
+        return UIImage(named: "loadingError")
+    }
     
+    func getUIimageDimentions(urlString: String) -> [CGFloat] {
+        worker.getUIimageDimentions(urlString: urlString)
+    }
     
+    func getVideoResolution(url: String) -> [CGFloat] {
+        worker.getVideoResolution(url: url)
+    }
 //    func getMorePosts() {
 //
 //    }

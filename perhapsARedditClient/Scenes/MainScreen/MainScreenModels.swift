@@ -20,7 +20,7 @@ enum MainScreen
         
         struct Request { let subreddit: String; let timePeriod: String; let numberOfPosts: Int }
         
-        struct Response { let data: RedditPosts; let hiddenPosts: [String]; let iconUrlString: String }
+        struct Response { let data: RedditPosts; let hiddenPosts: [String]; let iconUrlStrings: [String] }
         
         struct ViewModel { let tableData: [PostForTable]; let hiddenPosts: [String] }
     }

@@ -32,7 +32,7 @@ class TableViewCell: UITableViewCell {
         subName.text = "r/\(sub)"
         subIcon.layer.cornerRadius = 20
         let finalUrlString = icon ?? "https://www.reddit.com/favicon.ico"
-        subIcon.load(urlString: finalUrlString, indicator: UIActivityIndicatorView())
+        subIcon.load(urlString: finalUrlString, indicator: nil)
     }
     
     func getIcon(subreddit: String) async {
@@ -65,6 +65,6 @@ class TableViewCell: UITableViewCell {
         }
         
         subIcon.layer.cornerRadius = 20
-        subIcon.load(urlString: iconUrlString, indicator: UIActivityIndicatorView())
+        subIcon.load(urlString: iconUrlString, indicator: nil)
     }
 }

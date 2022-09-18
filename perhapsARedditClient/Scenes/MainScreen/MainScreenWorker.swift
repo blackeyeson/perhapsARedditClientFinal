@@ -16,7 +16,11 @@ protocol MainScreenWorkerLogic {
     func fetchPosts(after: String?) async throws -> RedditPosts
     func getSubreddit() async -> String
     func getHiddenPosts() async -> [String]
-    func getIconUrl() async -> String
+    func getIconUrl(from: String) async -> String
+    func loadImageFrom(urlString: String) async throws -> UIImage?
+    func loadGifFrom(urlString: String) async throws -> UIImage?
+    func getUIimageDimentions(urlString: String) -> [CGFloat]
+    func getVideoResolution(url: String) -> [CGFloat]
 }
 
 final class MainScreenWorker: MainScreenWorkerLogic {
@@ -52,11 +56,11 @@ final class MainScreenWorker: MainScreenWorkerLogic {
         } catch  { print("err/getHiddenPosts"); return [] }
     }
     
-    func getIconUrl() async -> String {
+    func getIconUrl(from: String) async -> String {
         var urlString = "https://www.reddit.com/favicon.ico"
         
         do {
-            let data = try await api.fetchData(urlString: "https://www.reddit.com/r/\(getSubreddit())/about.json" , decodingType: About.self).data
+            let data = try await api.fetchData(urlString: "https://www.reddit.com/r/\(from)/about.json" , decodingType: About.self).data
             
             if data.icon_img != "" {
                 urlString = data.icon_img
@@ -77,5 +81,21 @@ final class MainScreenWorker: MainScreenWorkerLogic {
             string += extensionString
         }
         return string
+    }
+    
+    func loadImageFrom(urlString: String) async throws -> UIImage? {
+        return try await api.loadImageFrom(urlString: urlString)
+    }
+    
+    func loadGifFrom(urlString: String) async throws -> UIImage? {
+        return try await api.loadGifFrom(urlString: urlString)
+    }
+    
+    func getUIimageDimentions(urlString: String) -> [CGFloat] {
+        api.imageDimenssions(url: urlString)
+    }
+    
+    func getVideoResolution(url: String) -> [CGFloat] {
+        api.getVideoResolution(url: url)
     }
 }

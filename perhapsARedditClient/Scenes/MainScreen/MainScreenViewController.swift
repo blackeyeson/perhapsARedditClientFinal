@@ -4,6 +4,7 @@ protocol MainScreenDisplayLogic: AnyObject {
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel)
     func refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel)
     func revealTable()
+    func popupShareMenu(url: String)
 }
 
 class MainScreenViewController: UIViewController, configable
@@ -24,6 +25,7 @@ class MainScreenViewController: UIViewController, configable
     // MARK: - Fields
     
     private var dataSource = [PostForTable]()
+    private var dataSourceFiltered = [PostForTable]()
     private var hiddenPosts = [String]()
     private var filterString = ""
     
@@ -66,6 +68,9 @@ class MainScreenViewController: UIViewController, configable
 
     private func setTableData(data: [PostForTable], hiddenPosts: [String]) {
         self.dataSource = data
+        if filterString != "" {
+            self.dataSourceFiltered = data.filter { $0.postTitle.contains(filterString) }
+        } else { self.dataSourceFiltered = data }
         self.hiddenPosts = hiddenPosts
         tableView.reloadData()
     }
@@ -91,8 +96,9 @@ class MainScreenViewController: UIViewController, configable
     }
     
     @IBAction func filterStringFiled(_ sender: Any) {
-        filterString = filterStringFieldOutlet.text ?? ""
         scrollToTop()
+        filterString = filterStringFieldOutlet.text ?? ""
+        dataSourceFiltered = dataSource.filter { $0.postTitle.contains(filterString) }
     }
     
     @objc func reloadData(notification: Notification) {
@@ -108,6 +114,13 @@ class MainScreenViewController: UIViewController, configable
 // MARK: - DisplayLogic
 
 extension MainScreenViewController: MainScreenDisplayLogic {
+    
+    func popupShareMenu(url: String) {
+        let vc = UIActivityViewController(activityItems: ["Check this out! \(url)"], applicationActivities: nil)
+        vc.popoverPresentationController?.sourceView = self.view
+
+        self.present(vc, animated: true, completion: nil)
+    }
     
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel) {
         setTableData(data: viewModel.tableData, hiddenPosts: viewModel.hiddenPosts)
@@ -138,23 +151,53 @@ extension MainScreenViewController: MainScreenDisplayLogic {
 
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filterString != "" {
-            return dataSource.filter { $0.postTitle.contains(filterString) }.count
-        } else {
-            return dataSource.count
-        }
+        dataSourceFiltered.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var model = dataSource[indexPath.row]
-        
-        if filterString != "" {
-            model = dataSource.filter { $0.postTitle.contains(filterString) }[indexPath.row]
-        }
+        let model = dataSourceFiltered[indexPath.row]
         
         if let model = model as PostForTable? {
             if !hiddenPosts.contains(model.id) {
+                // creation
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeFull", for: indexPath) as! TableViewCellTypeFull
+                cell.delegate = self
+                
+                // fetching media dimentions
+                var width: CGFloat = 200
+                var height: CGFloat = 200
+                cell.trueWidth = UIScreen.main.bounds.width
+                var isImageType = false
+                var isVideoType = false
+                
+                if let StringUrl = model.picture {
+                    isImageType = StringUrl.contains(".png") || StringUrl.contains(".jpg") || StringUrl.contains(".gif")
+                    isImageType = isImageType && !StringUrl.contains(".gifv")
+                    
+                    if isImageType {
+                        let dimentions = interactor.getUIimageDimentions(urlString: StringUrl)
+                        cell.mode = 1
+                        width = dimentions[0]
+                        height = dimentions[1]
+                    }
+                }
+                if let videoUrl = model.VideoUrlString {
+                    if videoUrl.contains(".mp4") {
+                        isVideoType = true
+                        let dimentions = interactor.getVideoResolution(url: videoUrl)
+                        cell.mode = 3
+                        width = dimentions[0]
+                        height = dimentions[1]
+                    }
+                }
+                if model.bodyText != ""  { cell.mode = 4 }
+                
+                if isImageType || isVideoType { cell.setHeightFromAspect(contentWidth: width, contentHeight: height) }
+                else {
+                    cell.mode = 2
+                }
+                
+                // setting data
                 cell.configure(with: model)
                 return cell
             } else {
@@ -179,7 +222,9 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func scrollToTop() {
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        if dataSourceFiltered.count > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
         UIView.transition(
             with: tableView,
             duration: 0.35,
