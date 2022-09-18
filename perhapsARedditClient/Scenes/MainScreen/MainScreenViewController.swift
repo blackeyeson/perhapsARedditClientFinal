@@ -2,6 +2,7 @@ import UIKit
 
 protocol MainScreenDisplayLogic: AnyObject {
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel)
+    func displayAddedPosts(viewModel: MainScreen.GetPosts.ViewModel)
     func refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel)
     func revealTable()
     func popupShareMenu(url: String)
@@ -28,6 +29,7 @@ class MainScreenViewController: UIViewController, configable
     private var dataSourceFiltered = [PostForTable]()
     private var hiddenPosts = [String]()
     private var filterString = ""
+    private var lastPostID = ""
     
     // MARK: - config
     
@@ -56,7 +58,6 @@ class MainScreenViewController: UIViewController, configable
     //MARK: - Setup
     
     private func setupView() {
-        indicator.startAnimating()
         indicator.hidesWhenStopped = true
         tableConfiguration()
     }
@@ -69,10 +70,25 @@ class MainScreenViewController: UIViewController, configable
     private func setTableData(data: [PostForTable], hiddenPosts: [String]) {
         self.dataSource = data
         if filterString != "" {
-            self.dataSourceFiltered = data.filter { $0.postTitle.contains(filterString) }
+            self.dataSourceFiltered = data.filter { $0.postTitle.uppercased().contains(filterString.uppercased()) }
         } else { self.dataSourceFiltered = data }
         self.hiddenPosts = hiddenPosts
         tableView.reloadData()
+        guard let lastFetchedPost = data.last else { return }
+        lastPostID = lastFetchedPost.id
+    }
+    
+    private func addTableData(data: [PostForTable], hiddenPosts: [String]) {
+        let pastLastRow = dataSourceFiltered.count - 1
+        self.dataSource += data
+        if filterString != "" {
+            self.dataSourceFiltered = dataSource.filter { $0.postTitle.uppercased().contains(filterString.uppercased()) }
+        } else { self.dataSourceFiltered = dataSource }
+        self.hiddenPosts = hiddenPosts
+        tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(row: pastLastRow, section: 0), at: .top, animated: true)
+        guard let lastFetchedPost = dataSource.last else { return }
+        lastPostID = lastFetchedPost.id
     }
     
     //MARK: - Actions
@@ -98,7 +114,7 @@ class MainScreenViewController: UIViewController, configable
     @IBAction func filterStringFiled(_ sender: Any) {
         scrollToTop()
         filterString = filterStringFieldOutlet.text ?? ""
-        dataSourceFiltered = dataSource.filter { $0.postTitle.contains(filterString) }
+        dataSourceFiltered = dataSource.filter { $0.postTitle.uppercased().contains(filterString.uppercased()) }
     }
     
     @objc func reloadData(notification: Notification) {
@@ -106,8 +122,7 @@ class MainScreenViewController: UIViewController, configable
     }
     
     @objc func reloadDataWithoutRefresh(notification: Notification) {
-        interactor.refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request())
-        tableView.reloadData()
+        reloadTableVithoutAnimation()
     }
 }
 
@@ -124,6 +139,10 @@ extension MainScreenViewController: MainScreenDisplayLogic {
     
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel) {
         setTableData(data: viewModel.tableData, hiddenPosts: viewModel.hiddenPosts)
+    }
+    
+    func displayAddedPosts(viewModel: MainScreen.GetPosts.ViewModel) {
+        addTableData(data: viewModel.tableData, hiddenPosts: viewModel.hiddenPosts)
     }
     
     func refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel) {
@@ -145,16 +164,22 @@ extension MainScreenViewController: MainScreenDisplayLogic {
         )
         tableView.reloadData()
     }
+    
+    func reloadTableVithoutAnimation() {
+        interactor.refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request())
+        tableView.reloadData()
+    }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource & UITableViewDelegate
 
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSourceFiltered.count
+        dataSourceFiltered.count+1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row < dataSourceFiltered.count {
         let model = dataSourceFiltered[indexPath.row]
         
         if let model = model as PostForTable? {
@@ -207,7 +232,14 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
         }
-        
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeLoading", for: indexPath) as! TableViewCellTypeLoading
+            cell.indicator.startAnimating()
+            if dataSource.count > 98 { interactor.getMorePosts(lastPost: lastPostID) }
+            print(lastPostID)
+            return cell
+        }
         return .init()
     }
     
@@ -218,6 +250,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TableViewCellTypeFull", bundle: nil), forCellReuseIdentifier: "TableViewCellTypeFull")
         tableView.register(UINib(nibName: "TableViewCellTypeShortened", bundle: nil), forCellReuseIdentifier: "TableViewCellTypeShortened")
+        tableView.register(UINib(nibName: "TableViewCellTypeLoading", bundle: nil), forCellReuseIdentifier: "TableViewCellTypeLoading")
         tableView.reloadData()
     }
     

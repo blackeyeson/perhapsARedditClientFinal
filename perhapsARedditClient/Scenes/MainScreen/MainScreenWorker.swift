@@ -37,9 +37,10 @@ final class MainScreenWorker: MainScreenWorkerLogic {
     func fetchPosts(after: String?) async throws -> RedditPosts {
         let sub = try await api.getUserDefaults(Key: "subreddit", type: String.self)
         let time = try await api.getUserDefaults(Key: "timePeriod", type: String.self)
+        
         var urlString = "https://www.reddit.com/r/\(sub ?? "pics")/top/.json?t=\(time ?? "month")&limit=\(100)"
         if let postId = after {
-            urlString = "https://www.reddit.com/r/\(sub ?? "pics")/top/.json?t=\(time ?? "month")&limit=\(100)&after=\(postId)"
+            urlString = "https://www.reddit.com/r/\(sub ?? "pics")/top/.json?t=\(time ?? "month")&limit=\(100)&after=t3_\(postId)"
         }
         return try await api.fetchData(urlString: urlString, decodingType: RedditPosts.self)
     }

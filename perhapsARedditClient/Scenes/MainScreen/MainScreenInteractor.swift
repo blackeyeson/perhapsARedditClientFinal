@@ -18,6 +18,7 @@ protocol MainScreenBusinessLogic {
     func tableLoadImageOrGif(urlString: String) async -> UIImage?
     func getUIimageDimentions(urlString: String) -> [CGFloat]
     func getVideoResolution(url: String) -> [CGFloat]
+    func getMorePosts(lastPost: String)
 //    func didTapPost(request: MainScreen.hidePost.Request)
 }
 
@@ -98,7 +99,20 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
     func getVideoResolution(url: String) -> [CGFloat] {
         worker.getVideoResolution(url: url)
     }
-//    func getMorePosts() {
-//
-//    }
+    
+    func getMorePosts(lastPost: String) {
+        Task {
+            do {
+                let redditPosts = try await worker.fetchPosts(after: lastPost)
+                let hiddenPosts = await worker.getHiddenPosts()
+                for i in 0..<redditPosts.data.children.count {
+                    let subreddit = redditPosts.data.children[i].data.subreddit
+                    iconURLStrings += [await worker.getIconUrl(from: subreddit)]
+                }
+                DispatchQueue.main.async { [weak self] in
+                    self?.presenter.presentAddedPosts(response: MainScreen.GetPosts.Response(data: redditPosts, hiddenPosts: hiddenPosts, iconUrlStrings: self?.iconURLStrings ?? []))
+                }
+            } catch { print(error) }
+        }
+    }
 }

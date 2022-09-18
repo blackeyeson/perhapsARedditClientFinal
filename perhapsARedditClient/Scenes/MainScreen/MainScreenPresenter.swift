@@ -14,6 +14,7 @@ import UIKit
 
 protocol MainScreenPresentationLogic {
     func presentPosts(response: MainScreen.GetPosts.Response)
+    func presentAddedPosts(response: MainScreen.GetPosts.Response)
     func refreshHiddenPosts(response: MainScreen.refreshHiddenPost.Response)
 }
 
@@ -131,6 +132,17 @@ extension MainScreenPresenter {
         
         viewController?.displayPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel, hiddenPosts: response.hiddenPosts))
         viewController?.revealTable()
+    }
+    
+    func presentAddedPosts(response: MainScreen.GetPosts.Response) {
+        
+        iconUrlStrings = response.iconUrlStrings
+        
+        let data = redditPostsToPosts(rawData: response.data)
+        let viewModel = configureTableModel(from: data)
+        
+        viewController?.displayAddedPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel, hiddenPosts: response.hiddenPosts))
+        viewController?.displayAddedPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel, hiddenPosts: response.hiddenPosts))
     }
     
     func refreshHiddenPosts(response: MainScreen.refreshHiddenPost.Response) {
