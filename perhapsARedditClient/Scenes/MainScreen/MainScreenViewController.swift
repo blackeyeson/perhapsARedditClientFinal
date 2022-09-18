@@ -19,6 +19,7 @@ class MainScreenViewController: UIViewController, configable
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var blueView: UIView!
+    @IBOutlet var bottomColorBar: UIView!
     @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var filterStringFieldOutlet: UITextField!
     

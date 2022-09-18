@@ -389,7 +389,7 @@
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugw-vu-7pd" userLabel="blueView">
                                         <rect key="frame" x="170" y="77" width="74.5" height="4"/>
-                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="backgroundColor" red="0.15686274509803921" green="0.0" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="4" id="Rxc-R2-pbt"/>
                                         </constraints>
@@ -427,7 +427,7 @@
                                         </connections>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.15686274509803921" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.15686274509803921" green="0.0" blue="0.31468531468531469" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="DJc-ve-PS6" secondAttribute="bottom" constant="20" id="MJg-UT-Xia"/>
                                     <constraint firstItem="DJc-ve-PS6" firstAttribute="centerX" secondItem="mhr-A6-V3X" secondAttribute="centerX" id="vR0-ci-VCw"/>
@@ -471,6 +471,7 @@
                     <navigationItem key="navigationItem" id="noe-kq-v4Y"/>
                     <connections>
                         <outlet property="blueView" destination="ugw-vu-7pd" id="fMC-R0-Cq8"/>
+                        <outlet property="bottomColorBar" destination="mhr-A6-V3X" id="95P-j0-yCA"/>
                         <outlet property="filterStringFieldOutlet" destination="RMM-Yt-kHu" id="C4H-F4-j8m"/>
                         <outlet property="indicator" destination="FXa-jl-HCc" id="dB0-sM-Rhw"/>
                         <outlet property="tableView" destination="RtF-lT-q4x" id="3xA-YE-hHg"/>
@@ -529,9 +530,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3R-2O-I6p">
-                                        <rect key="frame" x="-240" y="791" width="706.5" height="31"/>
+                                        <rect key="frame" x="64.5" y="791" width="97.5" height="31"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="The end is never. The end is never. The end is never. The end is never. The end is never. The end is never. "/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Signing out"/>
                                         <connections>
                                             <action selector="signInButton:" destination="5S9-vN-GBr" eventType="touchUpInside" id="e3d-xH-qVa"/>
                                         </connections>
@@ -747,9 +748,6 @@
         <image name="icons8-ui-40" width="40" height="40"/>
         <image name="logonLogo" width="1080" height="1080"/>
         <image name="rLogo" width="512" height="512"/>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

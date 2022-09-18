@@ -26,9 +26,9 @@ extension SceneDelegate {
         
         let defaults = UserDefaults.standard
         let rawUsername = defaults.object(forKey: "username") as? String?
-        let username: String = (rawUsername ?? "Guest") ?? "Guest"
+        let username: String = (rawUsername ?? "errorDingusGestimusPrimus") ?? "errorDingusGestimusPrimus"
         
-        if username != "Guest" {
+        if username != "errorDingusGestimusPrimus" {
             vc = mainStoryboard.instantiateViewController(identifier: "MainScreenViewController") as! configable
         }
         

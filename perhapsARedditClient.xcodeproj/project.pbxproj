@@ -53,6 +53,8 @@
 		00A8FE3028D2116F00F8F657 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A8FE2E28D2116F00F8F657 /* TableViewCell.xib */; };
 		00F0ACDC28D7A91200879A61 /* TableViewCellTypeLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F0ACDA28D7A91200879A61 /* TableViewCellTypeLoading.swift */; };
 		00F0ACDD28D7A91200879A61 /* TableViewCellTypeLoading.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F0ACDB28D7A91200879A61 /* TableViewCellTypeLoading.xib */; };
+		00F0ACDF28D7C21F00879A61 /* GreetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F0ACDE28D7C21F00879A61 /* GreetInteractor.swift */; };
+		00F0ACE128D7C29100879A61 /* GreetWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F0ACE028D7C29100879A61 /* GreetWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,8 @@
 		00A8FE2E28D2116F00F8F657 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		00F0ACDA28D7A91200879A61 /* TableViewCellTypeLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTypeLoading.swift; sourceTree = "<group>"; };
 		00F0ACDB28D7A91200879A61 /* TableViewCellTypeLoading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellTypeLoading.xib; sourceTree = "<group>"; };
+		00F0ACDE28D7C21F00879A61 /* GreetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetInteractor.swift; sourceTree = "<group>"; };
+		00F0ACE028D7C29100879A61 /* GreetWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,8 +282,10 @@
 		0057D6E828C38AE200D361F5 /* Greet */ = {
 			isa = PBXGroup;
 			children = (
+				00F0ACE028D7C29100879A61 /* GreetWorker.swift */,
 				0057D6EB28C38AF000D361F5 /* GreetRouter.swift */,
 				0057D6ED28C38AF000D361F5 /* GreetViewController.swift */,
+				00F0ACDE28D7C21F00879A61 /* GreetInteractor.swift */,
 			);
 			path = Greet;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 				0057D6CC28C38A6B00D361F5 /* MainScreenInteractor.swift in Sources */,
 				0057D6D928C38AA300D361F5 /* RightSideMenuInteractor.swift in Sources */,
 				0057D6CB28C38A6B00D361F5 /* MainScreenViewController.swift in Sources */,
+				00F0ACE128D7C29100879A61 /* GreetWorker.swift in Sources */,
 				0057D6E428C38AD000D361F5 /* LeftSideMenuRouter.swift in Sources */,
 				0057D6D728C38AA300D361F5 /* RightSideMenuModels.swift in Sources */,
 				0057D6AF28C3886E00D361F5 /* UIImageView+Extension.swift in Sources */,
@@ -416,6 +423,7 @@
 				0057D6E628C38AD000D361F5 /* LeftSideMenuViewController.swift in Sources */,
 				0057D70128C38B1100D361F5 /* LoginInteractor.swift in Sources */,
 				0057D6A328C3879200D361F5 /* APIManager.swift in Sources */,
+				00F0ACDF28D7C21F00879A61 /* GreetInteractor.swift in Sources */,
 				0057D6E528C38AD000D361F5 /* LeftSideMenuModels.swift in Sources */,
 				0057D68C28C3875D00D361F5 /* AppDelegate.swift in Sources */,
 				0057D6D628C38AA300D361F5 /* RightSideMenuRouter.swift in Sources */,

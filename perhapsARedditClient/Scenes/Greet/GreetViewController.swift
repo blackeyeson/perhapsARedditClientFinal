@@ -24,6 +24,7 @@ class GreetViewController: UIViewController, configable
     
     @IBOutlet var logo: UIImageView!
     var router: GreetRoutingLogic = GreetRouter()
+    private var interactor: GreetBusinessLogic = GreetInteractor(worker: GreetWorker(apiManager: APIManager()))
     
     // MARK: - Fields
     
@@ -32,8 +33,13 @@ class GreetViewController: UIViewController, configable
     // MARK: - config
     
     func config() {
+        let apiManager = APIManager()
+        let worker = GreetWorker(apiManager: apiManager)
+        let interactor = GreetInteractor(worker: worker)
         let router = GreetRouter()
         self.router = router
+        self.interactor = interactor
+        router.viewController = self
         router.viewController = self
     }
     
@@ -41,7 +47,6 @@ class GreetViewController: UIViewController, configable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.router.viewController = self
         setupAlert()
     }
     
@@ -70,6 +75,7 @@ class GreetViewController: UIViewController, configable
         router.openURL(stringURL: "https://www.reddit.com/policies/privacy-policy")
     }
     @IBAction func Skip(_ sender: Any) {
+        interactor.saveGuest()
         router.presentMain()
     }
     @IBAction func login(_ sender: Any) {

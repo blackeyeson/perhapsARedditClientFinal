@@ -85,7 +85,6 @@ extension LoginViewController: LoginDisplayLogic {
         let bool = interactor.didTapLogin(username: username, password: password)
         if bool {
             self.router.loginSuccessNavigateToMain(username: username)
-            
         } else {
             print("err/login")
             alertUserWithError(error: "Login failed", message: "User not Found")
