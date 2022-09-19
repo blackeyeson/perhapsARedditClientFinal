@@ -180,7 +180,7 @@ class TableViewCellTypeFull: UITableViewCell {
     //MARK: - Setup functions
     func AddIndicator(to view: UIView) {
         indicator?.removeFromSuperview()
-        let newIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        let newIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
         newIndicator.hidesWhenStopped = true
         mediaImageView.addSubview(newIndicator)
         

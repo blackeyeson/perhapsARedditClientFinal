@@ -15,16 +15,12 @@ import UIKit
 protocol MainScreenBusinessLogic {
     func getPosts(request: MainScreen.GetPosts.Request)
     func refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request)
-    func tableLoadImageOrGif(urlString: String) async -> UIImage?
-    func getUIimageDimentions(urlString: String) -> [CGFloat]
-    func getVideoResolution(url: String) -> [CGFloat]
-    func getMorePosts(lastPost: String)
-//    func didTapPost(request: MainScreen.hidePost.Request)
+    func getUIimageDimentions(request: MainScreen.getDimentionsFromURL.Request) -> [CGFloat]
+    func getVideoResolution(request: MainScreen.getDimentionsFromURL.Request) -> [CGFloat]
+    func getMorePosts(request: MainScreen.addPosts.Request)
 }
 
-protocol MainScreenDataStore {
-//    var selectedCountry: Country? { get }
-}
+protocol MainScreenDataStore { }
 
 final class MainScreenInteractor: MainScreenDataStore {
     private let presenter: MainScreenPresentationLogic
@@ -32,7 +28,6 @@ final class MainScreenInteractor: MainScreenDataStore {
     
     var redditPosts: RedditPosts? = nil
     private var iconURLStrings: [String] = []
-//    private(set) var selectedCountry: Country?
     
     // MARK: - Object Lifecycle
     
@@ -45,11 +40,6 @@ final class MainScreenInteractor: MainScreenDataStore {
 // MARK: - BusinessLogic
 
 extension MainScreenInteractor: MainScreenBusinessLogic {
-
-//    func didTapPost(request: MainScreen.hidePost.Request) {
-//        self.selectedCountry = countries.first { $0.latlng == request.coord}
-//        presenter.presentSelectedCountry(response: Table.ShowCountryDetails.Response())
-//    }
     
     func getPosts(request: MainScreen.GetPosts.Request) {
         Task {
@@ -75,32 +65,18 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
         
     }
     
-    func tableLoadImageOrGif(urlString: String) async -> UIImage? {
-        let isPicture = urlString.contains(".jpg") || urlString.contains("png")
-        let isGif = urlString.contains(".gif") && !urlString.contains(".gifv")
-        
-        if isGif {
-            do {
-                return try await worker.loadGifFrom(urlString: urlString)
-            } catch { print("gifError") }
-        }
-        if isPicture {
-            do {
-                return try await worker.loadImageFrom(urlString: urlString)
-            } catch { print("gifError") }
-        }
-        return UIImage(named: "loadingError")
+    func getUIimageDimentions(request: MainScreen.getDimentionsFromURL.Request) -> [CGFloat] {
+        let urlString = request.urlString
+        return worker.getUIimageDimentions(urlString: urlString)
     }
     
-    func getUIimageDimentions(urlString: String) -> [CGFloat] {
-        worker.getUIimageDimentions(urlString: urlString)
+    func getVideoResolution(request: MainScreen.getDimentionsFromURL.Request) -> [CGFloat] {
+        let urlString = request.urlString
+        return worker.getVideoResolution(url: urlString)
     }
     
-    func getVideoResolution(url: String) -> [CGFloat] {
-        worker.getVideoResolution(url: url)
-    }
-    
-    func getMorePosts(lastPost: String) {
+    func getMorePosts(request: MainScreen.addPosts.Request) {
+        let lastPost = request.lastPost
         Task {
             do {
                 let redditPosts = try await worker.fetchPosts(after: lastPost)

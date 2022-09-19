@@ -13,9 +13,9 @@
 import UIKit
 
 protocol LeftSideMenuDisplayLogic: AnyObject {
-    func dismiss()
-    func updateMain()
-    func selectRow(int: Int)
+    func dismiss(ViewModel: LeftSideMenu.dismiss.ViewModel)
+    func updateMain(ViewModel: LeftSideMenu.updateMain.ViewModel)
+    func selectRow(viewModel: LeftSideMenu.selectRow.ViewModel)
     func displaySubs(viewModel: LeftSideMenu.getSubs.ViewModel)
 }
 
@@ -116,10 +116,10 @@ final class LeftSideMenuViewController: UIViewController {
     //MARK: - actions
     
     @IBAction func tap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(ViewModel: LeftSideMenu.dismiss.ViewModel())
     }
     @IBAction func swipe(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(ViewModel: LeftSideMenu.dismiss.ViewModel())
     }
     @IBAction func pics(_ sender: Any) {
         changeSub(sub: "pics")
@@ -138,12 +138,12 @@ final class LeftSideMenuViewController: UIViewController {
     
     func changeSub(sub: String) {
         interactor.didTapSubreddit(request: LeftSideMenu.setSub.Request(subreddit: sub))
-        updateMain()
+        updateMain(ViewModel: LeftSideMenu.updateMain.ViewModel())
     }
 
     func changeTimePeriod(period: String) {
         interactor.didTapTimePeriod(request: LeftSideMenu.setperiod.Request(timePeriod: period))
-        updateMain()
+        updateMain(ViewModel: LeftSideMenu.updateMain.ViewModel())
     }
     
     func rowToString(row: Int) -> String {
@@ -193,14 +193,14 @@ extension LeftSideMenuViewController: LeftSideMenuDisplayLogic {
         tableView.reloadData()
     }
     
-    func selectRow(int: Int) {
-        pickerView.selectRow(int, inComponent: 0, animated: false)
+    func selectRow(viewModel: LeftSideMenu.selectRow.ViewModel) {
+        pickerView.selectRow(viewModel.row, inComponent: 0, animated: false)
     }
     
-    func dismiss() {
+    func dismiss(ViewModel: LeftSideMenu.dismiss.ViewModel) {
         router.dismissSelf()
     }
-    func updateMain() {
+    func updateMain(ViewModel: LeftSideMenu.updateMain.ViewModel) {
         NotificationCenter.default.post(name: Notification.Name("com.testCompany.Notification.reloadData"), object: nil)
     }
 }
@@ -227,7 +227,6 @@ extension LeftSideMenuViewController: UITableViewDataSource, UITableViewDelegate
 //        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-//        cell.config(subredditName: model)
         cell.configure(sub: model, icon: url)
         return cell
         }
@@ -245,9 +244,6 @@ extension LeftSideMenuViewController: UITableViewDataSource, UITableViewDelegate
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "TableViewCell")
         tableView.reloadData()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
-//            self?.tableView.reloadData()
-//        }
     }
 }
 

@@ -14,7 +14,31 @@ import UIKit
 
 enum LeftSideMenu {
   // MARK: Use cases
-  
+    
+    enum dismiss {
+        struct Request {  }
+
+        struct Response {  }
+
+        struct ViewModel {  }
+    }
+    
+    enum updateMain {
+        struct Request {  }
+
+        struct Response {  }
+
+        struct ViewModel {  }
+    }
+    
+    enum selectRow {
+        struct Request {  }
+
+        struct Response {  }
+
+        struct ViewModel { let row: Int }
+    }
+    
     enum setSub {
         struct Request { let subreddit: String }
         

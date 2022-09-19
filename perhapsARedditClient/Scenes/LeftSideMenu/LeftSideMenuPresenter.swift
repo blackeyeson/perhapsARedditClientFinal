@@ -27,7 +27,7 @@ extension leftSideMenuPresenter {
     }
     
     func selectRow(response: Int) {
-        viewController?.selectRow(int: response)
+        viewController?.selectRow(viewModel: LeftSideMenu.selectRow.ViewModel(row: response))
     }
 }
 

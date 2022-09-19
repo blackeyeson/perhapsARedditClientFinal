@@ -13,8 +13,8 @@ class MainScreenViewController: UIViewController, configable
 {
     // MARK: - Clean Components
     
-    var interactor: MainScreenBusinessLogic = MainScreenInteractor(presenter: MainScreenPresenter(), worker: MainScreenWorker(apiManager: APIManager()))
-    var router: MainScreenRoutingLogic & MainScreenDataPassing = MainScreenRouter()
+    var interactor: MainScreenBusinessLogic?
+    var router: (MainScreenRoutingLogic & MainScreenDataPassing)?
     
     // MARK: - Views
     
@@ -51,7 +51,7 @@ class MainScreenViewController: UIViewController, configable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
+        interactor?.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
         setupView()
         addGlobalListener()
     }
@@ -95,10 +95,10 @@ class MainScreenViewController: UIViewController, configable
     //MARK: - Actions
     
     @IBAction func tap3Lines(_ sender: Any) {
-        router.navigateToLeftSide()
+        router?.navigateToLeftSide()
     }
     @IBAction func swipe3Lines(_ sender: Any) {
-        router.navigateToLeftSide()
+        router?.navigateToLeftSide()
     }
     
     @IBAction func homeTap(_ sender: Any) {
@@ -106,10 +106,10 @@ class MainScreenViewController: UIViewController, configable
     }
     
     @IBAction func tapProfile(_ sender: Any) {
-        router.navigateToRightSide()
+        router?.navigateToRightSide()
     }
     @IBAction func swipeProfile(_ sender: Any) {
-        router.navigateToRightSide()
+        router?.navigateToRightSide()
     }
     
     @IBAction func filterStringFiled(_ sender: Any) {
@@ -177,7 +177,7 @@ extension MainScreenViewController: MainScreenDisplayLogic {
     }
     
     func reloadTableVithoutAnimation() {
-        interactor.refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request())
+        interactor?.refreshHiddenPostData(request: MainScreen.refreshHiddenPost.Request())
         tableView.reloadData()
     }
 }
@@ -206,12 +206,12 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
                 var isImageType = false
                 var isVideoType = false
                 
-                if let StringUrl = model.picture {
-                    isImageType = StringUrl.contains(".png") || StringUrl.contains(".jpg") || StringUrl.contains(".gif")
-                    isImageType = isImageType && !StringUrl.contains(".gifv")
+                if let stringUrl = model.picture {
+                    isImageType = stringUrl.contains(".png") || stringUrl.contains(".jpg") || stringUrl.contains(".gif")
+                    isImageType = isImageType && !stringUrl.contains(".gifv")
                     
                     if isImageType {
-                        let dimentions = interactor.getUIimageDimentions(urlString: StringUrl)
+                        let dimentions = interactor?.getUIimageDimentions(request: MainScreen.getDimentionsFromURL.Request(urlString: stringUrl)) ?? [200, 200]
                         cell.mode = 1
                         width = dimentions[0]
                         height = dimentions[1]
@@ -220,7 +220,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
                 if let videoUrl = model.VideoUrlString {
                     if videoUrl.contains(".mp4") {
                         isVideoType = true
-                        let dimentions = interactor.getVideoResolution(url: videoUrl)
+                        let dimentions = interactor?.getVideoResolution(request: MainScreen.getDimentionsFromURL.Request(urlString: videoUrl)) ?? [200, 200]
                         cell.mode = 3
                         width = dimentions[0]
                         height = dimentions[1]
@@ -247,8 +247,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeLoading", for: indexPath) as! TableViewCellTypeLoading
             cell.indicator.startAnimating()
-            if dataSource.count > 98 { interactor.getMorePosts(lastPost: lastPostID) }
-            print(lastPostID)
+            if dataSource.count > 98 { interactor?.getMorePosts(request: MainScreen.addPosts.Request(lastPost: lastPostID)) }
             return cell
         }
         return .init()
@@ -280,16 +279,6 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
             completion: nil
         )
         indicator.startAnimating()
-        interactor.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
+        interactor?.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
     }
 }
-
-// MARK: - UITableViewDelegate
-
-//extension MainScreenViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let model = dataSource[indexPath.row] as? CountryCellModel else { return }
-//        interactor.didTapCountry(request: MainScreen.ShowCountryDetails.Request(coord: model.latlng))
-//    }
-//}
-

@@ -41,4 +41,22 @@ enum MainScreen {
         
         struct ViewModel { let posts: [String] }
     }
+    
+    enum getDimentionsFromURL {
+        
+        struct Request { let urlString: String }
+        
+        struct Response { let dimentionsArr: [CGFloat] }
+        
+        struct ViewModel {  }
+    }
+    
+    enum addPosts {
+        
+        struct Request { let lastPost: String }
+        
+        struct Response {  }
+        
+        struct ViewModel {  }
+    }
 }

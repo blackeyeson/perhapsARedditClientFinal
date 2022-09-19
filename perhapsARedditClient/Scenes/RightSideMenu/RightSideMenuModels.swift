@@ -30,4 +30,20 @@ enum RightSideMenu {
         
         struct ViewModel {  }
     }
+    
+    enum dismiss {
+        struct Request {  }
+
+        struct Response {  }
+
+        struct ViewModel {  }
+    }
+    
+    enum backToStart {
+        struct Request {  }
+
+        struct Response {  }
+
+        struct ViewModel {  }
+    }
 }

@@ -13,16 +13,16 @@
 import UIKit
 
 protocol RightSideMenuDisplayLogic: AnyObject {
-    func backToStart()
-    func dismiss()
+    func backToStart(ViewModel: RightSideMenu.backToStart.ViewModel)
+    func dismiss(ViewModel: RightSideMenu.dismiss.ViewModel)
     func displayUsername(ViewModel: RightSideMenu.getUsername.ViewModel)
 }
 
 final class RightSideMenuViewController: UIViewController {
     // MARK: - Clean Components
     
-    private var interactor: RightSideMenuBusinessLogic = RightSideMenuInteractor(presenter: RightSideMenuPresenter(), worker: RightSideMenuWorker(apiManager: APIManager()))
-    private var router: RightSideMenuRoutingLogic & RightSideMenuDataPassing = RightSideMenuRouter()
+    private var interactor: RightSideMenuBusinessLogic?
+    private var router: (RightSideMenuRoutingLogic & RightSideMenuDataPassing)?
     
     // MARK: - View
 
@@ -50,20 +50,19 @@ final class RightSideMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        interactor.getprofpic(request: profile.getpic.Request())
-        Task { await interactor.getUsername(request: RightSideMenu.getUsername.Request()) }
+        Task { await interactor?.getUsername(request: RightSideMenu.getUsername.Request()) }
     }
     
     //MARK: - Actions
     
     @IBAction func signInButton(_ sender: Any) {
-        //
-        backToStart()
+        backToStart(ViewModel: RightSideMenu.backToStart.ViewModel())
     }
     @IBAction func tapOut(_ sender: Any) {
-        dismiss()
+        dismiss(ViewModel: RightSideMenu.dismiss.ViewModel())
     }
     @IBAction func swipeOut(_ sender: Any) {
-        dismiss()
+        dismiss(ViewModel: RightSideMenu.dismiss.ViewModel())
     }
     
 }
@@ -80,12 +79,12 @@ extension RightSideMenuViewController: RightSideMenuDisplayLogic {
         greetLabel.text = "Hello \(username)!"
     }
 
-    func dismiss() {
-        router.dismissSelf()
+    func dismiss(ViewModel: RightSideMenu.dismiss.ViewModel) {
+        router?.dismissSelf()
     }
     
-    func backToStart() {
-        interactor.didTapLogOut(request: RightSideMenu.removeAcc.Request())
-        router.backToStart()
+    func backToStart(ViewModel: RightSideMenu.backToStart.ViewModel) {
+        interactor?.didTapLogOut(request: RightSideMenu.removeAcc.Request())
+        router?.backToStart()
     }
 }

@@ -32,7 +32,10 @@ final class RightSideMenuWorker: RightSideMenuWorkerLogic {
         await api.getUser()
     }
     func logOut() {
-        api.setUserDefaults(value: "Guest", Key: "username")
+        let defaultStstsDict: [String: Int] = [:]
+
+        api.setUserDefaults(value: "errorDingusGestimusPrimus", Key: "username")
         api.setUserDefaults(value: [String](), Key: "hiddenPosts")
+        api.setUserDefaults(value: defaultStstsDict, Key: "postVoteStatuses")
     }
 }
