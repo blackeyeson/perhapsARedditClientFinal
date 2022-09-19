@@ -12,20 +12,27 @@
 
 import UIKit
 
-enum Login
-{
+enum Login {
   // MARK: Use cases
   
-    enum getUsername {
-        struct Request {  }
-        
+    enum login {
+        struct Request { let username: String?; let password: String? }
+
         struct Response { let username: String; let success: Bool }
-        
-        struct ViewModel { let username: String }
+
+        struct ViewModel { let username: String?; let password: String? }
     }
     
-    enum setUsername {
-        struct Request { let username: String }
+    enum dismiss {
+        struct Request {  }
+
+        struct Response {  }
+
+        struct ViewModel {  }
+    }
+   
+    enum register {
+        struct Request { let username: String?; let password: String? }
         
         struct Response { let username: String; let success: Bool }
         

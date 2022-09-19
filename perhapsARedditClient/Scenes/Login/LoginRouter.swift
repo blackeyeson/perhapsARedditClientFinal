@@ -15,7 +15,6 @@ import UIKit
 protocol LoginRoutingLogic {
     func loginSuccessNavigateToMain(username: String?)
     func dismissSelf()
-    var viewController: LoginViewController? { get set }
 }
 
 protocol LoginDataPassing { }
@@ -37,6 +36,7 @@ final class LoginRouter: LoginRoutingLogic, LoginDataPassing {
         
         viewController?.present(vc, animated: true, completion: nil)
     }
+    
     func dismissSelf() {
         viewController?.dismiss(animated: true, completion: nil)
     }

@@ -23,7 +23,7 @@ class GreetViewController: UIViewController, configable {
     var router: GreetRoutingLogic?
     private var interactor: GreetBusinessLogic?
     
-    // MARK: - Views
+    // MARK: - Views & outlets
 
     @IBOutlet var logo: UIImageView!
     private let alert = UIAlertController(title: "Warning", message: "Feature unsupported!", preferredStyle: .alert)

@@ -13,8 +13,8 @@
 import UIKit
 
 protocol LoginDisplayLogic: AnyObject {
-    func login(username: String?, password: String?)
-    func dismiss()
+    func login(viewModel: Login.login.ViewModel)
+    func dismiss(viewModel: Login.dismiss.ViewModel)
 }
 
 final class LoginViewController: UIViewController {
@@ -26,8 +26,8 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Clean Components
     
-    private var interactor: LoginBusinessLogic = LoginInteractor(worker: LoginWorker(apiManager: APIManager()))
-    private var router: LoginRoutingLogic & LoginDataPassing = LoginRouter()
+    private var interactor: LoginBusinessLogic?
+    private var router: (LoginRoutingLogic & LoginDataPassing)?
     
     // MARK: - Fields
     
@@ -51,7 +51,11 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        router.viewController = self
+        setupMyView()
+    }
+    //MARK: setup Views
+    
+    func setupMyView() {
         myView.layer.cornerRadius = 5
         myView.layer.masksToBounds = true
     }
@@ -59,18 +63,18 @@ final class LoginViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func back(_ sender: Any) {
-        dismiss()
+        dismiss(viewModel: Login.dismiss.ViewModel())
     }
     @IBAction func login(_ sender: Any) {
         if loginMode {
-            login(username: usernameField.text, password: passwordField.text)
+            login(viewModel: Login.login.ViewModel(username: usernameField.text, password: passwordField.text))
         } else {
             addAcount(username: usernameField.text, password: passwordField.text)
         }
         
     }
     @IBAction func tapOut(_ sender: Any) {
-        dismiss()
+        dismiss(viewModel: Login.dismiss.ViewModel())
     }
     @IBAction func SignUp(_ sender: Any) {
         changeMode()
@@ -81,10 +85,13 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: LoginDisplayLogic {
 
-    func login(username: String?, password: String?) {
-        let bool = interactor.didTapLogin(username: username, password: password)
+    func login(viewModel: Login.login.ViewModel) {
+        let username = viewModel.username
+        let password = viewModel.password
+        
+        let bool = interactor?.didTapLogin(request: Login.login.Request(username: username, password: password)) ?? false
         if bool {
-            self.router.loginSuccessNavigateToMain(username: username)
+            self.router?.loginSuccessNavigateToMain(username: username)
         } else {
             print("err/login")
             alertUserWithError(error: "Login failed", message: "User not Found")
@@ -92,9 +99,9 @@ extension LoginViewController: LoginDisplayLogic {
     }
     
     func addAcount(username: String?, password: String?) {
-        let bool = interactor.didTapSignup(username: username, password: password)
+        let bool = interactor?.didTapSignup(request: Login.register.Request(username: username, password: password)) ?? false
         if bool {
-            self.router.loginSuccessNavigateToMain(username: username)
+            self.router?.loginSuccessNavigateToMain(username: username)
         } else {
             print("err/signup")
             alertUserWithError(error: "Sign up failed", message: nil)
@@ -122,7 +129,7 @@ extension LoginViewController: LoginDisplayLogic {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func dismiss() {
-        router.dismissSelf()
+    func dismiss(viewModel: Login.dismiss.ViewModel ) {
+        router?.dismissSelf()
     }
 }

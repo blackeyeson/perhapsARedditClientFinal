@@ -13,8 +13,8 @@
 import UIKit
 
 protocol LoginBusinessLogic {
-    func didTapLogin(username: String?, password: String?) -> Bool
-    func didTapSignup(username: String?, password: String?) -> Bool
+    func didTapLogin(request: Login.login.Request) -> Bool
+    func didTapSignup(request: Login.register.Request) -> Bool
 }
 
 protocol LoginDataStore { }
@@ -35,18 +35,24 @@ final class LoginInteractor: LoginDataStore {
 
 extension LoginInteractor: LoginBusinessLogic {
 
-    func didTapLogin(username: String?, password: String?) -> Bool {
-        if username != nil && password != nil && username != "" && password != "" {
-            let bool = worker.login(username: username!, password: password!)
+    func didTapLogin(request: Login.login.Request) -> Bool {
+        guard let username = request.username else { return false }
+        guard let password = request.password else { return false }
+        
+        if username != "" && password != "" {
+            let bool = worker.login(username: username, password: password)
             if bool { worker.saveUser(username: username) }
             return bool
         }
         return false
     }
     
-    func didTapSignup(username: String?, password: String?) -> Bool {
-        if username != nil && password != nil && username != "" && password != "" {
-            let bool = worker.register(username: username!, password: password!)
+    func didTapSignup(request: Login.register.Request) -> Bool {
+        guard let username = request.username else { return false }
+        guard let password = request.password else { return false }
+        
+        if username != "" && password != "" {
+            let bool = worker.register(username: username, password: password)
             if bool { worker.saveUser(username: username) }
             return bool
         }
