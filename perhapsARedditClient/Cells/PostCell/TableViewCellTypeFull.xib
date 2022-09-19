@@ -131,16 +131,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowshape.turn.up.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9SZ-iG-9Jh">
-                                <rect key="frame" x="347" y="9" width="30" height="27.5"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9SZ-iG-9Jh">
+                                <rect key="frame" x="347" y="7" width="30" height="31"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="CU2-9f-96N"/>
                                     <constraint firstAttribute="height" constant="30" id="Pf7-iN-GFe"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="d3s-Kg-wfO">
-                                <rect key="frame" x="293" y="8" width="34" height="30"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowshape.turn.up.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="d3s-Kg-wfO">
+                                <rect key="frame" x="293" y="8.5" width="34" height="29.5"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30.5" id="tXH-cb-5Rr"/>
@@ -242,8 +242,8 @@
         <image name="icons8-drop-down-50" width="50" height="50"/>
         <image name="icons8-ui-24" width="24" height="24"/>
         <image name="icons8-up-squared-50" width="50" height="50"/>
-        <image name="message" catalog="system" width="128" height="113"/>
         <image name="reddit_loader_failstate" width="160" height="160"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
