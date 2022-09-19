@@ -35,6 +35,7 @@ class TableViewCellTypeFull: UITableViewCell {
     var isRed = false
     var isBlue = false
     var id = ""
+    var permalink = ""
     var stringUrl = ""
     var vidStringUrl = ""
     var subText = ""
@@ -83,8 +84,8 @@ class TableViewCellTypeFull: UITableViewCell {
     }
     
     @objc func commentsTap(_ sender: UITapGestureRecognizer? = nil) {
-        if self.id == "" { return }
-        delegate?.popupCommentsView(id: id)
+        if self.permalink == "" { return }
+        delegate?.popupCommentsView(permalink: permalink)
     }
     
     func configure(with model: PostForTable) {
@@ -245,6 +246,7 @@ class TableViewCellTypeFull: UITableViewCell {
         stringUrl = model.picture ?? ""
         vidStringUrl = model.VideoUrlString ?? ""
         subText = model.bodyText
+        permalink = model.permalink
         
         subredditIcon.image = UIImage(named: "logonLogo")
         subredditIcon.load(urlString: model.iconUrlString, indicator: nil)

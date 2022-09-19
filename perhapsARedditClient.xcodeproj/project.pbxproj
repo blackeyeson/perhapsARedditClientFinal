@@ -15,6 +15,8 @@
 		000E7C7228D8D87A00164160 /* CommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E7C6C28D8D87A00164160 /* CommentsInteractor.swift */; };
 		000E7C7428D8E3F600164160 /* GreetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E7C7328D8E3F600164160 /* GreetModels.swift */; };
 		000E7C7628D8E70C00164160 /* GreetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E7C7528D8E70C00164160 /* GreetPresenter.swift */; };
+		000E7C8728D90A7500164160 /* TableViewCellTypeComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000E7C8528D90A7500164160 /* TableViewCellTypeComment.swift */; };
+		000E7C8828D90A7500164160 /* TableViewCellTypeComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000E7C8628D90A7500164160 /* TableViewCellTypeComment.xib */; };
 		001E291C28CE690D00777BAA /* TableViewCellTypeFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E291A28CE690D00777BAA /* TableViewCellTypeFull.swift */; };
 		001E291F28CE730500777BAA /* TableViewCellTypeFull.xib in Resources */ = {isa = PBXBuildFile; fileRef = 001E291E28CE730500777BAA /* TableViewCellTypeFull.xib */; };
 		004B69B128D3661D004872D5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B69B028D3661D004872D5 /* UIImage+Extension.swift */; };
@@ -74,6 +76,8 @@
 		000E7C6C28D8D87A00164160 /* CommentsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsInteractor.swift; sourceTree = "<group>"; };
 		000E7C7328D8E3F600164160 /* GreetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetModels.swift; sourceTree = "<group>"; };
 		000E7C7528D8E70C00164160 /* GreetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetPresenter.swift; sourceTree = "<group>"; };
+		000E7C8528D90A7500164160 /* TableViewCellTypeComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTypeComment.swift; sourceTree = "<group>"; };
+		000E7C8628D90A7500164160 /* TableViewCellTypeComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellTypeComment.xib; sourceTree = "<group>"; };
 		001E291A28CE690D00777BAA /* TableViewCellTypeFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTypeFull.swift; sourceTree = "<group>"; };
 		001E291E28CE730500777BAA /* TableViewCellTypeFull.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellTypeFull.xib; sourceTree = "<group>"; };
 		004B69B028D3661D004872D5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -150,6 +154,15 @@
 			path = Comments;
 			sourceTree = "<group>";
 		};
+		000E7C8428D90A5100164160 /* commentCell */ = {
+			isa = PBXGroup;
+			children = (
+				000E7C8528D90A7500164160 /* TableViewCellTypeComment.swift */,
+				000E7C8628D90A7500164160 /* TableViewCellTypeComment.xib */,
+			);
+			path = commentCell;
+			sourceTree = "<group>";
+		};
 		0057D67F28C3875D00D361F5 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +218,7 @@
 				0057D6B228C3890800D361F5 /* PostCell */,
 				00A8FE2C28D2114E00F8F657 /* subredditCell */,
 				00F0ACD928D7A8EE00879A61 /* LoadingCell */,
+				000E7C8428D90A5100164160 /* commentCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -416,6 +430,7 @@
 				0057D6BD28C389D400D361F5 /* Main.storyboard in Resources */,
 				0057D6BB28C3894F00D361F5 /* TableViewCellTypeShortened.xib in Resources */,
 				0057D6BF28C389F400D361F5 /* Assets.xcassets in Resources */,
+				000E7C8828D90A7500164160 /* TableViewCellTypeComment.xib in Resources */,
 				00F0ACDD28D7A91200879A61 /* TableViewCellTypeLoading.xib in Resources */,
 				001E291F28CE730500777BAA /* TableViewCellTypeFull.xib in Resources */,
 			);
@@ -451,6 +466,7 @@
 				0057D6E428C38AD000D361F5 /* LeftSideMenuRouter.swift in Sources */,
 				000E7C6F28D8D87A00164160 /* CommentsRouter.swift in Sources */,
 				0057D6D728C38AA300D361F5 /* RightSideMenuModels.swift in Sources */,
+				000E7C8728D90A7500164160 /* TableViewCellTypeComment.swift in Sources */,
 				000E7C6E28D8D87A00164160 /* CommentsWorker.swift in Sources */,
 				000E7C7428D8E3F600164160 /* GreetModels.swift in Sources */,
 				0057D6AF28C3886E00D361F5 /* UIImageView+Extension.swift in Sources */,

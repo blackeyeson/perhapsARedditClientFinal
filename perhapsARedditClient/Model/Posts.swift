@@ -53,6 +53,7 @@ struct Post: Decodable {
 struct PostForTable {
     let postTitle: String
     let id: String
+    let permalink: String
     let voteCount: String
     let picture: String?
     let subredditIcon: String?
@@ -95,6 +96,32 @@ struct subredditsPage: Decodable {
             }
         }
     }
+}
+
+//MARK: - comments page
+
+struct CommentsPageComponent: Decodable {
+    let data: FirstChild
+    struct FirstChild: Decodable {
+        
+        let children: [Children]
+        struct Children: Decodable {
+            
+            let data: SecondChild
+            struct SecondChild: Decodable {
+                
+                let body: String?
+                let ups: Int?
+                let author: String?
+            }
+        }
+    }
+}
+
+struct CommentForTable {
+    let auther: String
+    let ups: String
+    let body: String
 }
 
 //MARK: - general protocol

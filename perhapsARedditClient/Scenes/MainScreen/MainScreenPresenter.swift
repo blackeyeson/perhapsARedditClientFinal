@@ -46,6 +46,7 @@ class MainScreenPresenter: MainScreenPresentationLogic {
             return PostForTable(
                 postTitle: $0.title,
                 id: $0.id,
+                permalink: $0.permalink,
                 voteCount: voteCount(score: $0.score),
                 picture: $0.url_overridden_by_dest,
                 subredditIcon: $0.thumbnail,

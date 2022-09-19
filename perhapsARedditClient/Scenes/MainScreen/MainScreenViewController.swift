@@ -6,11 +6,10 @@ protocol MainScreenDisplayLogic: AnyObject {
     func refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel)
     func revealTable()
     func popupShareMenu(url: String)
-    func popupCommentsView(id: String)
+    func popupCommentsView(permalink: String)
 }
 
-class MainScreenViewController: UIViewController, configable
-{
+class MainScreenViewController: UIViewController, configable {
     // MARK: - Clean Components
     
     var interactor: MainScreenBusinessLogic?
@@ -138,13 +137,14 @@ extension MainScreenViewController: MainScreenDisplayLogic {
         self.present(vc, animated: true, completion: nil)
     }
     
-    func popupCommentsView(id: String) {
+    func popupCommentsView(permalink: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "CommentsViewController") as! CommentsViewController
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .coverVertical
+        vc.commentUrlString = "https://www.reddit.com\(permalink).json"
+
         vc.config()
-        
         present(vc, animated: true, completion: nil)
     }
     
