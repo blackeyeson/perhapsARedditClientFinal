@@ -31,7 +31,9 @@ final class RightSideMenuRouter: RightSideMenuRoutingLogic, RightSideMenuDataPas
         let vc = storyboard.instantiateViewController(identifier: "GreetViewController") as! GreetViewController
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .crossDissolve
-                
+        
+        vc.config()
+        
         viewController?.present(vc, animated: true, completion: nil)
     }
     

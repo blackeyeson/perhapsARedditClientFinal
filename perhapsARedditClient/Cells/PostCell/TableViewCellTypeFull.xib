@@ -134,11 +134,24 @@
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowshape.turn.up.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9SZ-iG-9Jh">
                                 <rect key="frame" x="347" y="9" width="30" height="27.5"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="CU2-9f-96N"/>
+                                    <constraint firstAttribute="height" constant="30" id="Pf7-iN-GFe"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="d3s-Kg-wfO">
+                                <rect key="frame" x="293" y="8" width="34" height="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30.5" id="tXH-cb-5Rr"/>
+                                    <constraint firstAttribute="width" constant="34" id="wYV-4L-FvW"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="46" id="1hX-HA-pLe"/>
+                            <constraint firstItem="9SZ-iG-9Jh" firstAttribute="centerY" secondItem="d3s-Kg-wfO" secondAttribute="centerY" id="3dC-1A-5Ut"/>
                             <constraint firstAttribute="trailing" secondItem="9SZ-iG-9Jh" secondAttribute="trailing" constant="20" id="4Ty-qa-tbz"/>
                             <constraint firstItem="otL-RD-u2l" firstAttribute="leading" secondItem="z9O-lK-8o4" secondAttribute="trailing" constant="8" symbolic="YES" id="NYV-Kd-GaI"/>
                             <constraint firstItem="otL-RD-u2l" firstAttribute="centerY" secondItem="z9O-lK-8o4" secondAttribute="centerY" id="WIZ-Gg-Yaw"/>
@@ -150,6 +163,8 @@
                             <constraint firstItem="xWc-vW-YKh" firstAttribute="centerY" secondItem="z9O-lK-8o4" secondAttribute="centerY" id="gXl-9K-gF0"/>
                             <constraint firstItem="9SZ-iG-9Jh" firstAttribute="height" secondItem="xWc-vW-YKh" secondAttribute="height" id="lhT-HH-7HS"/>
                             <constraint firstItem="z9O-lK-8o4" firstAttribute="top" secondItem="LAg-ZA-QDb" secondAttribute="top" constant="8" id="nCO-wy-r3Y"/>
+                            <constraint firstItem="9SZ-iG-9Jh" firstAttribute="leading" secondItem="d3s-Kg-wfO" secondAttribute="trailing" constant="20" id="rVm-nd-iA1"/>
+                            <constraint firstItem="xWc-vW-YKh" firstAttribute="centerY" secondItem="LAg-ZA-QDb" secondAttribute="centerY" id="vLd-NO-ni5"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxG-Dy-73h">
@@ -201,6 +216,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="commentsImage" destination="d3s-Kg-wfO" id="1dI-WQ-uGE"/>
                 <outlet property="domain" destination="nYl-zt-sBH" id="agt-1P-OLD"/>
                 <outlet property="downDoot" destination="xWc-vW-YKh" id="cLC-if-xUf"/>
                 <outlet property="mediaImageView" destination="0iQ-Nc-5VS" id="PxN-wy-9yG"/>
@@ -226,6 +242,7 @@
         <image name="icons8-drop-down-50" width="50" height="50"/>
         <image name="icons8-ui-24" width="24" height="24"/>
         <image name="icons8-up-squared-50" width="50" height="50"/>
+        <image name="message" catalog="system" width="128" height="113"/>
         <image name="reddit_loader_failstate" width="160" height="160"/>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

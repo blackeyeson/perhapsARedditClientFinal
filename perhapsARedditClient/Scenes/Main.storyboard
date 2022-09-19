@@ -506,6 +506,77 @@
             </objects>
             <point key="canvasLocation" x="1002.8985507246377" y="69.642857142857139"/>
         </scene>
+        <!--Comments View Controller-->
+        <scene sceneID="3md-am-o19">
+            <objects>
+                <viewController storyboardIdentifier="CommentsViewController" id="jWP-L6-1gX" customClass="CommentsViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JnK-ko-Ef7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="U6S-LM-tDV">
+                                <rect key="frame" x="0.0" y="197" width="414" height="655"/>
+                                <color key="backgroundColor" white="0.055725524479999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.055725524479999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1q9-on-CIG">
+                                <rect key="frame" x="0.0" y="127" width="414" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjo-e3-aBg">
+                                        <rect key="frame" x="0.0" y="18.5" width="414" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6Hf-hw-AT4"/>
+                                    <constraint firstAttribute="trailing" secondItem="zjo-e3-aBg" secondAttribute="trailing" id="Nuj-Lb-ykw"/>
+                                    <constraint firstItem="zjo-e3-aBg" firstAttribute="centerY" secondItem="1q9-on-CIG" secondAttribute="centerY" id="hWS-BU-3bz"/>
+                                    <constraint firstItem="zjo-e3-aBg" firstAttribute="leading" secondItem="1q9-on-CIG" secondAttribute="leading" id="xis-d3-2gv"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="QJg-j9-3KS" appends="YES" id="MJv-2K-qcb"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3oa-ON-pPV"/>
+                        <color key="backgroundColor" white="0.055725524475524472" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3oa-ON-pPV" firstAttribute="bottom" secondItem="U6S-LM-tDV" secondAttribute="bottom" constant="10" id="788-yI-mVt"/>
+                            <constraint firstItem="U6S-LM-tDV" firstAttribute="leading" secondItem="3oa-ON-pPV" secondAttribute="leading" id="Bkx-Zx-ru5"/>
+                            <constraint firstItem="3oa-ON-pPV" firstAttribute="trailing" secondItem="U6S-LM-tDV" secondAttribute="trailing" id="Hhw-yK-SVd"/>
+                            <constraint firstItem="3oa-ON-pPV" firstAttribute="trailing" secondItem="1q9-on-CIG" secondAttribute="trailing" id="TI6-bD-zpF"/>
+                            <constraint firstItem="U6S-LM-tDV" firstAttribute="top" secondItem="1q9-on-CIG" secondAttribute="bottom" constant="10" id="bAO-jm-XjD"/>
+                            <constraint firstItem="1q9-on-CIG" firstAttribute="centerY" secondItem="JnK-ko-Ef7" secondAttribute="centerY" multiplier="0.35" id="c3s-ea-YjY"/>
+                            <constraint firstItem="1q9-on-CIG" firstAttribute="leading" secondItem="3oa-ON-pPV" secondAttribute="leading" id="nry-vK-0eS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="U6S-LM-tDV" id="Dc7-vz-Nly"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ANX-pW-vNX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QJg-j9-3KS">
+                    <connections>
+                        <action selector="tappedCloseView:" destination="jWP-L6-1gX" id="gbE-PQ-9Lu"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1001.4492753623189" y="743.97321428571422"/>
+        </scene>
         <!--Right Side Menu View Controller-->
         <scene sceneID="Q3i-do-wmi">
             <objects>

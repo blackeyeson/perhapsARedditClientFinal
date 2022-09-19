@@ -12,8 +12,7 @@
 
 import UIKit
 
-enum MainScreen
-{
+enum MainScreen {
     // MARK: Use cases
     
     enum GetPosts {

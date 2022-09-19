@@ -12,34 +12,38 @@
 
 import UIKit
 
-protocol GreetDisplayLogic: AnyObject
-{
-    
+protocol GreetDisplayLogic: AnyObject {
+    func presentAlert(viewModel: Greet.unsupportedAlert.ViewModel)
 }
 
-class GreetViewController: UIViewController, configable
-{
+class GreetViewController: UIViewController, configable {
     
     // MARK: - Clean Components
     
-    @IBOutlet var logo: UIImageView!
-    var router: GreetRoutingLogic = GreetRouter()
-    private var interactor: GreetBusinessLogic = GreetInteractor(worker: GreetWorker(apiManager: APIManager()))
+    var router: GreetRoutingLogic?
+    private var interactor: GreetBusinessLogic?
     
+    // MARK: - Views
+
+    @IBOutlet var logo: UIImageView!
+    private let alert = UIAlertController(title: "Warning", message: "Feature unsupported!", preferredStyle: .alert)
+
     // MARK: - Fields
     
-    let alert = UIAlertController(title: "Warning", message: "Feature unsupported!", preferredStyle: .alert)
+    let userAgreementsUrlString = "https://www.redditinc.com/policies/user-agreement"
+    let privacyPolicyUrlString = "https://www.reddit.com/policies/privacy-policy"
     
     // MARK: - config
     
     func config() {
         let apiManager = APIManager()
         let worker = GreetWorker(apiManager: apiManager)
-        let interactor = GreetInteractor(worker: worker)
+        let presenter = GreetPresenter()
+        let interactor = GreetInteractor(worker: worker, presenter: presenter)
         let router = GreetRouter()
         self.router = router
         self.interactor = interactor
-        router.viewController = self
+        presenter.viewController = self
         router.viewController = self
     }
     
@@ -47,12 +51,11 @@ class GreetViewController: UIViewController, configable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAlert()
+        setupView()
     }
+    //MARK: - View setup
     
-    // MARK: - functions
-    
-    private func setupAlert() {
+    func setupView() {
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                 UIAlertAction in
                 NSLog("OK Pressed")
@@ -63,30 +66,30 @@ class GreetViewController: UIViewController, configable
     //MARK: - IBActions
     
     @IBAction func GoogleSignIn(_ sender: Any) {
-        unsupported()
+        interactor?.didTapUnsupported(request: Greet.unsupportedAlert.Request(alert: alert))
     }
     @IBAction func AppleSignIn(_ sender: Any) {
-        unsupported()
+        interactor?.didTapUnsupported(request: Greet.unsupportedAlert.Request(alert: alert))
     }
     @IBAction func userAgreement(_ sender: Any) {
-        router.openURL(stringURL: "https://www.redditinc.com/policies/user-agreement")
+        router?.openURL(request: Greet.openWebUrl.Request(urlString: userAgreementsUrlString))
     }
     @IBAction func privacyPolicy(_ sender: Any) {
-        router.openURL(stringURL: "https://www.reddit.com/policies/privacy-policy")
+        router?.openURL(request: Greet.openWebUrl.Request(urlString: privacyPolicyUrlString))
     }
     @IBAction func Skip(_ sender: Any) {
-        interactor.saveGuest()
-        router.presentMain()
+        interactor?.saveGuest(request: Greet.skipLogin.Request())
+        router?.presentMain(request: Greet.skipLogin.Request())
     }
     @IBAction func login(_ sender: Any) {
-        router.presentLogin()
+        router?.presentLogin(request: Greet.logIn.Request())
     }
 }
 
 // MARK: - DisplayLogic
 
 extension GreetViewController: GreetDisplayLogic {
-    private func unsupported() {
-        self.present(alert, animated: true, completion: nil)
+    func presentAlert(viewModel: Greet.unsupportedAlert.ViewModel) {
+        self.present(viewModel.alert, animated: true, completion: nil)
     }
 }

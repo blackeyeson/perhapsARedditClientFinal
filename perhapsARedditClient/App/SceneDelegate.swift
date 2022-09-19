@@ -30,7 +30,7 @@ extension SceneDelegate {
         
         if username != "errorDingusGestimusPrimus" {
             vc = mainStoryboard.instantiateViewController(identifier: "MainScreenViewController") as! configable
-        }
+        } else { }
         
         vc.config()
         

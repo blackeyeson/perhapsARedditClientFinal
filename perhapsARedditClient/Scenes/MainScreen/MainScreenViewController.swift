@@ -6,6 +6,7 @@ protocol MainScreenDisplayLogic: AnyObject {
     func refreshHiddenPosts(viewModel: MainScreen.refreshHiddenPost.ViewModel)
     func revealTable()
     func popupShareMenu(url: String)
+    func popupCommentsView(id: String)
 }
 
 class MainScreenViewController: UIViewController, configable
@@ -44,7 +45,6 @@ class MainScreenViewController: UIViewController, configable
         self.router = router
         router.viewController = self
         presenter.viewController = self
-        router.viewController = self
     }
     
     // MARK: View lifecycle
@@ -136,6 +136,16 @@ extension MainScreenViewController: MainScreenDisplayLogic {
         vc.popoverPresentationController?.sourceView = self.view
 
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func popupCommentsView(id: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "CommentsViewController") as! CommentsViewController
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .coverVertical
+        vc.config()
+        
+        present(vc, animated: true, completion: nil)
     }
     
     func displayPosts(viewModel: MainScreen.GetPosts.ViewModel) {

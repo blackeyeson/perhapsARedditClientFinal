@@ -12,27 +12,10 @@
 
 import UIKit
 
-//@objc protocol GreetRoutingLogic
-//{
-//  //func routeToSomewhere(segue: UIStoryboardSegue?)
-//}
-//
-//protocol GreetDataPassing {
-//  var dataStore: GreetDataStore? { get }
-//}
-//
-//class GreetRouter: NSObject, GreetRoutingLogic, GreetDataPassing
-//{
-//  weak var viewController: GreetViewController?
-//  var dataStore: GreetDataStore?
-//
-//}
-
 protocol GreetRoutingLogic {
-    func openURL(stringURL: String)
-    func presentMain()
-    func presentLogin()
-    var viewController: GreetViewController? { get set }
+    func openURL(request: Greet.openWebUrl.Request)
+    func presentMain(request: Greet.skipLogin.Request)
+    func presentLogin(request: Greet.logIn.Request)
 }
 
 final class GreetRouter: GreetRoutingLogic {
@@ -43,13 +26,13 @@ final class GreetRouter: GreetRoutingLogic {
     
     // MARK: - Routing
     
-    func openURL(stringURL: String) {
-        if let url = URL(string: stringURL) {
+    func openURL(request: Greet.openWebUrl.Request) {
+        if let url = URL(string: request.urlString) {
           UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
-    func presentMain() {
+    func presentMain(request: Greet.skipLogin.Request) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "MainScreenViewController") as! MainScreenViewController
         vc.modalPresentationStyle = .fullScreen
@@ -60,7 +43,7 @@ final class GreetRouter: GreetRoutingLogic {
         viewController?.present(vc, animated: true, completion: nil)
     }
     
-    func presentLogin() {
+    func presentLogin(request: Greet.logIn.Request) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
         vc.modalPresentationStyle = .overFullScreen

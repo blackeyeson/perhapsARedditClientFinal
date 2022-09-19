@@ -56,6 +56,7 @@ final class RightSideMenuViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func signInButton(_ sender: Any) {
+        //
         backToStart()
     }
     @IBAction func tapOut(_ sender: Any) {

@@ -13,7 +13,7 @@
 import UIKit
 
 protocol GreetWorkerLogic {
-    func loginAsGuest()
+    func loginAsGuest(response: Greet.skipLogin.Response)
 }
 
 final class GreetWorker: GreetWorkerLogic {
@@ -27,7 +27,7 @@ final class GreetWorker: GreetWorkerLogic {
     
     // MARK: - Methods
     
-    func loginAsGuest() {
+    func loginAsGuest(response: Greet.skipLogin.Response) {
         api.setUserDefaults(value: "Guest", Key: "username")
     }
 }

@@ -12,13 +12,27 @@
 
 import UIKit
 
-protocol GreetBusinessLogic { func saveGuest() }
+protocol GreetBusinessLogic {
+    func saveGuest(request: Greet.skipLogin.Request)
+    func didTapUnsupported(request: Greet.unsupportedAlert.Request)
+}
 
 class GreetInteractor: GreetBusinessLogic {
-    
     private let worker: GreetWorkerLogic
+    private let presenter: GreetPresentationLogic
 
-    init(worker: GreetWorkerLogic) { self.worker = worker }
+    init(worker: GreetWorkerLogic, presenter: GreetPresentationLogic) {
+        self.worker = worker
+        self.presenter = presenter
+    }
     
-    func saveGuest() { worker.loginAsGuest() }
+    func didTapUnsupported(request: Greet.unsupportedAlert.Request) {
+        let alert = request.alert
+        
+        presenter.presentAlert(response: Greet.unsupportedAlert.Response(alert: alert))
+    }
+    
+    func saveGuest(request: Greet.skipLogin.Request) {
+        worker.loginAsGuest(response: Greet.skipLogin.Response())
+    }
 }
