@@ -25,10 +25,8 @@
 		0057D69828C3876100D361F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0057D69628C3876100D361F5 /* LaunchScreen.storyboard */; };
 		0057D6A228C3879200D361F5 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6A028C3879200D361F5 /* APIError.swift */; };
 		0057D6A328C3879200D361F5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6A128C3879200D361F5 /* APIManager.swift */; };
-		0057D6A828C387E300D361F5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6A728C387E300D361F5 /* UIView+Extension.swift */; };
 		0057D6AB28C387EE00D361F5 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6AA28C387EE00D361F5 /* Posts.swift */; };
 		0057D6AF28C3886E00D361F5 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6AE28C3886E00D361F5 /* UIImageView+Extension.swift */; };
-		0057D6B128C3888900D361F5 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6B028C3888900D361F5 /* UIColor+Extension.swift */; };
 		0057D6B928C3894800D361F5 /* TableViewCellTypeShortened.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6B828C3894800D361F5 /* TableViewCellTypeShortened.swift */; };
 		0057D6BB28C3894F00D361F5 /* TableViewCellTypeShortened.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0057D6BA28C3894F00D361F5 /* TableViewCellTypeShortened.xib */; };
 		0057D6BD28C389D400D361F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0057D6BC28C389D400D361F5 /* Main.storyboard */; };
@@ -52,7 +50,6 @@
 		0057D6E728C38AD000D361F5 /* LeftSideMenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6E128C38AD000D361F5 /* LeftSideMenuInteractor.swift */; };
 		0057D6F128C38AF000D361F5 /* GreetRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6EB28C38AF000D361F5 /* GreetRouter.swift */; };
 		0057D6F328C38AF000D361F5 /* GreetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6ED28C38AF000D361F5 /* GreetViewController.swift */; };
-		0057D6FC28C38B1100D361F5 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6F628C38B1100D361F5 /* LoginPresenter.swift */; };
 		0057D6FD28C38B1100D361F5 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6F728C38B1100D361F5 /* LoginWorker.swift */; };
 		0057D6FE28C38B1100D361F5 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6F828C38B1100D361F5 /* LoginRouter.swift */; };
 		0057D6FF28C38B1100D361F5 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0057D6F928C38B1100D361F5 /* LoginModels.swift */; };
@@ -88,10 +85,8 @@
 		0057D69928C3876100D361F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0057D6A028C3879200D361F5 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		0057D6A128C3879200D361F5 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		0057D6A728C387E300D361F5 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		0057D6AA28C387EE00D361F5 /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		0057D6AE28C3886E00D361F5 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		0057D6B028C3888900D361F5 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0057D6B828C3894800D361F5 /* TableViewCellTypeShortened.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellTypeShortened.swift; sourceTree = "<group>"; };
 		0057D6BA28C3894F00D361F5 /* TableViewCellTypeShortened.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellTypeShortened.xib; sourceTree = "<group>"; };
 		0057D6BC28C389D400D361F5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -115,7 +110,6 @@
 		0057D6E128C38AD000D361F5 /* LeftSideMenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSideMenuInteractor.swift; sourceTree = "<group>"; };
 		0057D6EB28C38AF000D361F5 /* GreetRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetRouter.swift; sourceTree = "<group>"; };
 		0057D6ED28C38AF000D361F5 /* GreetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetViewController.swift; sourceTree = "<group>"; };
-		0057D6F628C38B1100D361F5 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		0057D6F728C38B1100D361F5 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
 		0057D6F828C38B1100D361F5 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		0057D6F928C38B1100D361F5 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
@@ -226,9 +220,7 @@
 		0057D6A628C387E300D361F5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				0057D6A728C387E300D361F5 /* UIView+Extension.swift */,
 				0057D6AE28C3886E00D361F5 /* UIImageView+Extension.swift */,
-				0057D6B028C3888900D361F5 /* UIColor+Extension.swift */,
 				004B69B028D3661D004872D5 /* UIImage+Extension.swift */,
 			);
 			path = Utilities;
@@ -339,7 +331,6 @@
 		0057D6F528C38B0000D361F5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				0057D6F628C38B1100D361F5 /* LoginPresenter.swift */,
 				0057D6F728C38B1100D361F5 /* LoginWorker.swift */,
 				0057D6F828C38B1100D361F5 /* LoginRouter.swift */,
 				0057D6F928C38B1100D361F5 /* LoginModels.swift */,
@@ -451,9 +442,7 @@
 				0057D6F328C38AF000D361F5 /* GreetViewController.swift in Sources */,
 				0057D6CA28C38A6B00D361F5 /* MainScreenModels.swift in Sources */,
 				0057D6FE28C38B1100D361F5 /* LoginRouter.swift in Sources */,
-				0057D6FC28C38B1100D361F5 /* LoginPresenter.swift in Sources */,
 				000E7C7628D8E70C00164160 /* GreetPresenter.swift in Sources */,
-				0057D6A828C387E300D361F5 /* UIView+Extension.swift in Sources */,
 				0057D6FF28C38B1100D361F5 /* LoginModels.swift in Sources */,
 				0057D6C728C38A6B00D361F5 /* MainScreenPresenter.swift in Sources */,
 				000E7C6D28D8D87A00164160 /* CommentsPresenter.swift in Sources */,
@@ -488,7 +477,6 @@
 				0057D68E28C3875D00D361F5 /* SceneDelegate.swift in Sources */,
 				0057D6E328C38AD000D361F5 /* LeftSideMenuWorker.swift in Sources */,
 				0057D6D828C38AA300D361F5 /* RightSideMenuViewController.swift in Sources */,
-				0057D6B128C3888900D361F5 /* UIColor+Extension.swift in Sources */,
 				0057D6C928C38A6B00D361F5 /* MainScreenRouter.swift in Sources */,
 				004B69B128D3661D004872D5 /* UIImage+Extension.swift in Sources */,
 				0057D6D428C38AA300D361F5 /* RightSideMenuPresenter.swift in Sources */,

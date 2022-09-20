@@ -125,10 +125,11 @@ final class APIManager {
     func loadGifFrom(urlString: String) async throws -> UIImage? {
         guard let url = URL(string: urlString)
         else { return UIImage(named: "loadingError") }
-//        return UIImage(named: "loadingError")
         return UIImage.gifImageWithURL("\(url)") ?? UIImage(named: "loadingError")
     }
     
+    //MARK: - Loading media dimentions
+
     func imageDimenssions(url: String) -> [CGFloat] {
         if let imageSource = CGImageSourceCreateWithURL(URL(string: url)! as CFURL, nil) {
             if let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as Dictionary? {

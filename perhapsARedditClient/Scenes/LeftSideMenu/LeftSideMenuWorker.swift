@@ -39,7 +39,7 @@ final class LeftSideMenuWorker: LeftSideMenuWorkerLogic {
     func getPeriod() async -> Int {
         do {
             let period = try await api.getUserDefaults(Key: "timePeriod", type: String.self) ?? ""
-            switch period {
+            switch period { // converting string to mode Int
             case "day":
                 return 0
             case "week":

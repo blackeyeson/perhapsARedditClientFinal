@@ -10,7 +10,7 @@ import AVKit
 
 class TableViewCellTypeFull: UITableViewCell {
     
-    // MARK: - Fields
+    // MARK: - Views
     @IBOutlet var upDoot: UIImageView!
     @IBOutlet var downDoot: UIImageView!
     @IBOutlet var voteCount: UILabel!
@@ -29,6 +29,7 @@ class TableViewCellTypeFull: UITableViewCell {
     @IBOutlet var mediaImageViewHeightConstraintEqualOrLess: NSLayoutConstraint!
     @IBOutlet var subtextLabel: UILabel!
     
+    // MARK: - Fields
     var mode = 0
     var trueWidth: CGFloat? = nil
     weak var delegate: MainScreenDisplayLogic?
@@ -45,16 +46,17 @@ class TableViewCellTypeFull: UITableViewCell {
     var playerLooper: NSObject?
     var indicator: UIActivityIndicatorView?
     
+    // MARK: - life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        addGestures()
+        addGestures() // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
+    // MARK: - Actions
     @objc func handleUpTap(_ sender: UITapGestureRecognizer? = nil) {
         if isRed { vote(status: 0); updateVoteStatusInDefaults(status: 0) }
         else { vote(status: 1); updateVoteStatusInDefaults(status: 1) }
@@ -86,6 +88,7 @@ class TableViewCellTypeFull: UITableViewCell {
         delegate?.popupCommentsView(request: MainScreen.popupCommentsView.Request(permalink: permalink))
     }
     
+    // MARK: configuration
     func configure(with model: PostForTable) {
         
         AddIndicator(to: mediaImageView)

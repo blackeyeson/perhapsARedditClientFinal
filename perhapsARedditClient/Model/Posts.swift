@@ -21,7 +21,7 @@ struct RedditPosts: Decodable {
         }
     }
 }
-
+// post of subreddit page
 struct Post: Decodable {
     let selftext: String
     let title: String
@@ -50,6 +50,7 @@ struct Post: Decodable {
     }
 }
 
+// viewModel post of subreddit page
 struct PostForTable {
     let postTitle: String
     let id: String
@@ -80,7 +81,7 @@ struct About: Decodable {
     }
 }
 
-//MARK: - subreddits page
+//MARK: - subreddits' page
 
 struct subredditsPage: Decodable {
     let data: Stuff
@@ -118,6 +119,7 @@ struct CommentsPageComponent: Decodable {
     }
 }
 
+// comment viewModel
 struct CommentForTable {
     let auther: String
     let ups: String
@@ -126,7 +128,7 @@ struct CommentForTable {
 
 //MARK: - general protocol
 
-protocol configable: UIViewController {
+protocol configable: UIViewController { //used in SceneDelegate to configure initial page
     func config()
 }
 

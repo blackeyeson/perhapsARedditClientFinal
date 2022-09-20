@@ -207,24 +207,13 @@ extension LeftSideMenuViewController: LeftSideMenuDisplayLogic {
 
 // MARK: - UITableViewDataSource & UITableViewDelegate
 extension LeftSideMenuViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if filterString != "" {
-//            return dataSource.filter { $0.contains(filterString) }.count
-//        } else {
-//            return dataSource.count
-//        }
-        subreddits.count
-    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { subreddits.count }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var model = dataSource[indexPath.row]
 
         let model = subreddits[indexPath.row]
         let url = urlStrings[indexPath.row]
-        
-//        if filterString != "" {
-//            model = dataSource.filter { $0.contains(filterString) }[indexPath.row]
-//        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeSubreddit", for: indexPath) as! TableViewCellTypeSubreddit
         cell.configure(sub: model, icon: url)

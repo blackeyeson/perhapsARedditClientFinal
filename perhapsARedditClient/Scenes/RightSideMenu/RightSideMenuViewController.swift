@@ -24,7 +24,7 @@ final class RightSideMenuViewController: UIViewController {
     private var interactor: RightSideMenuBusinessLogic?
     private var router: (RightSideMenuRoutingLogic & RightSideMenuDataPassing)?
     
-    // MARK: - View
+    // MARK: - Views
 
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var greetLabel: UILabel!
@@ -49,7 +49,6 @@ final class RightSideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        interactor.getprofpic(request: profile.getpic.Request())
         Task { await interactor?.getUsername(request: RightSideMenu.getUsername.Request()) }
     }
     

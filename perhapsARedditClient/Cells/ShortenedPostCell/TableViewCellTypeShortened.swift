@@ -9,17 +9,19 @@ import UIKit
 
 class TableViewCellTypeShortened: UITableViewCell {
 
-    // MARK: - Fields
+    // MARK: - Views
     @IBOutlet var title: UILabel!
     @IBOutlet var userAndSubreddit: UILabel!
     @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var thumbnail: UIImageView!
     
+    // MARK: - Fields
     var id = ""
 
-    // MARK: - ObjectLifecycle
+    // MARK: - Life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
         let threeDotsTap = UITapGestureRecognizer(target: self, action: #selector(self.handleThreeDotsTap(_:)))
         self.addGestureRecognizer(threeDotsTap)
@@ -27,8 +29,6 @@ class TableViewCellTypeShortened: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     // MARK: - Actions
@@ -44,14 +44,13 @@ class TableViewCellTypeShortened: UITableViewCell {
         }
 
     }
+    
+    // MARK: - configuration
     func configure(with model: PostForTable) {
         
         indicator.startAnimating()
         indicator.hidesWhenStopped = true
         thumbnail.layer.cornerRadius = 8
-//        if let url = model.picture {
-//            thumbnail.load(url: url, indicator: indicator)
-//        }
         
         title.text = model.postTitle
         userAndSubreddit.text = "\(model.oPUsername) | \(model.subreddit)"
@@ -60,8 +59,5 @@ class TableViewCellTypeShortened: UITableViewCell {
         }
         id = model.id
 
-    }
-    deinit {
-        print("deined")
     }
 }

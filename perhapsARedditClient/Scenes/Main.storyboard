@@ -269,7 +269,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.089999999999999997" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Esm-R1-lDO" firstAttribute="leading" secondItem="dHr-cj-Ape" secondAttribute="leading" constant="10" id="0OC-mf-qaW"/>
                                     <constraint firstItem="tus-Cz-aLm" firstAttribute="top" secondItem="ea2-0m-dEY" secondAttribute="bottom" constant="8" symbolic="YES" id="DPe-Lr-BVi"/>
@@ -637,7 +637,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFZ-B8-eA7">
                                 <rect key="frame" x="186.5" y="-36" width="1" height="928"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="ruL-V1-hdP"/>
                                 </constraints>
@@ -754,7 +754,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKg-mN-qyb">
                                 <rect key="frame" x="226.5" y="-36" width="1" height="928"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="M8n-a1-rcW"/>
                                 </constraints>

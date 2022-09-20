@@ -51,7 +51,7 @@ class MainScreenViewController: UIViewController, configable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor?.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
+        interactor?.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month"))
         setupView()
         addGlobalListener()
     }
@@ -261,7 +261,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         )
         indicator.startAnimating()
         // reloading post data
-        interactor?.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month", numberOfPosts: 10))
+        interactor?.getPosts(request: MainScreen.GetPosts.Request(subreddit: "pics", timePeriod: "month"))
     }
     
     private func revealTableView() {

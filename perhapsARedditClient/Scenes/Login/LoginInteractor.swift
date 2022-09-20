@@ -20,13 +20,11 @@ protocol LoginBusinessLogic {
 protocol LoginDataStore { }
 
 final class LoginInteractor: LoginDataStore {
-//    private let presenter: LoginPresentationLogic
     private let worker: LoginWorkerLogic
 
     // MARK: - Object Lifecycle
     
     init(worker: LoginWorkerLogic) {
-//        self.presenter = presenter
         self.worker = worker
     }
 }
@@ -40,9 +38,9 @@ extension LoginInteractor: LoginBusinessLogic {
         guard let password = request.password else { return false }
         
         if username != "" && password != "" {
-            let bool = worker.login(username: username, password: password)
-            if bool { worker.saveUser(username: username) }
-            return bool
+            let success = worker.login(username: username, password: password)
+            if success { worker.saveUser(username: username) }
+            return success
         }
         return false
     }
@@ -52,9 +50,9 @@ extension LoginInteractor: LoginBusinessLogic {
         guard let password = request.password else { return false }
         
         if username != "" && password != "" {
-            let bool = worker.register(username: username, password: password)
-            if bool { worker.saveUser(username: username) }
-            return bool
+            let success = worker.register(username: username, password: password)
+            if success { worker.saveUser(username: username) }
+            return success
         }
         return false
     }

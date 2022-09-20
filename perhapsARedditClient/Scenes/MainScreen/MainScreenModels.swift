@@ -17,7 +17,7 @@ enum MainScreen {
     
     enum GetPosts {
         
-        struct Request { let subreddit: String; let timePeriod: String; let numberOfPosts: Int }
+        struct Request { let subreddit: String; let timePeriod: String }
         
         struct Response { let data: RedditPosts; let hiddenPosts: [String]; let iconUrlStrings: [String] }
         
