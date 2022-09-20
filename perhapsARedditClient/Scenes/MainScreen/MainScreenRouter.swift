@@ -15,6 +15,8 @@ import UIKit
 protocol MainScreenRoutingLogic {
     func navigateToRightSide()
     func navigateToLeftSide()
+    func popupShareMenu(urlString: String)
+    func popupCommentsView(permalinkComponent: String)
 }
 
 protocol MainScreenDataPassing {  }
@@ -44,6 +46,22 @@ final class MainScreenRouter: MainScreenRoutingLogic, MainScreenDataPassing {
         
         vc.config()
         
+        viewController?.present(vc, animated: true, completion: nil)
+    }
+    func popupShareMenu(urlString: String) {
+        let vc = UIActivityViewController(activityItems: ["Check this out! \(urlString)"], applicationActivities: nil)
+        vc.popoverPresentationController?.sourceView = viewController?.view
+        
+        viewController?.present(vc, animated: true, completion: nil)
+    }
+    func popupCommentsView(permalinkComponent: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "CommentsViewController") as! CommentsViewController
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .coverVertical
+        vc.commentUrlString = "https://www.reddit.com\(permalinkComponent).json"
+        
+        vc.config()
         viewController?.present(vc, animated: true, completion: nil)
     }
 }

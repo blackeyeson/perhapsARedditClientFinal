@@ -29,7 +29,7 @@
                                 <rect key="frame" x="125.5" y="56.5" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="0.1675863199" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.11" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Jue-Mx-beJ" firstAttribute="centerY" secondItem="1Li-9f-4c9" secondAttribute="centerY" id="DnZ-bD-XCg"/>
                             <constraint firstItem="Jue-Mx-beJ" firstAttribute="centerX" secondItem="1Li-9f-4c9" secondAttribute="centerX" id="eXh-qA-A1S"/>
@@ -37,7 +37,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.1675863199" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" white="0.11" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Cqh-rQ-t31" secondAttribute="trailing" id="8FB-fa-KeD"/>
                     <constraint firstAttribute="trailingMargin" secondItem="1Li-9f-4c9" secondAttribute="trailing" id="8bx-Ey-B5d"/>

@@ -59,4 +59,23 @@ enum MainScreen {
         
         struct ViewModel {  }
     }
+    
+    enum popupShareMenu {
+        
+        struct Request { let urlString: String }
+        
+        struct Response {  }
+        
+        struct ViewModel {  }
+    }
+    
+    enum popupCommentsView {
+        
+        struct Request { let permalink: String }
+        
+        struct Response {  }
+        
+        struct ViewModel {  }
+    }
+    
 }

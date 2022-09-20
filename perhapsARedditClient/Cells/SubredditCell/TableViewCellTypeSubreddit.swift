@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class TableViewCellTypeSubreddit: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()

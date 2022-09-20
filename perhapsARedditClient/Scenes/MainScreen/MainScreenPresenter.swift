@@ -28,7 +28,7 @@ class MainScreenPresenter: MainScreenPresentationLogic {
     
     private func configureTableModel(from data: [Post]) -> [PostForTable] {
         var tableModel = [PostForTable]()
-        var i = 0
+        var i = 0 // needed for asigning icon urls
         
         tableModel.append(contentsOf: data.map {
             var isGif = false
@@ -42,7 +42,6 @@ class MainScreenPresenter: MainScreenPresentationLogic {
             if let videoType = $0.media?.reddit_video {
                 videoUrlString = videoType.fallback_url
             }
-            print($0.selftext)
             return PostForTable(
                 postTitle: $0.title,
                 id: $0.id,

@@ -44,13 +44,13 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
     func getPosts(request: MainScreen.GetPosts.Request) {
         Task {
             do {
-                let redditPosts = try await worker.fetchPosts(after: nil)
-                let hiddenPosts = await worker.getHiddenPosts()
-                for i in 0..<redditPosts.data.children.count {
+                let redditPosts = try await worker.fetchPosts(after: nil) // fetching all posts
+                let hiddenPosts = await worker.getHiddenPosts() // fetching hidden posts
+                for i in 0..<redditPosts.data.children.count { // fetching icons for PostCell
                     let subreddit = redditPosts.data.children[i].data.subreddit
                     iconURLStrings += [await worker.getIconUrl(from: subreddit)]
                 }
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async { [weak self] in // presenting posts
                     self?.presenter.presentPosts(response: MainScreen.GetPosts.Response(data: redditPosts, hiddenPosts: hiddenPosts, iconUrlStrings: self?.iconURLStrings ?? []))
                 }
             } catch { print(error) }
@@ -62,7 +62,6 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
             let hiddenPosts = await worker.getHiddenPosts()
             presenter.refreshHiddenPosts(response: MainScreen.refreshHiddenPost.Response(posts: hiddenPosts))
         }
-        
     }
     
     func getUIimageDimentions(request: MainScreen.getDimentionsFromURL.Request) -> [CGFloat] {
@@ -79,13 +78,13 @@ extension MainScreenInteractor: MainScreenBusinessLogic {
         let lastPost = request.lastPost
         Task {
             do {
-                let redditPosts = try await worker.fetchPosts(after: lastPost)
-                let hiddenPosts = await worker.getHiddenPosts()
-                for i in 0..<redditPosts.data.children.count {
+                let redditPosts = try await worker.fetchPosts(after: lastPost) // fetching posts after datasources last
+                let hiddenPosts = await worker.getHiddenPosts() // refetching hidden posts
+                for i in 0..<redditPosts.data.children.count { // fetching new icons
                     let subreddit = redditPosts.data.children[i].data.subreddit
                     iconURLStrings += [await worker.getIconUrl(from: subreddit)]
                 }
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async { [weak self] in // presenting added Posts
                     self?.presenter.presentAddedPosts(response: MainScreen.GetPosts.Response(data: redditPosts, hiddenPosts: hiddenPosts, iconUrlStrings: self?.iconURLStrings ?? []))
                 }
             } catch { print(error) }

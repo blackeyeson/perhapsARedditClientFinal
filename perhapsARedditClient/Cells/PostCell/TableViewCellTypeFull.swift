@@ -53,8 +53,6 @@ class TableViewCellTypeFull: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     @objc func handleUpTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -80,12 +78,12 @@ class TableViewCellTypeFull: UITableViewCell {
     
     @objc func shareTap(_ sender: UITapGestureRecognizer? = nil) {
         if self.stringUrl == "" { return }
-        delegate?.popupShareMenu(url: stringUrl)
+        delegate?.popupShareMenu(request: MainScreen.popupShareMenu.Request(urlString: stringUrl))
     }
     
     @objc func commentsTap(_ sender: UITapGestureRecognizer? = nil) {
         if self.permalink == "" { return }
-        delegate?.popupCommentsView(permalink: permalink)
+        delegate?.popupCommentsView(request: MainScreen.popupCommentsView.Request(permalink: permalink))
     }
     
     func configure(with model: PostForTable) {

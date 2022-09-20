@@ -226,7 +226,7 @@ extension LeftSideMenuViewController: UITableViewDataSource, UITableViewDelegate
 //            model = dataSource.filter { $0.contains(filterString) }[indexPath.row]
 //        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeSubreddit", for: indexPath) as! TableViewCellTypeSubreddit
         cell.configure(sub: model, icon: url)
         return cell
         }
@@ -242,7 +242,7 @@ extension LeftSideMenuViewController: UITableViewDataSource, UITableViewDelegate
     func tableConfiguration() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "TableViewCell")
+        tableView.register(UINib(nibName: "TableViewCellTypeSubreddit", bundle: nil), forCellReuseIdentifier: "TableViewCellTypeSubreddit")
         tableView.reloadData()
     }
 }
