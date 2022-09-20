@@ -227,7 +227,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeLoading", for: indexPath) as! TableViewCellTypeLoading
         cell.indicator.startAnimating()
         // fetching and adding more posts if dataSource has posts
-        if dataSource.count > 20 { interactor?.getMorePosts(request: MainScreen.addPosts.Request(lastPost: lastPostID)) }
+        if dataSource.count > 20 && dataSource.count < 400 { interactor?.getMorePosts(request: MainScreen.addPosts.Request(lastPost: lastPostID)) }
         return cell
     }
     
