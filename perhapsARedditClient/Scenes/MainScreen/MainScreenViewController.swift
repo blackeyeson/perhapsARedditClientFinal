@@ -113,9 +113,9 @@ class MainScreenViewController: UIViewController, configable {
     @IBAction func swipeProfile(_ sender: Any) { router?.navigateToRightSide() }
     
     @IBAction func filterStringFiled(_ sender: Any) {
-        scrollToTop()
         filterString = filterStringFieldOutlet.text ?? ""
         dataSourceFiltered = dataSource.filter { $0.postTitle.uppercased().contains(filterString.uppercased()) }
+        scrollToTop()
     }
     
     @objc func reloadData(notification: Notification) { scrollToTop() }
@@ -225,9 +225,13 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     private func createLoadingCell(indexPath: IndexPath) -> TableViewCellTypeLoading {
         //MARK: - creating LastInRow Loading cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellTypeLoading", for: indexPath) as! TableViewCellTypeLoading
-        cell.indicator.startAnimating()
         // fetching and adding more posts if dataSource has posts
-        if dataSource.count > 20 && dataSource.count < 400 { interactor?.getMorePosts(request: MainScreen.addPosts.Request(lastPost: lastPostID)) }
+        if dataSource.count > 300 { cell.indicator.stopAnimating(); cell.label.text = "No posts found" }
+        else {
+            cell.indicator.startAnimating(); cell.label.text = "Loading Posts . . ."
+            if dataSource.count > 20 { interactor?.getMorePosts(request: MainScreen.addPosts.Request(lastPost: lastPostID)) }
+        }
+        cell.configure()
         return cell
     }
     

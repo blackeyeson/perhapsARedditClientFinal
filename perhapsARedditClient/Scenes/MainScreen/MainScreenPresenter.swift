@@ -43,22 +43,22 @@ class MainScreenPresenter: MainScreenPresentationLogic {
                 videoUrlString = videoType.fallback_url
             }
             return PostForTable(
-                postTitle: $0.title,
+                postTitle: $0.title ?? "[removed]",
                 id: $0.id,
                 permalink: $0.permalink,
-                voteCount: voteCount(score: $0.score),
+                voteCount: voteCount(score: $0.score ?? 0),
                 picture: $0.url_overridden_by_dest,
                 subredditIcon: $0.thumbnail,
                 thumbnail: $0.thumbnail,
                 subreddit: "r/\($0.subreddit)",
-                domain: $0.domain,
-                oPUsername: "u/\($0.author)",
+                domain: $0.domain ?? "v.redd.it",
+                oPUsername: "u/\($0.author ?? "[deleted]")",
                 timePassed: timePassed(created_utc: $0.created_utc),
                 iconUrlString: iconUrlStrings[i-1],
-                isVideo: $0.is_video,
+                isVideo: $0.is_video ?? false,
                 isGif: isGif,
                 VideoUrlString: removeExtraUrlString(url: videoUrlString, extensionString: ".mp4"),
-                bodyText: $0.selftext
+                bodyText: $0.selftext ?? ""
             )  
         })
         return tableModel
@@ -141,7 +141,6 @@ extension MainScreenPresenter {
         let data = redditPostsToPosts(rawData: response.data)
         let viewModel = configureTableModel(from: data)
         
-        viewController?.displayAddedPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel, hiddenPosts: response.hiddenPosts))
         viewController?.displayAddedPosts(viewModel: MainScreen.GetPosts.ViewModel(tableData: viewModel, hiddenPosts: response.hiddenPosts))
     }
     
