@@ -9,10 +9,14 @@ import UIKit
 
 class TableViewCellTypeComment: UITableViewCell {
 
+    // MARK: - Views
+
     @IBOutlet var user: UILabel!
     @IBOutlet var textBody: UILabel!
     @IBOutlet var votes: UILabel!
     
+    // MARK: - Life cycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +28,7 @@ class TableViewCellTypeComment: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - configuration
     func config(user: String, bodyText: String, votes: String) {
         self.user.text = user
         self.textBody.text = bodyText
