@@ -31,7 +31,7 @@ extension SceneDelegate {
         
         if username != "errorDingusGestimusPrimus" { //if logged in changing VC
             vc = mainStoryboard.instantiateViewController(identifier: "MainScreenViewController") as! configable
-        } else { }
+        }
         
         vc.config() // configuring VC
         

@@ -23,22 +23,21 @@ struct RedditPosts: Decodable {
 }
 // post of subreddit page
 struct Post: Decodable {
-    let selftext: String
-    let title: String
+    let selftext: String?
+    let title: String?
     let subreddit: String
     let subreddit_name_prefixed: String
-    let ups: Int
-    let domain: String
-    let score: Int
-    let is_created_from_ads_ui: Bool
+    let ups: Int?
+    let domain: String?
+    let score: Int?
     let thumbnail: String?
     let url_overridden_by_dest: String?
     let url: String?
     let permalink: String
-    let author: String
+    let author: String?
     let created_utc: Double
     let id: String
-    let is_video: Bool
+    let is_video: Bool?
     let media: Media?
     struct Media: Decodable {
         

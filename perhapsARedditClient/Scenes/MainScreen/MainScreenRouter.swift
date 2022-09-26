@@ -32,7 +32,7 @@ final class MainScreenRouter: MainScreenRoutingLogic, MainScreenDataPassing {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "RightSideMenuViewController") as! RightSideMenuViewController
         vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .flipHorizontal
+        vc.modalTransitionStyle = .crossDissolve
         
         vc.config()
         
@@ -42,7 +42,7 @@ final class MainScreenRouter: MainScreenRoutingLogic, MainScreenDataPassing {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(identifier: "LeftSideMenuViewController") as! LeftSideMenuViewController
         vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .flipHorizontal
+        vc.modalTransitionStyle = .crossDissolve
         
         vc.config()
         

@@ -26,7 +26,6 @@ final class APIManager {
         do {
            return try JSONDecoder().decode(decodingType.self, from: data)
         } catch {
-            print("err/decoding")
             throw ApiError.decodingError
         }
     }
@@ -49,7 +48,6 @@ final class APIManager {
             let username = try await getUserDefaults(Key: "username", type: String?.self) ?? "Guest"
             return username ?? "Guest"
         } catch {
-            print("err/getUser")
             return "Guest"
         }
     }
@@ -70,10 +68,8 @@ final class APIManager {
         
         // Add user
         if SecItemAdd(attributes as CFDictionary, nil) == noErr {
-            print("User saved successfully in the keychain")
             return true
         } else {
-            print("Something went wrong trying to save the user in the keychain")
             return false
         }
     }
@@ -102,7 +98,7 @@ final class APIManager {
                 if realPassword == password { return true } else { return false }
             }
         } else {
-            print("Something went wrong trying to find the user in the keychain"); return false
+            return false
         }
         return false
     }

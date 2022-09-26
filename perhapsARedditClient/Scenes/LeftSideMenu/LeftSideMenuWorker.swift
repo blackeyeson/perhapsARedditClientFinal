@@ -53,7 +53,7 @@ final class LeftSideMenuWorker: LeftSideMenuWorkerLogic {
             default:
                 return 0
             }
-        } catch { print("err/getPeriod"); return 0 }
+        } catch { return 0 }
     }
     
     func getSubreddits(request: LeftSideMenu.getSubs.Request) async -> LeftSideMenu.getSubs.Response {
@@ -63,7 +63,7 @@ final class LeftSideMenuWorker: LeftSideMenuWorkerLogic {
         
         do {
             response.subreddits = try await api.fetchData(urlString: urlString, decodingType: subredditsPage.self).data.children
-        } catch { print("error/getsubs/fetchData") }
+        } catch {  }
         
         return response
     }

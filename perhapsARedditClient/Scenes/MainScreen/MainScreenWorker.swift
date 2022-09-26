@@ -48,13 +48,13 @@ final class MainScreenWorker: MainScreenWorkerLogic {
     func getSubreddit() async -> String {
         do {
             return try await api.getUserDefaults(Key: "subreddit", type: String.self) ?? "pics"
-        } catch  { print("err/getSubreddit"); return "pics" }
+        } catch  { return "pics" }
     }
     
     func getHiddenPosts() async -> [String] {
         do {
             return try await api.getUserDefaults(Key: "hiddenPosts", type: [String].self) ?? []
-        } catch  { print("err/getHiddenPosts"); return [] }
+        } catch  { return [] }
     }
     
     func getIconUrl(from: String) async -> String {
@@ -66,7 +66,7 @@ final class MainScreenWorker: MainScreenWorkerLogic {
             if data.icon_img != "" {
                 urlString = data.icon_img
             } else { urlString = data.community_icon }
-        } catch { print("err/getIconUrl") }
+        } catch {  }
 
         urlString = removeExtraUrlString(url: urlString, extensionString: ".jpg")
         urlString = removeExtraUrlString(url: urlString, extensionString: ".png")

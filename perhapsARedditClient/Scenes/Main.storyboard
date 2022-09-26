@@ -697,7 +697,7 @@
         <!--Left Side Menu View Controller-->
         <scene sceneID="gqP-Ox-EpQ">
             <objects>
-                <viewController storyboardIdentifier="LeftSideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APD-MM-DVP" customClass="LeftSideMenuViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftSideMenuViewController" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APD-MM-DVP" customClass="LeftSideMenuViewController" customModule="perhapsARedditClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FPM-Ei-eI7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
