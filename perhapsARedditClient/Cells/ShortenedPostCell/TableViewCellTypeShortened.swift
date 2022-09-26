@@ -34,7 +34,6 @@ class TableViewCellTypeShortened: UITableViewCell {
     // MARK: - Actions
 
     @objc func handleThreeDotsTap(_ sender: UITapGestureRecognizer? = nil) {
-        print("a")
         let defaults = UserDefaults.standard
         var hiddenPosts: [String] = defaults.object(forKey: "hiddenPosts") as? [String] ?? []
         if id != "" {

@@ -10,16 +10,23 @@ import UIKit
 class TableViewCellTypeLoading: UITableViewCell {
 
     @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    func configure() {
+        DispatchQueue.global().async { [weak self] in
+            sleep(4)
+            DispatchQueue.main.async {
+                self?.indicator.stopAnimating(); self?.label.text = "No posts found"
+            }
+        }
     }
     
 }
